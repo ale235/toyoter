@@ -12,7 +12,10 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                /*background-color: #fff;*/
+                background-image: url("images/toyoterlanding.jpg");
+                /*background-size: 100%;*/
+                background-size: 100%;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -81,7 +84,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    <img src="{{ asset('images/toyoterlogo.png') }}" alt="Smiley face" width="50%">
                 </div>
 
                 <div class="links">
