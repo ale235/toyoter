@@ -25,18 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-//        Role::create(['name'=>'admin']);
-//        Role::create(['name'=>'cliente_minorista']);
-//        Role::create(['name'=>'cliente_mayorista']);
-//        Role::create(['name'=>'cliente_personalizado']);
-//
-//        Permission::create(['name'=>'ver_precio']);
-
-
-//        auth()->user()->givePermissionTo('ver_precio');
-        //auth()->user()->assignRole('admin');
-        dd(auth()->guest());
+//        dd(auth()->guest());
         return view('home');
     }
 }
