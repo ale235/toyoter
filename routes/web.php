@@ -19,3 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/buscar', 'GuestController@index')->name('buscar');
+Route::resource('repuesto/repuestos','RepuestoController');
+
+Route::get('export', 'MyController@export')->name('export');
+Route::get('importExportView', 'MyController@importExportView');
+Route::post('import', 'MyController@import')->name('import');
+

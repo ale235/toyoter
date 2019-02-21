@@ -94,10 +94,9 @@
                 <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>Reportes</span></a></li>
                 @endif
                 <li class="treeview">
-                    <a href="#"><i class='fa fa-folder-open'></i> <span>Almacén</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <a href="#"><i class='fa fa-folder-open'></i> <span>Repuestos</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('almacen/articulo?selectText=Activo') }}">Artículo</a></li>
-                        <li><a href="{{ url('almacen/categoria?select-categoria=1') }}">Categorías</a></li>
+                        <li><a href="{{ url('repuesto/repuestos/create') }}">Cargar Repuestos</a></li>
                     </ul>
                 </li>
                 @if (Auth::user()->role == 1)
