@@ -15,19 +15,19 @@ class CreateRepuestosTable extends Migration
     {
         Schema::create('marca_repuestos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->unique();
+            $table->string('nombre');
             $table->timestamps();
         });
 
         Schema::create('marca_vehiculos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->unique();
+            $table->string('nombre');
             $table->timestamps();
         });
 
         Schema::create('secciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre')->unique();
+            $table->string('nombre');
             $table->timestamps();
         });
 

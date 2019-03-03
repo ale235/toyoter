@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Imports\RepuestosImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RepuestoController extends Controller
 {
@@ -97,8 +99,9 @@ class RepuestoController extends Controller
      */
     public function import()
     {
-        Excel::import(new UsersImport,request()->file('file'));
 
+        Excel::import(new RepuestosImport,request()->file('file'));
+        //dd('hola');
         return back();
     }
 }
