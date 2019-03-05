@@ -36,6 +36,8 @@ class CreateRepuestosTable extends Migration
             $table->float('precio_sugerido');
             $table->float('precio_minorista');
             $table->float('precio_mayorista');
+            $table->float('precio_minorista_co');
+            $table->float('precio_mayorista_co');
             $table->float('precio_personalizado');
             $table->timestamps();
         });

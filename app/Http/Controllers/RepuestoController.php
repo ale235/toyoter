@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Repuesto;
 use Illuminate\Http\Request;
 use App\Imports\RepuestosImport;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RepuestoController extends Controller
@@ -99,9 +101,36 @@ class RepuestoController extends Controller
      */
     public function import()
     {
-
+//        DB::connection()->disableQueryLog();
         Excel::import(new RepuestosImport,request()->file('file'));
         //dd('hola');
         return back();
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function actualizar()
+    {
+        //
+        return view('repuesto/actualizar', ['categorias'=>'hola',]);
+
+    }
+
+    public function autocomplete(Request $request)
+    {
+//        $data = Repuesto::select('nombre','codigo','idarticulo','ultimoprecio')
+//            ->where('nombre','LIKE','%'.$request->get('query').'%')
+//            ->where('estado','=','Activo')
+//            ->orwhere('codigo','LIKE','%'.$request->get('query').'%')
+//            ->get();
+        $data = Repuesto::select('codigo','descripcion')
+            ->where('descripcion','LIKE','%'.$request->get('query').'%')
+            ->orwhere('codigo','LIKE','%'.$request->get('query').'%')
+            ->get();
+//        $data = Repuesto::whereRaw(DB::raw('CONCAT(codigo," ",descripcion)'), 'like', $request->get('query'))->get();
+        return response()->json($data);
     }
 }
