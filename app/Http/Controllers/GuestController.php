@@ -81,4 +81,16 @@ class GuestController extends Controller
     {
         //
     }
+
+    public function repuestos()
+    {
+        return datatables()
+            ->query(DB::table('repuestos')
+                ->leftJoin('marca_repuestos', 'marca_repuestos.id', '=', 'repuestos.marca_repuesto_id')
+                ->leftJoin('marca_vehiculos', 'marca_vehiculos.id', '=', 'repuestos.marca_vehiculo_id')
+                ->leftJoin('secciones', 'secciones.id', '=', 'repuestos.seccion_id')
+                ->leftJoin('precios', 'precios.id', '=', 'repuestos.precio_id')
+                ->select('repuestos.id', 'repuestos.codigo', 'repuestos.descripcion','marca_repuestos.nombre as marca_repuesto', 'marca_vehiculos.nombre as marca_vehiculo', 'secciones.nombre as seccion')
+            )->toJson();
+    }
 }

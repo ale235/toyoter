@@ -5,7 +5,10 @@
         {{--<meta name="viewport" content="width=device-width, initial-scale=1">--}}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-        <title>Laravel</title>
+        {{--<title>Laravel</title>--}}
+        {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">--}}
+        {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
+        {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>--}}
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -132,22 +135,64 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height" style="z-index:100;">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+    <header>
+        {{--<nav class="navbar navbar-expand-lg bg-dark navbar-dark">--}}
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid"  style="z-index:100;">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <img src="{{ asset('images/toyoterlogo.png') }}" alt="Smiley face" width="15%">
+                    </a>
                 </div>
-            @endif
-            @yield('content')
-        </div>
-    @stack('scripts')
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="{{ url('/buscar') }}"><strong><p>Buscar</p></strong></a></li>
+                        @if (Route::has('login'))
+                            @auth
+                            <li class="nav-item active"><a class="nav-link" href="{{ url('/home') }}"><strong>Home</strong></a></li>
+                        @else
+                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><strong>Ingresar</strong></a></li>
+                            {{--@if (Route::has('register'))--}}
+                                {{--<li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>--}}
+                            {{--@endif--}}
+                            @endauth
+                        @endif
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+        {{--<div class="flex-center position-ref full-height" style="z-index:100;">--}}
+            {{--@if (Route::has('login'))--}}
+                {{--<div class="top-right links">--}}
+                    {{--@auth--}}
+                    {{--<a href="{{ url('/home') }}">Home</a>--}}
+                    {{--@else--}}
+                        {{--<a href="{{ route('login') }}">Login</a>--}}
+
+                        {{--@if (Route::has('register'))--}}
+                            {{--<a href="{{ route('register') }}">Register</a>--}}
+                        {{--@endif--}}
+                        {{--@endauth--}}
+                {{--</div>--}}
+            {{--@endif--}}
+        {{--</div>--}}
+
+    <div class="container" style="padding-top: 10px;">
+        @yield('content')
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+        @stack('scripts')
+
+
     </body>
 </html>

@@ -27,4 +27,5 @@ Route::get('importExportView', 'RepuestoController@importExportView');
 Route::post('import', 'RepuestoController@import')->name('import');
 
 Route::get('autocomplete',array('as'=>'autocomplete', 'uses'=>'RepuestoController@autocomplete'));
+Route::get('repuestos', 'GuestController@repuestos');
 
