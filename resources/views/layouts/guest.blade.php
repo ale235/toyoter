@@ -19,7 +19,7 @@
         <style>
             html, body {
                 /*background-color: #fff;*/
-                background-image: url("images/toyoterlanding.jpg");
+                background-image: url("../images/toyoterlanding.jpg");
                 /*background-size: 100%;*/
                 background-size: 100%;
                 color: #636b6f;
