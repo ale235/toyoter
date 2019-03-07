@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('repuestos', function (){
+Route::get('buscarRepuestos', function (){
 
     $repuestos = DB::table('repuestos')
         ->join('marca_repuestos', 'marca_repuestos.id', '=', 'repuestos.marca_repuesto_id')

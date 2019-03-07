@@ -3,7 +3,14 @@
 <a href="whatsapp://send?text=" class="botao-wpp">
     <!-- ícone -->
     <i class="fa fa-whatsapp"></i>
-    Consultar
+    Enviar
+</a>
+{{--<a href="{{url('/repuestos/$id')}}" class="botao-details">--}}
+<a href="{{route('guest.show', $id)}}" class="botao-details">
+
+    <!-- ícone -->
+    <i class="fa fa-whatsapp"></i>
+    Detalles
 </a>
 <style>
     .botao-wpp {
@@ -11,6 +18,15 @@
         color: #eee;
         display: inline-block;
         background-color: #25d366;
+        font-weight: bold;
+        padding: 1rem 2rem;
+        border-radius: 3px;
+    }
+    .botao-details {
+        text-decoration: none;
+        color: #eee;
+        display: inline-block;
+        background-color: #1a2226;
         font-weight: bold;
         padding: 1rem 2rem;
         border-radius: 3px;

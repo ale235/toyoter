@@ -29,7 +29,7 @@
             $('#example').DataTable({
                 "serverSide": true,
                 "processing": true,
-                "ajax": "{{url('api/repuestos')}}",
+                "ajax": "{{url('api/buscarRepuestos')}}",
                 "columns": [
 //                    {data: 'id'},
                     {data: 'descripcion'},

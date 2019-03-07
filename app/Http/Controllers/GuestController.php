@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repuesto;
 use Illuminate\Http\Request;
 
 class GuestController extends Controller
@@ -45,7 +46,8 @@ class GuestController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('guest.show',['repuesto'=>Repuesto::findOrFail($id)]);
+
     }
 
     /**
