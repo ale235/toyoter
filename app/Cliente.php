@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Imagen extends Model
+class Cliente extends Model
 {
-    protected $table = 'imagenes';
+    protected $table = 'clientes';
     protected $primaryKey = 'id';
 
     public $timestamps = true;
 
-    protected $fillable = ['repuesto_id', 'ruta', 'telefono'];
+    protected $fillable = ['user_id', 'razon_social', 'telefono'];
 }

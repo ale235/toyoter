@@ -21,6 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/buscar', 'GuestController@index')->name('buscar');
 Route::resource('repuesto/repuestos','RepuestoController');
 Route::resource('guest','GuestController');
+Route::resource('cliente/clientes','ClienteController');
 Route::get('repuesto/actualizar', 'RepuestoController@actualizar');
 
 Route::get('export', 'RepuestoController@export')->name('export');

@@ -70,7 +70,16 @@
                             <li class="user-footer">
 
                                 <div class="pull-right">
-                                    <a href="{{url('/logout')}}" class="btn btn-default btn-flat">Cerrar</a>
+                                    <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    {{--<a href="{{route('/logout')}}" class="btn btn-default btn-flat">Cerrar</a>--}}
                                 </div>
                             </li>
                         </ul>
@@ -100,16 +109,16 @@
                         <li><a href="{{ url('repuesto/actualizar') }}">Acualizar Repuestos</a></li>
                     </ul>
                 </li>
-                @if (Auth::user()->role == 1)
+                {{--@if (Auth::user()->role == 1)--}}
                 <li class="treeview">
-                    <a href="#"><i class='fa fa-link'></i> <span>Compras</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <a href="#"><i class='fa fa-link'></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         {{--<li><a href="{{ url('compras/ingreso') }}">Ingreso</a></li>--}}
-                        <li><a href="{{ url('compras/proveedor') }}">Proveedor</a></li>
+                        <li><a href="{{ url('cliente/clientes/create') }}">Cargar Cliente</a></li>
                         <li><a href="{{ url('compras/stockminimo') }}">Stock Mínimo</a></li>
                     </ul>
                 </li>
-                @endif
+                {{--@endif--}}
                 <li class="treeview">
                     <a href="#"><i class='fa fa-link'></i> <span>Ventas</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
