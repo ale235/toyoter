@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repuesto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GuestController extends Controller
 {
@@ -46,7 +47,16 @@ class GuestController extends Controller
      */
     public function show($id)
     {
-        return view('guest.show',['repuesto'=>Repuesto::findOrFail($id)]);
+        $repuestos = DB::table('repuestos')
+            ->select('repuestos.id', 'repuestos.codigo', 'repuestos.descripcion','marca_repuestos.nombre as marca_repuesto', 'marca_vehiculos.nombre as marca_vehiculo', 'secciones.nombre as seccion', 'precios.precio_minorista as precio_minorista')
+            ->join('marca_repuestos', 'marca_repuestos.id', '=', 'repuestos.marca_repuesto_id')
+            ->join('marca_vehiculos', 'marca_vehiculos.id', '=', 'repuestos.marca_vehiculo_id')
+            ->join('secciones', 'secciones.id', '=', 'repuestos.seccion_id')
+            ->join('precios', 'precios.id', '=', 'repuestos.precio_id')
+            ->where('repuestos.id','=',$id)
+            ->first();
+
+        return view('guest.show',['repuesto'=>$repuestos]);
 
     }
 

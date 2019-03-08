@@ -27,9 +27,12 @@
                             </div>
                             <div class="details col-md-6">
                                 <h3 class="product-title">Código repuesto: {{$repuesto->codigo}}</h3>
-                                <p class="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
-                                <h4 class="price">current price: <span>$180</span></h4>
-                                <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+                                <p class="product-description">{{$repuesto->descripcion}}</p>
+                                <h4 class="price">Precio: <span>${{$repuesto->precio_minorista}}</span></h4>
+                                <p class="vote">Marca del Repuesto: {{$repuesto->marca_repuesto}}</p>
+                                <p class="vote">Marca del Vehículo: {{$repuesto->marca_vehiculo}}</p>
+                                <p class="vote">Sección: {{$repuesto->seccion}}</p>
+
                                 <div class="action">
                                     <button class="add-to-cart btn btn-default" type="button">add to cart</button>
                                 </div>

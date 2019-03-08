@@ -162,23 +162,6 @@
             </div>
         </nav>
     </header>
-
-        {{--<div class="flex-center position-ref full-height" style="z-index:100;">--}}
-            {{--@if (Route::has('login'))--}}
-                {{--<div class="top-right links">--}}
-                    {{--@auth--}}
-                    {{--<a href="{{ url('/home') }}">Home</a>--}}
-                    {{--@else--}}
-                        {{--<a href="{{ route('login') }}">Login</a>--}}
-
-                        {{--@if (Route::has('register'))--}}
-                            {{--<a href="{{ route('register') }}">Register</a>--}}
-                        {{--@endif--}}
-                        {{--@endauth--}}
-                {{--</div>--}}
-            {{--@endif--}}
-        {{--</div>--}}
-
     <div class="container" style="padding-top: 10px;">
         @yield('content')
     </div>

@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\MarcaRepuesto;
 use App\MarcaVehiculo;
 use App\Precio;
+use App\PrecioHistorico;
 use App\Repuesto;
 use App\Seccion;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +40,11 @@ class RepuestosImport implements ToModel
             return Repuesto::find($repuesto->id);
         }
         else if ($repuesto != null  &&  $repuesto->precio_sugerido != $row[6]) {
-            //dd([$repuesto,$row,'else if']);
+            new PrecioHistorico([
+                'repuesto_id' => $repuesto->id,
+                'precio_id' => $repuesto->precio_id
+                ]
+            );
             $precio = new Precio([
                 'precio_sugerido' => $row[6],
                 'precio_minorista' => $repuesto->precio_minorista_co * $row[6],
@@ -91,6 +96,7 @@ class RepuestosImport implements ToModel
                 'precio_id' => $precio->id,
             ]);
         }
+
     }
 //            DB::commit();
 //        }

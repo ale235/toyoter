@@ -73,6 +73,34 @@ class CreateRepuestosTable extends Migration
                 ->onDelete('cascade');
 
         });
+
+        Schema::create('imagenes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('repuesto_id');
+            $table->foreign('repuesto_id')
+                ->references('id')
+                ->on('repuestos')
+                ->onDelete('cascade');
+            $table->string('ruta');
+            $table->timestamps();
+        });
+
+        Schema::create('precios_historicos', function (Blueprint $table) {
+            $table->increments('id');
+            $table->float('precio_id');
+            $table->float('repuesto_id');
+
+            $table->foreign('precio_id')
+                ->references('id')
+                ->on('precios')
+                ->onDelete('cascade');
+
+            $table->foreign('repuesto_id')
+                ->references('id')
+                ->on('repuestos')
+                ->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -82,6 +110,8 @@ class CreateRepuestosTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('precios_historicos');
+        Schema::dropIfExists('imagenes');
         Schema::dropIfExists('repuestos');
         Schema::dropIfExists('marca_repuestos');
         Schema::dropIfExists('marca_vehiculos');
