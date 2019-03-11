@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cliente;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class ClienteController extends Controller
@@ -79,7 +80,15 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        return view('cliente.edit',['roles' => Role::all()]);
+        $clienteedit = DB::table('clientes as c')
+            ->join('users as u','c.user_id','=','u.id')
+            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user')
+            ->where('c.id','=',$cliente->id)
+            ->first();
+
+        $user = User::find($clienteedit->id_user)->roles->pluck('name');
+
+        return view('cliente.edit',['roles' => Role::all(), 'cliente' => $clienteedit, 'role' => $user[0]]);
     }
 
     /**

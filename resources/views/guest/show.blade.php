@@ -28,13 +28,30 @@
                             <div class="details col-md-6">
                                 <h3 class="product-title">Código repuesto: {{$repuesto->codigo}}</h3>
                                 <p class="product-description">{{$repuesto->descripcion}}</p>
-                                <h4 class="price">Precio: <span>${{$repuesto->precio_minorista}}</span></h4>
+                                @role('admin')
+                                <h4 class="price">Precio Sugerido: <span>${{$repuesto->precio_sugerido}}</span></h4>
+                                <h4 class="price">Precio Mayorista: <span>${{$repuesto->precio_mayorista}}</span></h4>
+                                <h4 class="price">Precio Minorista: <span>${{$repuesto->precio_minorista}}</span></h4>
+                                @endrole
+                                @role('cliente_minorista')
+                                <h4 class="price">Precio Minorista: <span>${{$repuesto->precio_minorista}}</span></h4>
+                                @endrole
+                                @role('cliente_mayorista')
+                                <h4 class="price">Precio Mayorista: <span>${{$repuesto->precio_mayorista}}</span></h4>
+                                @endrole
+                                {{--<h4 class="price">Precio: <span>${{$repuesto->precio_minorista}}</span></h4>--}}
                                 <p class="vote">Marca del Repuesto: {{$repuesto->marca_repuesto}}</p>
                                 <p class="vote">Marca del Vehículo: {{$repuesto->marca_vehiculo}}</p>
                                 <p class="vote">Sección: {{$repuesto->seccion}}</p>
 
                                 <div class="action">
-                                    <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+
+                                        <a href="whatsapp://send?text=" class="botao-wpp">
+                                            <!-- ícone -->
+                                            <i class="fa fa-whatsapp"></i>
+                                            Enviar
+                                        </a>
+
                                 </div>
                             </div>
                         </div>
@@ -166,6 +183,32 @@
             -webkit-transform: scale(1);
             transform: scale(1); } }
 
+    .botao-wpp {
+        text-decoration: none;
+        color: #eee;
+        display: inline-block;
+        background-color: #25d366;
+        font-weight: bold;
+        padding: 1rem 2rem;
+        border-radius: 3px;
+    }
+    .botao-details {
+        text-decoration: none;
+        color: #eee;
+        display: inline-block;
+        background-color: #1a2226;
+        font-weight: bold;
+        padding: 1rem 2rem;
+        border-radius: 3px;
+    }
+
+    .botao-wpp:hover {
+        background-color: darken(#25d366, 5%);
+    }
+
+    .botao-wpp:focus {
+        background-color: darken(#25d366, 15%);
+    }
 </style>
 @endpush
 @endsection

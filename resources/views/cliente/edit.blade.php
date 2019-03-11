@@ -14,9 +14,9 @@
             </div>
         @endif
         <div class="box box-body">
-            <form role="form" action="{{ url('cliente.update',$cliente->id) }}" method="POST" id="form-post" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+            <form role="form" action="{{ url('cliente',$cliente->id) }}" method="POST" id="form-post" enctype="multipart/form-data">
+                <input name="_method" type="hidden" value="PATCH">
+                {{ csrf_field() }}
                 <div class="col-md-6">
                     <div class="row form-group">
                         <div class="col-md-9">
@@ -54,18 +54,22 @@
                             <label>Rol</label><em>*</em>
                             <select name="role" class="form-control">
                                 @foreach($roles as $rol)
+                                    @if($rol->name == $role)
+                                        <option selected>{{$rol->name}}</option>
+                                    @else
                                     <option>{{$rol->name}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
                     </div>
 
-                    <div class="row form-group">
-                        <div class="col-md-9">
-                            <label>Password</label><em>*</em>
-                            <input type="text" name="password" id="password" class="form-control" value="{{ old('password') ? old('password'):@$cliente->password }}">
-                        </div>
-                    </div>
+                    {{--<div class="row form-group">--}}
+                        {{--<div class="col-md-9">--}}
+                            {{--<label>Password</label><em>*</em>--}}
+                            {{--<input type="text" name="password" id="password" class="form-control" value="{{ old('password') ? old('password'):@$cliente->password }}">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                     <div class="row form-group">
                         <div class="col-md-9">

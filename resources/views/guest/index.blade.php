@@ -7,10 +7,11 @@
                 <table id="example" class="table table-striped table-bordered dt-responsive nowrap table-dark" style="width:100%">
                     <thead>
                     <tr>
-                        {{--<th>ID</th>--}}
                         <th>Descripción</th>
                         <th>Código</th>
-                        <th>Precio</th>
+                        {{--<th>Precio Sugerido</th>--}}
+                        {{--<th>Precio Mayorista</th>--}}
+                        {{--<th>Precio Minorista</th>--}}
                         <th>Acción</th>
                         <th>Sección</th>
                         <th>Marca Repuesto</th>
@@ -32,7 +33,9 @@
 //                    {data: 'id'},
                     {data: 'descripcion'},
                     {data: 'codigo'},
-                    {data: 'precio_id'},
+//                    {data: 'precio_id_sugerido'},
+//                    {data: 'precio_id_mayorista'},
+//                    {data: 'precio_id_minorista'},
                     {data: 'btn'},
                     {data: 'seccion_id'},
                     {data: 'marca_repuesto_id'},

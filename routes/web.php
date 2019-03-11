@@ -17,20 +17,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('role:admin');
 Route::get('/buscar', 'GuestController@index')->name('buscar');
-Route::resource('repuesto','RepuestoController');
+Route::resource('repuesto','RepuestoController')->middleware('role:admin');
 Route::resource('guest','GuestController');
-Route::resource('cliente','ClienteController');
-Route::resource('precio','PrecioController');
-Route::post('actualizarpreciominorista', 'PrecioController@actualizarpreciominorista');
-Route::post('actualizarpreciomayorista', 'PrecioController@actualizarpreciomayorista');
+Route::resource('cliente','ClienteController')->middleware('role:admin');
+Route::resource('precio','PrecioController')->middleware('role:admin');
+Route::post('actualizarpreciominorista', 'PrecioController@actualizarpreciominorista')->middleware('role:admin');
+Route::post('actualizarpreciomayorista', 'PrecioController@actualizarpreciomayorista')->middleware('role:admin');
 //Route::post('user/create', 'HomeController@store');
 
-Route::get('export', 'RepuestoController@export')->name('export');
-Route::get('importExportView', 'RepuestoController@importExportView');
-Route::post('import', 'RepuestoController@import')->name('import');
+Route::get('export', 'RepuestoController@export')->name('export')->middleware('role:admin');
+Route::get('importExportView', 'RepuestoController@importExportView')->middleware('role:admin');
+Route::post('import', 'RepuestoController@import')->name('import')->middleware('role:admin');
 
 Route::get('autocomplete',array('as'=>'autocomplete', 'uses'=>'RepuestoController@autocomplete'));
-Route::get('repuestos', 'GuestController@repuestos');
+Route::get('repuestos', 'GuestController@repuestos')->middleware('role:admin');
 

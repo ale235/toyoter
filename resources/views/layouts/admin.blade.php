@@ -3,24 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ADVentas | www.incanatoit.com</title>
+    <title>TOYOTER | REPUESTOS TOYOTA, MARCAS JAPONESAS y COREANAS</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href={{asset('css/bootstrap.min.css')}}>
     <!-- Bootstrap Select -->
-    {{--<link rel="stylesheet" href={{asset('css/bootstrap-select.min.css')}}>--}}
-
-    {{--<link rel="stylesheet" href={{asset('css/bootstrap-table.css')}}>--}}
     <!-- Font Awesome -->
     <link rel="stylesheet" href={{asset('css/font-awesome.css')}}>
     <!-- Theme style -->
     <link rel="stylesheet" href={{asset('css/AdminLTE.min.css')}}>
 
-    {{--<link rel="stylesheet" href={{asset('css/daterangepicker.css')}}>--}}
-
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href={{asset('css/_all-skins.min.css')}}>
     <link rel="apple-touch-icon" href={{asset('img/apple-touch-icon.png')}}>
     <link rel="shortcut icon" href={{asset('img/favicon.ico')}}>
@@ -32,11 +25,11 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="/home" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>AD</b>V</span>
+            <span class="logo-mini"><b>T</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>ADVentas</b></span>
+            <span class="logo-lg"><b>TOYOTER</b></span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
@@ -99,9 +92,6 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header"></li>
-                @if (Auth::user()->role == 1)
-                <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>Reportes</span></a></li>
-                @endif
                 <li class="treeview">
                     <a href="#"><i class='fa fa-folder-open'></i> <span>Repuestos</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
@@ -109,16 +99,13 @@
                         <li><a href="{{ url('repuesto/actualizar') }}">Acualizar Repuestos</a></li>
                     </ul>
                 </li>
-                {{--@if (Auth::user()->role == 1)--}}
                 <li class="treeview">
                     <a><i class='fa fa-link'></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="{{ url('cliente') }}">Listar Clientes</a></li>
                         <li><a href="{{ url('cliente/create') }}">Cargar Cliente</a></li>
-                        <li><a href="{{ url('compras/stockminimo') }}">Stock Mínimo</a></li>
                     </ul>
                 </li>
-                {{--@endif--}}
                 <li class="treeview">
                     <a href="#"><i class='fa fa-link'></i> <span>Precios</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
@@ -127,53 +114,10 @@
                         {{--<li><a href="{{ url('ventas/venta/create') }}">Facturación</a></li>--}}
                     </ul>
                 </li>
-                {{--<li class="treeview">--}}
-                    {{--<a href="{{ url('pagos') }}"><i class='fa fa-link'></i> <span>Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>--}}
-                {{--</li>--}}
-                {{--<li class="treeview">--}}
-                    {{--<a href="{{ url('arqueo') }}"><i class='fa fa-link'></i> <span>Arqueos</span> <i class="fa fa-angle-left pull-right"></i></a>--}}
-                {{--</li>--}}
-                {{--@if (Auth::user()->role == 1)--}}
-                {{--<li class="treeview">--}}
-                    {{--<a href="#"><i class='fa fa-link'></i> <span>Precios</span> <i class="fa fa-angle-left pull-right"></i></a>--}}
-                    {{--<ul class="treeview-menu">--}}
-                        {{--<li><a href="{{ url('precios/actualizar') }}">Actualizar precios</a></li>--}}
-                    {{--</ul>--}}
-                {{--</li>--}}
-                {{--@endif--}}
-                {{--@if (Auth::user()->role == 1)--}}
-                {{--<li class="treeview">--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="fa fa-folder"></i> <span>Usuarios</span>--}}
-                        {{--<i class="fa fa-angle-left pull-right"></i>--}}
-                    {{--</a>--}}
-                    {{--<ul class="treeview-menu">--}}
-                        {{--<li><a href="{{ url('seguridad/usuario') }}"><i class="fa fa-circle-o"></i> Usuarios</a></li>--}}
-
-                    {{--</ul>--}}
-                {{--</li>--}}
-                {{--@endif--}}
-                {{--<li>--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="fa fa-plus-square"></i> <span>Ayuda</span>--}}
-                        {{--<small class="label pull-right bg-red">PDF</small>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-                {{--<li>--}}
-                    {{--<a href="#">--}}
-                        {{--<i class="fa fa-info-circle"></i> <span>Acerca De...</span>--}}
-                        {{--<small class="label pull-right bg-yellow">IT</small>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
-
             </ul>
         </section>
         <!-- /.sidebar -->
     </aside>
-
-
-
-
 
     <!--Contenido-->
     <div class="content-wrapper">

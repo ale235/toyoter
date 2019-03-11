@@ -24,7 +24,6 @@ class UsersTableSeedeer extends Seeder
             switch ($u->id) {
 
                 case 1:
-                    echo $u;
                     $u->assignRole('admin');
                     $u->name = 'Alejandro';
                     $u->email = 'admin@admin.com';
@@ -58,6 +57,5 @@ class UsersTableSeedeer extends Seeder
                 $u->assignRole('cliente_minorista');
             }
         });
-//        factory(Post::class, 8)->create(['user_id'=>1]);
     }
 }

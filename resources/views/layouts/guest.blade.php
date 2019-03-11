@@ -149,7 +149,19 @@
                         <li class="nav-item"><a class="nav-link" href="{{ url('/buscar') }}"><strong><p>Buscar</p></strong></a></li>
                         @if (Route::has('login'))
                             @auth
-                            <li class="nav-item active"><a class="nav-link" href="{{ url('/home') }}"><strong>Home</strong></a></li>
+                            @role('admin')
+                            <li class="nav-item active"><a class="nav-link" href="{{ url('/home') }}"><strong>Admin</strong></a></li>
+                            @endrole
+                            <li>
+                                <a class="nav-link " href="{{ route('logout') }}"
+                                                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Salir') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
                         @else
                             <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><strong>Ingresar</strong></a></li>
                             {{--@if (Route::has('register'))--}}

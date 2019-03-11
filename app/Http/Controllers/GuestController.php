@@ -48,7 +48,7 @@ class GuestController extends Controller
     public function show($id)
     {
         $repuestos = DB::table('repuestos')
-            ->select('repuestos.id', 'repuestos.codigo', 'repuestos.descripcion','marca_repuestos.nombre as marca_repuesto', 'marca_vehiculos.nombre as marca_vehiculo', 'secciones.nombre as seccion', 'precios.precio_minorista as precio_minorista')
+            ->select('repuestos.id', 'repuestos.codigo', 'repuestos.descripcion','marca_repuestos.nombre as marca_repuesto', 'marca_vehiculos.nombre as marca_vehiculo', 'secciones.nombre as seccion', 'precios.precio_minorista as precio_minorista', 'precios.precio_mayorista as precio_mayorista', 'precios.precio_sugerido as precio_sugerido')
             ->join('marca_repuestos', 'marca_repuestos.id', '=', 'repuestos.marca_repuesto_id')
             ->join('marca_vehiculos', 'marca_vehiculos.id', '=', 'repuestos.marca_vehiculo_id')
             ->join('secciones', 'secciones.id', '=', 'repuestos.seccion_id')
