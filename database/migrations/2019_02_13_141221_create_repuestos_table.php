@@ -87,8 +87,8 @@ class CreateRepuestosTable extends Migration
 
         Schema::create('precios_historicos', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('precio_id');
-            $table->float('repuesto_id');
+            $table->unsignedInteger('precio_id');
+            $table->unsignedInteger('repuesto_id');
 
             $table->foreign('precio_id')
                 ->references('id')

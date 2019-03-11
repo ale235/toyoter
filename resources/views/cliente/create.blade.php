@@ -15,7 +15,7 @@
             </div>
         @endif
         <div class="box box-body">
-            <form role="form" method="POST" action="{{ url('cliente/clientes') }}" id="form-post" enctype="multipart/form-data">
+            <form role="form" method="POST" action="{{ url('cliente') }}" id="form-post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="col-md-6">
                     <div class="row form-group">
@@ -60,12 +60,12 @@
                         </div>
                     </div>
 
-                    <div class="row form-group">
-                        <div class="col-md-9">
-                            <label>Password</label><em>*</em>
-                            <input type="text" name="password" id="password" class="form-control" value="{{ old('password') ? old('password'):@$cliente->password }}">
-                        </div>
-                    </div>
+                    {{--<div class="row form-group">--}}
+                        {{--<div class="col-md-9">--}}
+                            {{--<label>Password</label><em>*</em>--}}
+                            {{--<input type="text" name="password" id="password" class="form-control" value="{{ old('password') ? old('password'):@$cliente->password }}">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                     {{--<div class="row form-group">--}}
                         {{--<div class="col-md-9">--}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -15,7 +16,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        return view('cliente.index');
     }
 
     /**
@@ -36,7 +37,27 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+//        dd($request);
+        $usuario = new User([
+            'name' => $request->get('username'),
+            'email' => $request->get('mail'),
+            'email_verified_at' => now(),
+            'password' => bcrypt($request->get('username')), // secret
+            'remember_token' => str_random(10),
+        ]);
+        $usuario->save();
+
+        $usuario->assignRole($request->get('role'));
+
+        $cliente = new Cliente([
+            'razon_social' => $request->get('razon_social'),
+            'telefono' => $request->get('telefono'),
+            'user_id' => $usuario->id,
+        ]);
+        $cliente->save();
+
+        return view('cliente.create',['roles' => Role::all()]);
+//        return view('cliente.show', $cliente->id);
     }
 
     /**
@@ -58,7 +79,7 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        return view('cliente.edit',['roles' => Role::all()]);
     }
 
     /**
@@ -70,7 +91,23 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        dd($cliente);
+        User::findById($cliente)
+                    ->update([
+                        'name' => $request->get('username'),
+                        'email' => $request->get('mail'),
+                        'email_verified_at' => now(),
+                        'password' => bcrypt($request->get('username')), // secret
+                        'remember_token' => str_random(10),
+                            ])
+                    ->assignRole($request->get('role'));
+
+        Cliente::findById($cliente)->update([
+            'razon_social' => $request->get('razon_social'),
+            'telefono' => $request->get('telefono'),
+        ]);
+
+        return view('cliente.create',['roles' => Role::all()]);
     }
 
     /**

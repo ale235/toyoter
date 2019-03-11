@@ -40,11 +40,11 @@ class RepuestosImport implements ToModel
             return Repuesto::find($repuesto->id);
         }
         else if ($repuesto != null  &&  $repuesto->precio_sugerido != $row[6]) {
-            new PrecioHistorico([
-                'repuesto_id' => $repuesto->id,
-                'precio_id' => $repuesto->precio_id
-                ]
-            );
+//            new PrecioHistorico([
+//                'repuesto_id' => $repuesto->id,
+//                'precio_id' => $repuesto->precio_id
+//                ]
+//            );
             $precio = new Precio([
                 'precio_sugerido' => $row[6],
                 'precio_minorista' => $repuesto->precio_minorista_co * $row[6],
@@ -57,7 +57,15 @@ class RepuestosImport implements ToModel
             //$repuesto->id_precio = $precio->id;
 //            dd(Repuesto::find($repuesto->id));
             //dd([$repuesto,$row]);
-            return Repuesto::find($repuesto->id)->update(['precio_id' => $precio->id]);
+
+            Precio::find($repuesto->precio_id)->update(
+                [
+                    'precio_minorista' => $repuesto->precio_minorista_co * $repuesto->precio_sugerido,
+                    'precio_mayorista' => $repuesto->precio_mayorista_co * $repuesto->precio_sugerido,
+                    'updated_at' => Carbon::now()->toDateTimeString(),
+                    ]);
+
+            return Repuesto::find($repuesto->id);
         }
         else{
             //dd([$repuesto,$row,'else']);

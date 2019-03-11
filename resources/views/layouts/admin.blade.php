@@ -105,66 +105,66 @@
                 <li class="treeview">
                     <a href="#"><i class='fa fa-folder-open'></i> <span>Repuestos</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('repuesto/repuestos/create') }}">Cargar Repuestos</a></li>
+                        <li><a href="{{ url('repuesto/create') }}">Cargar Repuestos</a></li>
                         <li><a href="{{ url('repuesto/actualizar') }}">Acualizar Repuestos</a></li>
                     </ul>
                 </li>
                 {{--@if (Auth::user()->role == 1)--}}
                 <li class="treeview">
-                    <a href="#"><i class='fa fa-link'></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <a><i class='fa fa-link'></i> <span>Clientes</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        {{--<li><a href="{{ url('compras/ingreso') }}">Ingreso</a></li>--}}
-                        <li><a href="{{ url('cliente/clientes/create') }}">Cargar Cliente</a></li>
+                        <li><a href="{{ url('cliente') }}">Listar Clientes</a></li>
+                        <li><a href="{{ url('cliente/create') }}">Cargar Cliente</a></li>
                         <li><a href="{{ url('compras/stockminimo') }}">Stock Mínimo</a></li>
                     </ul>
                 </li>
                 {{--@endif--}}
                 <li class="treeview">
-                    <a href="#"><i class='fa fa-link'></i> <span>Ventas</span> <i class="fa fa-angle-left pull-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('ventas/cliente') }}">Clientes</a></li>
-                        <li><a href="{{ url('ventas/venta?daterange') }}">Venta</a></li>
-                        <li><a href="{{ url('ventas/venta/create') }}">Facturación</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="{{ url('pagos') }}"><i class='fa fa-link'></i> <span>Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>
-                </li>
-                <li class="treeview">
-                    <a href="{{ url('arqueo') }}"><i class='fa fa-link'></i> <span>Arqueos</span> <i class="fa fa-angle-left pull-right"></i></a>
-                </li>
-                @if (Auth::user()->role == 1)
-                <li class="treeview">
                     <a href="#"><i class='fa fa-link'></i> <span>Precios</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('precios/actualizar') }}">Actualizar precios</a></li>
+                        <li><a href="{{ url('precio/create') }}">Cargar Precios</a></li>
+                        {{--<li><a href="{{ url('ventas/venta?daterange') }}">Venta</a></li>--}}
+                        {{--<li><a href="{{ url('ventas/venta/create') }}">Facturación</a></li>--}}
                     </ul>
                 </li>
-                @endif
-                @if (Auth::user()->role == 1)
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-folder"></i> <span>Usuarios</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('seguridad/usuario') }}"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                {{--<li class="treeview">--}}
+                    {{--<a href="{{ url('pagos') }}"><i class='fa fa-link'></i> <span>Pagos</span> <i class="fa fa-angle-left pull-right"></i></a>--}}
+                {{--</li>--}}
+                {{--<li class="treeview">--}}
+                    {{--<a href="{{ url('arqueo') }}"><i class='fa fa-link'></i> <span>Arqueos</span> <i class="fa fa-angle-left pull-right"></i></a>--}}
+                {{--</li>--}}
+                {{--@if (Auth::user()->role == 1)--}}
+                {{--<li class="treeview">--}}
+                    {{--<a href="#"><i class='fa fa-link'></i> <span>Precios</span> <i class="fa fa-angle-left pull-right"></i></a>--}}
+                    {{--<ul class="treeview-menu">--}}
+                        {{--<li><a href="{{ url('precios/actualizar') }}">Actualizar precios</a></li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
+                {{--@endif--}}
+                {{--@if (Auth::user()->role == 1)--}}
+                {{--<li class="treeview">--}}
+                    {{--<a href="#">--}}
+                        {{--<i class="fa fa-folder"></i> <span>Usuarios</span>--}}
+                        {{--<i class="fa fa-angle-left pull-right"></i>--}}
+                    {{--</a>--}}
+                    {{--<ul class="treeview-menu">--}}
+                        {{--<li><a href="{{ url('seguridad/usuario') }}"><i class="fa fa-circle-o"></i> Usuarios</a></li>--}}
 
-                    </ul>
-                </li>
-                @endif
-                <li>
-                    <a href="#">
-                        <i class="fa fa-plus-square"></i> <span>Ayuda</span>
-                        <small class="label pull-right bg-red">PDF</small>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-info-circle"></i> <span>Acerca De...</span>
-                        <small class="label pull-right bg-yellow">IT</small>
-                    </a>
-                </li>
+                    {{--</ul>--}}
+                {{--</li>--}}
+                {{--@endif--}}
+                {{--<li>--}}
+                    {{--<a href="#">--}}
+                        {{--<i class="fa fa-plus-square"></i> <span>Ayuda</span>--}}
+                        {{--<small class="label pull-right bg-red">PDF</small>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                    {{--<a href="#">--}}
+                        {{--<i class="fa fa-info-circle"></i> <span>Acerca De...</span>--}}
+                        {{--<small class="label pull-right bg-yellow">IT</small>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
 
             </ul>
         </section>
@@ -218,10 +218,21 @@
 
 <!-- jQuery 2.1.4 -->
 <script type="text/javascript" src={{asset('js/moment.js')}}></script>
-<script type="text/javascript" src={{asset('js/jQuery-2.1.4.min.js')}}></script>
+{{--<script type="text/javascript" src={{asset('js/jQuery-2.1.4.min.js')}}></script>--}}
 
 <script type="text/javascript" src={{asset('js/daterangepicker.js')}}></script>
 <!-- Bootstrap 3.3.5 -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">--}}
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+<link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+
+
 @stack('scripts')
 
 <script src={{asset('js/bootstrap.min.js')}}></script>

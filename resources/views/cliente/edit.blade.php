@@ -2,7 +2,7 @@
 @section ('contenido')
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Editar Artículo</h3>
+            <h3 class="box-title">Editar Cliente</h3>
         </div>
         @if(count($errors)>0)
             <div class="alert alert-danger">
@@ -13,77 +13,66 @@
                 </u>
             </div>
         @endif
-        {!! Form::model($articulo, ['method'=>'PATCH','route'=>['articulo.update',$articulo->idarticulo], 'files'=>'true'])!!}
-        {{Form::token()}}
-        <div class="box-body">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
-                <input  type="text" name="barcode" id="barcode" value="{{$articulo->barcode}}"  class="form-control" placeholder="Código de Barras">
-            </div>
-            <br>
+        <div class="box box-body">
+            <form role="form" action="{{ url('cliente.update',$cliente->id) }}" method="POST" id="form-post" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Usuario</label><em>*</em>
+                            <input type="text" name="username" id="username" class="form-control" value="{{ old('username') ? old('username'):@$cliente->username }}">
+                        </div>
+                    </div>
 
-            <div class="input-group">
-                <span class="input-group-addon">Nombre</span>
-                <input type="text" name="nombre" id="nombre" value="{{$articulo->nombre}}" class="form-control" placeholder="Nombre">
-            </div>
-            <br>
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Razón Social</label><em>*</em>
+                            <input type="text" name="razon_social" id="razon_social" class="form-control" value="{{ old('razon_social') ? old('razon_social'):@$cliente->razon_social }}">
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon">Categoría</span>
-                    <select name="idcategoria" class="form-control">
-                        @foreach($categorias as $cat)
-                            @if ($cat->idcategoria == $articulo->idcategoria)
-                                <option value="{{$cat->idcategoria}}" selected>{{$cat->nombre}}</option>
-                            @else
-                                <option value="{{$cat->idcategoria}}">{{$cat->nombre}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <span class="input-group-btn">
-                        <a href="{{ url('almacen/categoria/create?lastPage=art') }}"><button type="button" class="btn btn-info btn-flat">Nueva Categoría</button></a>
-                    </span>
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Mail</label><em>*</em>
+                            <input type="text" name="mail" id="mail" class="form-control" value="{{ old('mail') ? old('mail'):@$cliente->mail }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Teléfono</label><em>*</em>
+                            <input type="text" name="telefono" id="telefono" class="form-control" value="{{ old('telefono') ? old('telefono'):@$cliente->telefono }}">
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            <br>
+                <div class="col-md-6">
 
-            {{--<div class="form-group">--}}
-                {{--<div class="input-group">--}}
-                    {{--<span class="input-group-addon">Proveedor</span>--}}
-                    {{--<select name="idproveedores" class="form-control">--}}
-                        {{--@foreach($proveedores as $prov)--}}
-                            {{--<option value="{{$prov->idpersona}}">{{$prov->codigo}}</option>--}}
-                        {{--@endforeach--}}
-                    {{--</select>--}}
-                    {{--<span class="input-group-btn">--}}
-                        {{--<a href="{{ url('compras/proveedor/create?lastPage=art') }}"><button type="button" class="btn btn-info btn-flat">Nuevo Proveedor</button></a>--}}
-                    {{--</span>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<br>--}}
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Rol</label><em>*</em>
+                            <select name="role" class="form-control">
+                                @foreach($roles as $rol)
+                                    <option>{{$rol->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
 
-            <div style="display: none" class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
-                <div class="from-group">
-                    <label for="stock">Codigo</label>
-                    <input type="text" name="codigo" id="codigo" value="{{$articulo->codigo}}" class="form-control" placeholder="Código...">
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Password</label><em>*</em>
+                            <input type="text" name="password" id="password" class="form-control" value="{{ old('password') ? old('password'):@$cliente->password }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <button type="submit" class="btn btn-primary">Primary</button></div>
+                    </div>
                 </div>
-            </div>
-
-            <hr size="60" />
-
-            <div class="input-group">
-                <span id="inputdelexistencia" style="display: none" class="input-group-addon">Hay <span id="existencia"></span> artículos en Stock</span>
-                <input type="number" name="pcantidad" id="pcantidad" value="{{$articulo->stock}}" class="form-control" placeholder="Cantidad">
-                <span class="input-group-addon">Cantidad de árticulos en existencia (Stock)</span>
-            </div>
-            <br>
-            <!-- /input-group -->
+            </form>
         </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-            <button type="reset" class="btn btn-default">Cancelar</button>
-            <button type="submit" class="btn btn-info pull-right">Cargar Artículo</button>
-        </div>
-        {!! Form::close()!!}
     </div>
 @endsection

@@ -1,32 +1,39 @@
 @extends ('layouts.admin')
-@section ('contenido')
-    <div class="col-md-12">
-        <table id="example" class="table table-striped table-bordered dt-responsive nowrap table-dark" style="width:100%">
-            <thead>
-            <tr>
-                <th>Razón Social</th>
-                <th>Usuario</th>
-                <th>Teléfono</th>
-                {{--<th>Rol</th>--}}
-                <th>Acción</th>
-            </tr>
-            </thead>
-        </table>
+@section('content')
+            <div class="col-md-12">
+                <table id="example" class="table table-striped table-bordered dt-responsive nowrap table-dark" style="width:100%">
+                    <thead>
+                    <tr>
+                        {{--<th>ID</th>--}}
+                        <th>Descripción</th>
+                        <th>Código</th>
+                        <th>Precio</th>
+                        <th>Acción</th>
+                        <th>Sección</th>
+                        <th>Marca Repuesto</th>
+                        <th>Marca Vehículo</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
 @push('scripts')
 <script>
-        $(document).ready(function() {
+    $(document).ready(function() {
             $('#example').DataTable({
                 "serverSide": true,
                 "processing": true,
-                "ajax": "{{url('api/listarClientes')}}",
+                "ajax": "{{url('api/buscarRepuestos')}}",
                 "columns": [
 //                    {data: 'id'},
-                    {data: 'razon_social'},
-                    {data: 'name'},
-                    {data: 'telefono'},
-//                    {data: 'role'},
+                    {data: 'descripcion'},
+                    {data: 'codigo'},
+                    {data: 'precio_id'},
                     {data: 'btn'},
+                    {data: 'seccion_id'},
+                    {data: 'marca_repuesto_id'},
+                    {data: 'marca_vehiculo_id'},
                 ],
                 language: {
                     "sProcessing": "Procesando...",

@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use Notifiable, HasRoles;
 
+    public $timestamps = true;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,7 +27,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+//    protected $hidden = [
+//        'password', 'remember_token',
+//    ];
 }
