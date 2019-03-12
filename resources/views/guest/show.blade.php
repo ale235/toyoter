@@ -45,8 +45,9 @@
                                 <p class="vote">Sección: {{$repuesto->seccion}}</p>
 
                                 <div class="action">
-
-                                        <a href="whatsapp://send?text=" class="botao-wpp">
+                                    {{--https://wa.me/número?text=mensaje--}}
+                                    <a href="https://wa.me/5493424232136?text={{Request::url()}}" class="botao-wpp">
+                                        {{--<a href="whatsapp://send?text={{Request::url()}}" class="botao-wpp">--}}
                                             <!-- ícone -->
                                             <i class="fa fa-whatsapp"></i>
                                             Enviar
