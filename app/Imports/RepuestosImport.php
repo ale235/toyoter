@@ -105,12 +105,13 @@ class RepuestosImport implements ToModel
             ]);
         }
 
-    }
-//            DB::commit();
+//        DB::commit();
 //        }
 //        catch(\Exception $e)
 //        {
 //            DB::rollback();
 //        }
+    }
+//
 }
 

@@ -23,6 +23,7 @@ Route::resource('repuesto','RepuestoController')->middleware('role:admin');
 Route::resource('guest','GuestController');
 Route::resource('cliente','ClienteController')->middleware('role:admin');
 Route::resource('precio','PrecioController')->middleware('role:admin');
+Route::get('sessions','PresupuestoController@addSessions');
 Route::post('actualizarpreciominorista', 'PrecioController@actualizarpreciominorista')->middleware('role:admin');
 Route::post('actualizarpreciomayorista', 'PrecioController@actualizarpreciomayorista')->middleware('role:admin');
 //Route::post('user/create', 'HomeController@store');

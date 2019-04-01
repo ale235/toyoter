@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 table-responsive" style="overflow-x:auto;">
                 <table id="example" class="table table-striped table-bordered dt-responsive nowrap table-dark" style="width:100%">
                     <thead>
                     <tr>
@@ -66,6 +66,54 @@
                     }
                 },
 
+            });
+            $('#example tbody').on('click', '.shop', function (e){
+                //todo
+                var item = $(e.currentTarget).parent().parent().children()[1].textContent;
+//                $('.carrito').prepend(
+//                    $('<a class="dropdown-item" href="#"></a>').text('hola')
+//                );
+                 console.log(e);
+
+                $(document).on('click','.shop',function(){
+                    var item = $(e.currentTarget).parent().parent().children()[1].textContent;
+
+                    $.ajax({
+                        type:'get',
+                        url:'{!!URL::to('sessions')!!}',
+                        data:{'codigo':item},
+                        success:function(data){
+                            //Controla que se muestre el resto del formulario.
+                            console.log(data);
+                            $('#cart').prepend(
+                                '<tr>' +
+                                '<td data-th="Product">' +
+                                '<div class="row">' +
+                                '<div class="col-sm-12">' +
+                                '<h4 class="nomargin">'+data[0].codigo+'</h4>' +
+                                '<p>'+data[0].descripcion+'</p>' +
+                                '</div>' +
+                                '</div>' +
+                                '</td>' +
+                                '<td data-th="Price">$1.99' +
+                                '</td>' +
+                                '<td data-th="Quantity">' +
+                                '<input type="number" class="form-control text-center" value="1">' +
+                                '</td>' +
+                                '<td data-th="Subtotal" class="text-center">1.99' +
+                                '</td>' +
+                                '<td class="actions" data-th="">' +
+                                '<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>' +
+                                '<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>' +
+                                '</td>' +
+                                '</tr>');
+                        },
+                        error:function(){
+                            console.log("aca");
+                        }
+                    });
+
+                });
             });
         } );
 </script>

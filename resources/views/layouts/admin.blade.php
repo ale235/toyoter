@@ -96,7 +96,7 @@
                     <a href="#"><i class='fa fa-folder-open'></i> <span>Repuestos</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a href="{{ url('repuesto/create') }}">Cargar Repuestos</a></li>
-                        <li><a href="{{ url('repuesto/actualizar') }}">Acualizar Repuestos</a></li>
+                        {{--<li><a href="{{ url('repuesto/actualizar') }}">Acualizar Repuestos</a></li>--}}
                     </ul>
                 </li>
                 <li class="treeview">
@@ -128,7 +128,7 @@
                 <div class="col-md-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Sistema de Ventas</h3>
+                            <h3 class="box-title">Sistema de Repuestos</h3>
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 
@@ -153,9 +153,9 @@
     <!--Fin-Contenido-->
     <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Version</b> 2.3.0
+        <b>Version</b> 1.19.3
     </div>
-    <strong>Copyright &copy; 2015-2020 <a href="www.incanatoit.com">IncanatoIT</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019 <a href="#">Alejandro Colautti</a>.</strong> Todos los derechos reservados.
 </footer>
 </div>
 

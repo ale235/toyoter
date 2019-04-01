@@ -3,7 +3,7 @@
     <!-- Input addon -->
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Nuevo Artículo</h3>
+            <h3 class="box-title">Cargar Excel</h3>
         </div>
         @if(count($errors)>0)
             <div class="alert alert-danger">
@@ -19,8 +19,8 @@
                 @csrf
                 <input type="file" name="file" class="form-control">
                 <br>
-                <button class="btn btn-success">Import User Data</button>
-                <a class="btn btn-warning" href="{{ route('export') }}">Export User Data</a>
+                <button class="btn btn-success">Importar Repuestos</button>
+                {{--<a class="btn btn-warning" href="{{ route('export') }}">Export User Data</a>--}}
             </form>
         </div>
     </div>

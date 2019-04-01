@@ -7,12 +7,12 @@
 
         <title>TOYOTER | REPUESTOS TOYOTA, MARCAS JAPONESAS y COREANAS</title>
         <!-- Tell the browser to be responsive to screen width -->
-        @yield('card');
+        @yield('card')
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/brands.css" integrity="sha384-BKw0P+CQz9xmby+uplDwp82Py8x1xtYPK3ORn/ZSoe6Dk3ETP59WCDnX+fI1XCKK" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 
         <!-- Styles -->
         <style>
@@ -136,40 +136,139 @@
     <body>
     <header>
         {{--<nav class="navbar navbar-expand-lg bg-dark navbar-dark">--}}
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid"  style="z-index:100;">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">
-                        <img src="{{ asset('images/toyoterlogo.png') }}" alt="Smiley face" width="15%">
-                    </a>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="{{ url('/buscar') }}"><strong><p>Buscar</p></strong></a></li>
-                        @if (Route::has('login'))
-                            @auth
-                            @role('admin')
-                            <li class="nav-item active"><a class="nav-link" href="{{ url('/home') }}"><strong>Admin</strong></a></li>
-                            @endrole
-                            <li>
-                                <a class="nav-link " href="{{ route('logout') }}"
-                                                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Salir') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>
-                        @else
-                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><strong>Ingresar</strong></a></li>
+        {{--<nav class="navbar navbar-expand-lg navbar-dark">--}}
+            {{--<div class="container-fluid"  style="z-index:100;">--}}
+                {{--<div class="navbar-header">--}}
+                    {{--<a class="navbar-brand" href="#">--}}
+                        {{--<img src="{{ asset('images/toyoterlogo.png') }}" alt="Smiley face" width="15%">--}}
+                    {{--</a>--}}
+                {{--</div>--}}
+                {{--<div class="collapse navbar-collapse" id="navbarNav">--}}
+                    {{--<ul class="navbar-nav ml-auto">--}}
+                        {{--<li class="nav-item"><a class="nav-link" href="{{ url('/buscar') }}"><strong><p>Buscar</p></strong></a></li>--}}
+                        {{--@if (Route::has('login'))--}}
+                            {{--@auth--}}
+                            {{--@role('admin')--}}
+                            {{--<li class="nav-item active"><a class="nav-link" href="{{ url('/home') }}"><strong>Admin</strong></a></li>--}}
+                            {{--@endrole--}}
+                            {{--<li>--}}
+                                {{--<a class="nav-link " href="{{ route('logout') }}"--}}
+                                                               {{--onclick="event.preventDefault();--}}
+                                                     {{--document.getElementById('logout-form').submit();">--}}
+                                    {{--{{ __('Salir') }}--}}
+                                {{--</a>--}}
+                                {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                                    {{--@csrf--}}
+                                {{--</form>--}}
+                            {{--</li>--}}
+                        {{--@else--}}
+                            {{--<li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><strong>Ingresar</strong></a></li>--}}
                             {{--@if (Route::has('register'))--}}
                                 {{--<li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>--}}
                             {{--@endif--}}
-                            @endauth
+                            {{--@endauth--}}
+                        {{--@endif--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</nav>--}}
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="clearfix-xs">
+                <a class="navbar-brand" href="#">
+                    <img src="{{ asset('images/toyoterlogo.png') }}" alt="Smiley face" class="img-fluid" width="15%" style=" min-width: 100px;">
+                </a>
+                <button class="navbar-toggler float-right" type="button" style="    margin-top: -40px;" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse text-right" id="navbarsExample02" >
+                <ul class="navbar-nav ml-auto">
+                    @role('cliente|admin')
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fas fa-shopping-cart" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span style="">Imprimir Presupuesto</span>
+                            {{--<li class="fas fa-shopping-cart"></li>--}}
+                        </a>
+                        <div class="dropdown-menu" style="left: -700px;" aria-labelledby="navbarDropdown">
+                            <table id="cart" class="table table-hover table-condensed">
+                                <thead>
+                                <tr>
+                                    <th style="width:50%">Product</th>
+                                    <th style="width:10%">Price</th>
+                                    <th style="width:8%">Quantity</th>
+                                    <th style="width:22%" class="text-center">Subtotal</th>
+                                    <th style="width:10%"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td data-th="Product">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h4 class="nomargin">Product 1</h4>
+                                                <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-th="Price">$1.99</td>
+                                    <td data-th="Quantity">
+                                        <input type="number" class="form-control text-center" value="1">
+                                    </td>
+                                    <td data-th="Subtotal" class="text-center">1.99</td>
+                                    <td class="actions" data-th="">
+                                        <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr class="visible-xs">
+                                    <td class="text-center"><strong>Total 1.99</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                                    <td colspan="2" class="hidden-xs"></td>
+                                    <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
+                                    <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </li>
+                    {{--<i class="nav-item">--}}
+                        {{--<a class="nav-link" href=""><li class="fas fa-shopping-cart"></li></a>--}}
+                    {{--</i>--}}
+                    @endrole
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/buscar') }}"><strong><p>Buscar</p></strong></a>
+                    </li>
+                    @if (Route::has('login'))
+                        @auth
+                        @role('admin')
+                        <li class="nav-item active"><a class="nav-link" href="{{ url('/home') }}"><strong>Admin</strong></a>
+                        </li>
+                        @endrole
+                        <li>
+                            <a class="nav-link " href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Salir') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">
+                                <strong>Ingresar</strong>
+                            </a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                         @endif
-                    </ul>
-                </div>
+                        @endauth
+                    @endif
+                </ul>
             </div>
         </nav>
     </header>
@@ -183,10 +282,55 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
         @stack('scripts')
 
+    <style>
+        .table>tbody>tr>td, .table>tfoot>tr>td{
+            vertical-align: middle;
+        }
+        @media screen and (max-width: 600px) {
+            table#cart tbody td .form-control{
+                width:20%;
+                display: inline !important;
+            }
+            .actions .btn{
+                width:36%;
+                margin:1.5em 0;
+            }
 
+            .actions .btn-info{
+                float:left;
+            }
+            .actions .btn-danger{
+                float:right;
+            }
+
+            table#cart thead { display: none; }
+            table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+            table#cart tbody tr td:first-child { background: #333; color: #fff; }
+            table#cart tbody td:before {
+                content: attr(data-th); font-weight: bold;
+                display: inline-block; width: 8rem;
+            }
+
+
+
+            table#cart tfoot td{display:block; }
+            table#cart tfoot td .btn{display:block;}
+
+        }
+        @media(max-width:768px){.clearfix-xs:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+        }
+    </style>
     </body>
 </html>

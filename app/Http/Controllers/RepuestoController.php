@@ -102,7 +102,13 @@ class RepuestoController extends Controller
     public function import()
     {
 //        DB::connection()->disableQueryLog();
-        Excel::import(new RepuestosImport,request()->file('file'));
+        try {
+            DB::beginTransaction();
+            Excel::import(new RepuestosImport, request()->file('file'));
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
         return back();
     }
 
