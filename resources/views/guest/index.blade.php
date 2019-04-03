@@ -69,36 +69,41 @@
             });
             $('#example tbody').on('click', '.shop', function (e){
                 //todo
+                event.preventDefault();
+//                var item = $(e.currentTarget).parent().parent().children()[1].textContent;
                 var item = $(e.currentTarget).parent().parent().children()[1].textContent;
-//                $('.carrito').prepend(
-//                    $('<a class="dropdown-item" href="#"></a>').text('hola')
-//                );
-                 console.log(e);
+                var bandera = 0;
+                event.preventDefault();
+                $.ajax({
+                    type:'get',
+                    url:'{!!URL::to('sessions')!!}',
+                    data:{'codigo':item},
+                    success:function(data){
+                        //Controla que se muestre el resto del formulario.
+                        console.log(data);
 
-                $(document).on('click','.shop',function(){
-                    var item = $(e.currentTarget).parent().parent().children()[1].textContent;
-
-                    $.ajax({
-                        type:'get',
-                        url:'{!!URL::to('sessions')!!}',
-                        data:{'codigo':item},
-                        success:function(data){
-                            //Controla que se muestre el resto del formulario.
-                            console.log(data);
+                        $('#cart tr').each(function() {
+                            if($($($(this).children().children().children().children())[0]).text() == data[0].codigo && bandera == 0){
+                                var ant = parseInt($($(this).children()[2]).children()[0].defaultValue);
+                                $($(this).children()[2]).children()[0].defaultValue = ant + 1;
+                                bandera = 1;
+                            }
+                        });
+                        if(bandera == 0){
                             $('#cart').prepend(
                                 '<tr>' +
                                 '<td data-th="Product">' +
                                 '<div class="row">' +
                                 '<div class="col-sm-12">' +
-                                '<h4 class="nomargin">'+data[0].codigo+'</h4>' +
+                                '<h4 class="nomargin codigotabla">'+data[0].codigo+'</h4>' +
                                 '<p>'+data[0].descripcion+'</p>' +
                                 '</div>' +
                                 '</div>' +
                                 '</td>' +
-                                '<td data-th="Price">$1.99' +
+                                '<td data-th="Price">$'+data[0].precio+'' +
                                 '</td>' +
                                 '<td data-th="Quantity">' +
-                                '<input type="number" class="form-control text-center" value="1">' +
+                                '<input type="number" min="1" step="1" class="form-control text-center cantidadtabla" value="1">' +
                                 '</td>' +
                                 '<td data-th="Subtotal" class="text-center">1.99' +
                                 '</td>' +
@@ -107,15 +112,20 @@
                                 '<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>' +
                                 '</td>' +
                                 '</tr>');
-                        },
-                        error:function(){
-                            console.log("aca");
+                            bandera = 1
                         }
-                    });
 
+                    },
+                    error:function(){
+                        console.log("aca");
+                    }
                 });
             });
         } );
+        $(document).on('change', '.cantidadtabla', function(e) {
+            // Does some stuff and logs the event to the console
+            var item = $(e.currentTarget).parent().parent().children()[1].textContent;
+        });
 </script>
 @endpush
 @endsection

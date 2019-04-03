@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Presupuesto;
 use App\Repuesto;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -49,16 +51,37 @@ class PresupuestoController extends Controller
      */
     public function addSessions(Request $request)
     {
-//        $items = (object)array(
-//            'codigo' => $request->codigo,
-////            'cantidad' => $request->cantidad
-//        );
-        $items = DB::table('repuestos as r')
-            ->join('precios as p','p.id','=','r.precio_id')
-            ->where('r.codigo','=', $request->codigo)
-            ->get();
+        $sessions = (object)array(
+            'codigo' => $request->codigo
+        );
+        Session::push('items',$sessions);
+
+        $roleLogged = Auth::user()->roles->pluck('name');
+
+        if($roleLogged[0] == 'cliente_minorista'){
+            $items = DB::table('repuestos as r')
+                ->join('precios as p','p.id','=','r.precio_id')
+                ->where('r.codigo','=', $request->codigo)
+                ->select('r.codigo','p.precio_minorista as precio','r.descripcion')
+                ->get();
+        } else if ($roleLogged[0] == 'cliente_mayorista'){
+            $items = DB::table('repuestos as r')
+                ->join('precios as p','p.id','=','r.precio_id')
+                ->where('r.codigo','=', $request->codigo)
+                ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
+                ->get();
+        } else {
+            $items = DB::table('repuestos as r')
+                ->join('precios as p','p.id','=','r.precio_id')
+                ->where('r.codigo','=', $request->codigo)
+                ->select('r.codigo','p.precio_sugerido as precio','r.descripcion')
+                ->get();
+        }
+
+
 
 //        Session::push('items',$items);
+
         return response()->json($items);
     }
 

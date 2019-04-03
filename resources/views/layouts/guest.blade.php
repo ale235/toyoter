@@ -183,7 +183,7 @@
             </div>
             <div class="collapse navbar-collapse text-right" id="navbarsExample02" >
                 <ul class="navbar-nav ml-auto">
-                    @role('cliente|admin')
+                    @role('cliente_minorista|admin')
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle fas fa-shopping-cart" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span style="">Imprimir Presupuesto</span>
@@ -201,30 +201,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($sessions as $repuesto)
                                 <tr>
                                     <td data-th="Product">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <h4 class="nomargin">Product 1</h4>
-                                                <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                                <h4 class="nomargin codigotabla">{{$repuesto[0]->codigo}}</h4>
+                                                <p>{{$repuesto[0]->descripcion}}</p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td data-th="Price">$1.99</td>
+                                    <td data-th="Price">${{$repuesto[0]->precio}}</td>
                                     <td data-th="Quantity">
-                                        <input type="number" class="form-control text-center" value="1">
+                                        <input type="number" class="form-control text-center cantidadtabla" value="{{$repuesto['cantidad']}}">
                                     </td>
                                     <td data-th="Subtotal" class="text-center">1.99</td>
                                     <td class="actions" data-th="">
-                                        <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+                                        {{--<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>--}}
                                         <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
                                     </td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
-                                <tr class="visible-xs">
-                                    <td class="text-center"><strong>Total 1.99</strong></td>
-                                </tr>
                                 <tr>
                                     <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                                     <td colspan="2" class="hidden-xs"></td>
