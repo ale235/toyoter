@@ -19,40 +19,43 @@ class GuestController extends Controller
     {
         $items = Session::get('items');
         $repuestos = [];
-        $roleLogged = Auth::user()->roles->pluck('name');
-        $aux = collect();
-        foreach ($items as $item){
-            $aux->push($item->codigo);
-        }
-        $aux = array_count_values($aux->toArray());
+        if($items != null){
+            $roleLogged = Auth::user()->roles->pluck('name');
+            $aux = collect();
+            foreach ($items as $item){
+                $aux->push($item->codigo);
+            }
+            $aux = array_count_values($aux->toArray());
 //        dd($aux);
 
-        foreach ($aux as $clave => $valor) {
-            if($roleLogged[0] == 'cliente_minorista'){
-                $repuesto = DB::table('repuestos as r')
-                    ->join('precios as p','p.id','=','r.precio_id')
-                    ->where('r.codigo','=', $clave)
-                    ->select('r.codigo','p.precio_minorista as precio','r.descripcion')
-                    ->get();
-            } else if ($roleLogged[0] == 'cliente_mayorista'){
-                $repuesto = DB::table('repuestos as r')
-                    ->join('precios as p','p.id','=','r.precio_id')
-                    ->where('r.codigo','=', $clave)
-                    ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
-                    ->get();
-            } else {
-                $repuesto = DB::table('repuestos as r')
-                    ->join('precios as p','p.id','=','r.precio_id')
-                    ->where('r.codigo','=', $clave)
-                    ->select('r.codigo','p.precio_sugerido as precio','r.descripcion')
-                    ->get();
-            }
-            $repuesto['cantidad'] = $valor;
+            foreach ($aux as $clave => $valor) {
+                if($roleLogged[0] == 'cliente_minorista'){
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_minorista as precio','r.descripcion')
+                        ->get();
+                } else if ($roleLogged[0] == 'cliente_mayorista'){
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
+                        ->get();
+                } else {
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_sugerido as precio','r.descripcion')
+                        ->get();
+                }
+                $repuesto['cantidad'] = $valor;
 
-            array_push($repuestos, $repuesto);
-        }
+                array_push($repuestos, $repuesto);
+            }
 //        dd($repuestos[0]['cantidad']);
 //        return response()->json($items);
+        }
+
         return view('guest.index',['sessions' => $repuestos]);
     }
 
