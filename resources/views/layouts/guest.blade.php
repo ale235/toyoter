@@ -135,43 +135,6 @@
     </head>
     <body>
     <header>
-        {{--<nav class="navbar navbar-expand-lg bg-dark navbar-dark">--}}
-        {{--<nav class="navbar navbar-expand-lg navbar-dark">--}}
-            {{--<div class="container-fluid"  style="z-index:100;">--}}
-                {{--<div class="navbar-header">--}}
-                    {{--<a class="navbar-brand" href="#">--}}
-                        {{--<img src="{{ asset('images/toyoterlogo.png') }}" alt="Smiley face" width="15%">--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-                {{--<div class="collapse navbar-collapse" id="navbarNav">--}}
-                    {{--<ul class="navbar-nav ml-auto">--}}
-                        {{--<li class="nav-item"><a class="nav-link" href="{{ url('/buscar') }}"><strong><p>Buscar</p></strong></a></li>--}}
-                        {{--@if (Route::has('login'))--}}
-                            {{--@auth--}}
-                            {{--@role('admin')--}}
-                            {{--<li class="nav-item active"><a class="nav-link" href="{{ url('/home') }}"><strong>Admin</strong></a></li>--}}
-                            {{--@endrole--}}
-                            {{--<li>--}}
-                                {{--<a class="nav-link " href="{{ route('logout') }}"--}}
-                                                               {{--onclick="event.preventDefault();--}}
-                                                     {{--document.getElementById('logout-form').submit();">--}}
-                                    {{--{{ __('Salir') }}--}}
-                                {{--</a>--}}
-                                {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                                    {{--@csrf--}}
-                                {{--</form>--}}
-                            {{--</li>--}}
-                        {{--@else--}}
-                            {{--<li class="nav-item"><a class="nav-link" href="{{ route('login') }}"><strong>Ingresar</strong></a></li>--}}
-                            {{--@if (Route::has('register'))--}}
-                                {{--<li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>--}}
-                            {{--@endif--}}
-                            {{--@endauth--}}
-                        {{--@endif--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</nav>--}}
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="clearfix-xs">
                 <a class="navbar-brand" href="#">
@@ -187,51 +150,56 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle fas fa-shopping-cart" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span style="">Imprimir Presupuesto</span>
-                            {{--<li class="fas fa-shopping-cart"></li>--}}
                         </a>
                         <div class="dropdown-menu" style="left: -700px;" aria-labelledby="navbarDropdown">
-                            <table id="cart" class="table table-hover table-condensed">
-                                <thead>
-                                <tr>
-                                    <th style="width:50%">Product</th>
-                                    <th style="width:10%">Price</th>
-                                    <th style="width:8%">Quantity</th>
-                                    <th style="width:22%" class="text-center">Subtotal</th>
-                                    <th style="width:10%"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($sessions as $repuesto)
-                                <tr>
-                                    <td data-th="Product">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <h4 class="nomargin codigotabla">{{$repuesto[0]->codigo}}</h4>
-                                                <p>{{$repuesto[0]->descripcion}}</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td data-th="Price">${{$repuesto[0]->precio}}</td>
-                                    <td data-th="Quantity">
-                                        <input type="number" class="form-control text-center cantidadtabla" value="{{$repuesto['cantidad']}}">
-                                    </td>
-                                    <td data-th="Subtotal" class="text-center">1.99</td>
-                                    <td class="actions" data-th="">
-                                        {{--<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>--}}
-                                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-                                    <td colspan="2" class="hidden-xs"></td>
-                                    <td class="hidden-xs text-center"><strong>Total $1.99</strong></td>
-                                    <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
-                                </tr>
-                                </tfoot>
-                            </table>
+                            <form id="table-form" action="{{ url('presupuesto') }}" method="POST">
+                                {{csrf_field()}}
+                                <table id="cart" class="table table-hover table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:50%">Producto</th>
+                                        <th style="width:10%">Precio</th>
+                                        <th style="width:8%">Cantidad</th>
+                                        <th style="width:22%" class="text-center">Subtotal</th>
+                                        <th style="width:10%"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($sessions as $repuesto)
+                                        <tr>
+                                            <td data-th="Producto">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <h4 class="nomargin codigotabla">{{$repuesto[0]->codigo}}</h4>
+                                                        <p>{{$repuesto[0]->descripcion}}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td data-th="Precio" class="preciotabla">${{$repuesto[0]->precio}}</td>
+                                            <td data-th="Cantidad">
+                                                <input type="number" readonly class="form-control text-center cantidadtabla" value="{{$repuesto['cantidad']}}">
+                                            </td>
+                                            <td data-th="Subtotal" class="text-center subtotaltabla">${{$repuesto[0]->precio * $repuesto['cantidad']}}</td>
+                                            <td class="actions" data-th="">
+                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                    <button class="btn btn-info btn-sm minus"><a><i class="fa fa-minus"></i></a></button>
+                                                    <button class="btn btn-info btn-sm plus"><a><i class="fa fa-plus"></i></a></button>
+                                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="hidden-xs"></td>
+                                        <td> <button type="submit" class="btn btn-danger btn-sm"> <a  class="btn btn-success btn-block">Imprimir Presupuesto</a></button></td>
+                                        <td class="hidden-xs text-center"><strong>Total {{$total}}</strong></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </form>
+
                         </div>
                     </li>
                     {{--<i class="nav-item">--}}

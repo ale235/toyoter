@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use App\Cliente;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeedeer extends Seeder
@@ -27,6 +28,10 @@ class UsersTableSeedeer extends Seeder
                     $u->assignRole('admin');
                     $u->name = 'Alejandro';
                     $u->email = 'admin@admin.com';
+                    $cliente = new Cliente();
+                    $cliente->user_id = $u->id;
+                    $cliente->telefono = "444444";
+                    $cliente->razon_social = "Aya SA";
                     $u->save();
                     break;
 
@@ -34,6 +39,11 @@ class UsersTableSeedeer extends Seeder
                     $u->assignRole('cliente_minorista');
                     $u->name = 'Daniela';
                     $u->email = 'cliente@minorista.com';
+                    $cliente = new Cliente();
+                    $cliente->user_id = $u->id;
+                    $cliente->telefono = "444444";
+                    $cliente->razon_social = "Aya SA";
+                    $cliente->save();
                     $u->save();
                     break;
 
@@ -41,6 +51,11 @@ class UsersTableSeedeer extends Seeder
                     $u->assignRole('cliente_mayorista');
                     $u->name = 'Norberto';
                     $u->email = 'cliente@mayorista.com';
+                    $cliente = new Cliente();
+                    $cliente->user_id = $u->id;
+                    $cliente->telefono = "444444";
+                    $cliente->razon_social = "Aya SA";
+                    $cliente->save();
                     $u->save();
                     break;
 
@@ -48,6 +63,11 @@ class UsersTableSeedeer extends Seeder
                     $u->assignRole('cliente_personalizado');
                     $u->name = 'Maxi';
                     $u->email = 'cliente@personalizado.com';
+                    $cliente = new Cliente();
+                    $cliente->user_id = $u->id;
+                    $cliente->telefono = "444444";
+                    $cliente->razon_social = "Aya SA";
+                    $cliente->save();
                     $u->save();
                     break;
 

@@ -15,7 +15,11 @@ class CreatePresupuestosTable extends Migration
     {
         Schema::create('presupuestos', function (Blueprint $table) {
             $table->increments('id');
-//            $table->string('nombre');
+            $table->unsignedInteger('cliente_id');
+            $table->foreign('cliente_id')
+                ->references('id')
+                ->on('clientes')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

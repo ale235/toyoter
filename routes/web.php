@@ -14,15 +14,20 @@
 Route::get('/', function () {
 
     $items = Session::get('items');
-    $repuestos = [];
+    $repuestos  = [];
+//        dd($items);
+    if(count($items) == 1){
+        $items  = $items[0];
+    }
+    $total = 0;
     if($items != null){
         $roleLogged = Auth::user()->roles->pluck('name');
         $aux = collect();
         foreach ($items as $item){
+//                dd($item);
             $aux->push($item->codigo);
         }
         $aux = array_count_values($aux->toArray());
-//        dd($aux);
 
         foreach ($aux as $clave => $valor) {
             if($roleLogged[0] == 'cliente_minorista'){
@@ -45,14 +50,13 @@ Route::get('/', function () {
                     ->get();
             }
             $repuesto['cantidad'] = $valor;
-
+            dd($repuesto);
+            $total = $total + ($repuesto['cantidad'] * $repuesto[0]->precio);
             array_push($repuestos, $repuesto);
         }
-//        dd($repuestos[0]['cantidad']);
-//        return response()->json($items);
     }
 
-    return view('welcome',['sessions' => $repuestos]);
+    return view('welcome', ['sessions' => $repuestos, 'total' => $total]);
 });
 
 Auth::routes();
@@ -63,7 +67,10 @@ Route::resource('repuesto','RepuestoController')->middleware('role:admin');
 Route::resource('guest','GuestController');
 Route::resource('cliente','ClienteController')->middleware('role:admin');
 Route::resource('precio','PrecioController')->middleware('role:admin');
-Route::get('sessions','PresupuestoController@addSessions');
+Route::resource('presupuesto','PresupuestoController');
+Route::get('addtosessions','PresupuestoController@addSessions');
+Route::get('removeitemtosessions','PresupuestoController@removeItemToSessions');
+//Route::post('guardarpresupuesto','PresupuestoController@guardarPresupuesto');
 Route::post('actualizarpreciominorista', 'PrecioController@actualizarpreciominorista')->middleware('role:admin');
 Route::post('actualizarpreciomayorista', 'PrecioController@actualizarpreciomayorista')->middleware('role:admin');
 //Route::post('user/create', 'HomeController@store');

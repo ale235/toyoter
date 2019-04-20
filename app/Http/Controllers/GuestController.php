@@ -18,15 +18,20 @@ class GuestController extends Controller
     public function index()
     {
         $items = Session::get('items');
-        $repuestos = [];
+        $repuestos  = [];
+//        dd($items);
+        if(count($items) == 1){
+            $items  = $items[0];
+        }
+         $total = 0;
         if($items != null){
             $roleLogged = Auth::user()->roles->pluck('name');
             $aux = collect();
             foreach ($items as $item){
+//                dd($item);
                 $aux->push($item->codigo);
             }
             $aux = array_count_values($aux->toArray());
-//        dd($aux);
 
             foreach ($aux as $clave => $valor) {
                 if($roleLogged[0] == 'cliente_minorista'){
@@ -49,14 +54,11 @@ class GuestController extends Controller
                         ->get();
                 }
                 $repuesto['cantidad'] = $valor;
-
+                $total = $total + ($repuesto['cantidad'] * $repuesto[0]->precio);
                 array_push($repuestos, $repuesto);
             }
-//        dd($repuestos[0]['cantidad']);
-//        return response()->json($items);
         }
-
-        return view('guest.index',['sessions' => $repuestos]);
+        return view('guest.index',['sessions' => $repuestos, 'total' => $total]);
     }
 
     /**

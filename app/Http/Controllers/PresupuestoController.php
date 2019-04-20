@@ -40,7 +40,19 @@ class PresupuestoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function guardarPresupuesto(Request $request)
+    {
+        return view('guest.index');
+
     }
 
     /**
@@ -83,6 +95,53 @@ class PresupuestoController extends Controller
 //        Session::push('items',$items);
 
         return response()->json($items);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function removeItemToSessions(Request $request)
+    {
+
+        $items = Session::get('items');
+        if(count($items)){
+            $items  = $items[0];
+        }
+        foreach ($items as $key => $item){
+            if ($item != [] && $request->codigo == $item->codigo)
+            {
+                unset($items[$key]);
+
+                Session::forget('items');
+                Session::push('items',$items);
+                break;
+
+            }
+        }
+        return response()->json($items);
+
+//        return response()->json(Session::get('items'));
+
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function removeAllItemsToSessions(Request $request)
+    {
+
+        $items = Session::forget('items');
+
+
+
+        return response()->json();
     }
 
     /**
