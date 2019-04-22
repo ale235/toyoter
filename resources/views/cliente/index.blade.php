@@ -4,10 +4,9 @@
         <table id="example" class="table table-striped table-bordered dt-responsive nowrap table-dark" style="width:100%">
             <thead>
             <tr>
-                <th>Razón Social</th>
-                <th>Usuario</th>
-                <th>Teléfono</th>
-                {{--<th>Rol</th>--}}
+                <th>Nro Presupuesto</th>
+                <th>Cliente</th>
+                <th>Monto</th>
                 <th>Acción</th>
             </tr>
             </thead>

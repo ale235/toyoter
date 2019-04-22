@@ -151,9 +151,7 @@
                         <a class="nav-link dropdown-toggle fas fa-shopping-cart" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span style="">Imprimir Presupuesto</span>
                         </a>
-                        <div class="dropdown-menu" style="left: -700px;" aria-labelledby="navbarDropdown">
-                            <form id="table-form" action="{{ url('presupuesto') }}" method="POST">
-                                {{csrf_field()}}
+                        <div class="dropdown-menu" style="left: -700px;" aria-labelledby="navbarDropdown">                             {{--{{csrf_field()}}--}}
                                 <table id="cart" class="table table-hover table-condensed">
                                     <thead>
                                     <tr>
@@ -193,12 +191,14 @@
                                     <tfoot>
                                     <tr>
                                         <td colspan="2" class="hidden-xs"></td>
+                                        <form id="table-form" action="{{ url('exportpresupuesto') }}" method="GET">
+
                                         <td> <button type="submit" class="btn btn-danger btn-sm"> <a  class="btn btn-success btn-block">Imprimir Presupuesto</a></button></td>
+                                        </form>
                                         <td class="hidden-xs text-center"><strong>Total {{$total}}</strong></td>
                                     </tr>
                                     </tfoot>
                                 </table>
-                            </form>
 
                         </div>
                     </li>

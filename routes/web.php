@@ -24,8 +24,12 @@ Route::get('/', function () {
         $roleLogged = Auth::user()->roles->pluck('name');
         $aux = collect();
         foreach ($items as $item){
-//                dd($item);
-            $aux->push($item->codigo);
+//                dd(is_object($item));
+                if(!is_object($item)){
+                    $aux->push($item);
+                } else {
+                    $aux->push($item->codigo);
+                }
         }
         $aux = array_count_values($aux->toArray());
 
@@ -50,7 +54,7 @@ Route::get('/', function () {
                     ->get();
             }
             $repuesto['cantidad'] = $valor;
-            dd($repuesto);
+//            dd($repuesto);
             $total = $total + ($repuesto['cantidad'] * $repuesto[0]->precio);
             array_push($repuestos, $repuesto);
         }
@@ -76,6 +80,8 @@ Route::post('actualizarpreciomayorista', 'PrecioController@actualizarpreciomayor
 //Route::post('user/create', 'HomeController@store');
 
 Route::get('export', 'RepuestoController@export')->name('export')->middleware('role:admin');
+Route::get('exportpresupuesto', 'PresupuestoController@exportPresupuesto');
+//Route::get('exportadmin', 'PresupuestoController@exportAdmin');
 Route::get('importExportView', 'RepuestoController@importExportView')->middleware('role:admin');
 Route::post('import', 'RepuestoController@import')->name('import')->middleware('role:admin');
 

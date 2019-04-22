@@ -149,7 +149,7 @@
             });
         });
         $('.minus').on('click', function(e) {
-            event.preventDefault();
+            e.stopPropagation();
             var item = $(e.currentTarget).closest('tr').find('.codigotabla')[0].textContent;
 
             var precio = $(e.currentTarget).closest('tr').find('.preciotabla')[0].textContent;

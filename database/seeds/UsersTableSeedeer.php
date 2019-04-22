@@ -32,6 +32,10 @@ class UsersTableSeedeer extends Seeder
                     $cliente->user_id = $u->id;
                     $cliente->telefono = "444444";
                     $cliente->razon_social = "Aya SA";
+                    $cliente->domicilio = "Lavalle 3676";
+                    $cliente->iva = "Inscripto";
+                    $cliente->chasis = "3G1J85CC2GS999589";
+                    $cliente->cuit = "20342475806";
                     $u->save();
                     break;
 
@@ -43,6 +47,10 @@ class UsersTableSeedeer extends Seeder
                     $cliente->user_id = $u->id;
                     $cliente->telefono = "444444";
                     $cliente->razon_social = "Aya SA";
+                    $cliente->domicilio = "Lavalle 3676";
+                    $cliente->iva = "Inscripto";
+                    $cliente->chasis = "3G1J85CC2GS999589";
+                    $cliente->cuit = "20342475806";
                     $cliente->save();
                     $u->save();
                     break;
@@ -55,6 +63,10 @@ class UsersTableSeedeer extends Seeder
                     $cliente->user_id = $u->id;
                     $cliente->telefono = "444444";
                     $cliente->razon_social = "Aya SA";
+                    $cliente->domicilio = "Lavalle 3676";
+                    $cliente->iva = "Inscripto";
+                    $cliente->chasis = "3G1J85CC2GS999589";
+                    $cliente->cuit = "20342475806";
                     $cliente->save();
                     $u->save();
                     break;
@@ -67,6 +79,10 @@ class UsersTableSeedeer extends Seeder
                     $cliente->user_id = $u->id;
                     $cliente->telefono = "444444";
                     $cliente->razon_social = "Aya SA";
+                    $cliente->iva = "Inscripto";
+                    $cliente->domicilio = "3G1J85CC2GS999589";
+                    $cliente->chasis = "3G1J85CC2GS999589";
+                    $cliente->cuit = "20342475806";
                     $cliente->save();
                     $u->save();
                     break;

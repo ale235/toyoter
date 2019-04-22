@@ -114,6 +114,12 @@
                         {{--<li><a href="{{ url('ventas/venta/create') }}">Facturación</a></li>--}}
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="#"><i class='fa fa-link'></i> <span>Presupuestos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('presupuesto') }}">Listar Presupuestos</a></li>
+                    </ul>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->

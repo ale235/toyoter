@@ -11,5 +11,5 @@ class Presupuesto extends Model
 
     public $timestamps = true;
 
-//    protected $fillable = ['precio_id', 'repuesto_id'];
+    protected $fillable = ['cliente_id'];
 }

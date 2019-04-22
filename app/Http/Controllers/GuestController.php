@@ -28,8 +28,11 @@ class GuestController extends Controller
             $roleLogged = Auth::user()->roles->pluck('name');
             $aux = collect();
             foreach ($items as $item){
-//                dd($item);
-                $aux->push($item->codigo);
+                if(!is_object($item)){
+                    $aux->push($item);
+                } else {
+                    $aux->push($item->codigo);
+                }
             }
             $aux = array_count_values($aux->toArray());
 

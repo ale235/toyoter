@@ -20,6 +20,7 @@ class CreatePresupuestosTable extends Migration
                 ->references('id')
                 ->on('clientes')
                 ->onDelete('cascade');
+            $table->float('montototal');
             $table->timestamps();
         });
     }

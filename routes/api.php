@@ -61,3 +61,17 @@ Route::get('listarClientes', function (){
         ->toJson();
 
 });
+
+Route::get('listarPresupuestos', function (){
+
+    $presupuestos = DB::table('presupuestos')
+        ->join('clientes', 'clientes.id', '=', 'presupuestos.cliente_id')
+        ->select('presupuestos.id', 'clientes.razon_social as cliente', 'presupuestos.montototal');
+
+
+    return datatables($presupuestos)
+        ->addColumn('btn', 'datatables.actionsbackendpresupuesto')
+        ->rawColumns(['btn'])
+        ->toJson();
+
+});
