@@ -40,6 +40,62 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="cuit" class="col-md-4 col-form-label text-md-right">{{ __('CUIT') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="cuit" type="number" class="form-control{{ $errors->has('cuit') ? ' is-invalid' : '' }}" name="cuit" value="{{ old('cuit') }}" required>
+
+                                @if ($errors->has('cuit'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('cuit') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="nombreapellidorazonsocial" class="col-md-4 col-form-label text-md-right">{{ __('Nombre y Apellido / Razón Social') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nombreapellidorazonsocial" type="text" class="form-control{{ $errors->has('nombreapellidorazonsocial') ? ' is-invalid' : '' }}" name="nombreapellidorazonsocial" value="{{ old('nombreapellidorazonsocial') }}" required>
+
+                                @if ($errors->has('nombreapellidorazonsocial'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('nombreapellidorazonsocial') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="condicioniva" class="col-md-4 col-form-label text-md-right">{{ __('Condición IVA') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="condicioniva" type="text" class="form-control{{ $errors->has('condicioniva') ? ' is-invalid' : '' }}" name="condicioniva" value="{{ old('condicioniva') }}" required>
+
+                                @if ($errors->has('condicioniva'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('condicioniva') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="domicilio" class="col-md-4 col-form-label text-md-right">{{ __('Domicilio') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="domicilio" type="text" class="form-control{{ $errors->has('domicilio') ? ' is-invalid' : '' }}" name="cuit" value="{{ old('domicilio') }}" required>
+
+                                @if ($errors->has('domicilio'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('domicilio') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
