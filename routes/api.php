@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 
 /*
@@ -56,6 +57,19 @@ Route::get('listarClientes', function (){
         ->get();
 
     return datatables($clientes)
+        ->addColumn('btn', 'datatables.actionsbackendcliente')
+        ->rawColumns(['btn'])
+        ->toJson();
+
+});
+
+Route::get('listarClientesSinCategorizar', function (){
+
+    $users = User::role('cliente_sin_categorizar')
+        ->join('clientes', 'clientes.user_id', '=', 'users.id')
+        ->select('clientes.id', 'clientes.razon_social', 'users.name','clientes.cuit');
+
+    return datatables($users)
         ->addColumn('btn', 'datatables.actionsbackendcliente')
         ->rawColumns(['btn'])
         ->toJson();

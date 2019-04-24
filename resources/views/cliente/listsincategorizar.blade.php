@@ -6,7 +6,7 @@
             <tr>
                 <th>Nombre</th>
                 <th>Usuario</th>
-                <th>Telefono</th>
+                <th>CUIT</th>
                 <th>Acción</th>
             </tr>
             </thead>
@@ -18,12 +18,12 @@
             $('#example').DataTable({
                 "serverSide": true,
                 "processing": true,
-                "ajax": "{{url('api/listarClientes')}}",
+                "ajax": "{{url('api/listarClientesSinCategorizar')}}",
                 "columns": [
 //                    {data: 'id'},
                     {data: 'razon_social'},
                     {data: 'name'},
-                    {data: 'telefono'},
+                    {data: 'cuit'},
 //                    {data: 'role'},
                     {data: 'btn'},
                 ],

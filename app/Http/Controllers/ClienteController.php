@@ -129,4 +129,10 @@ class ClienteController extends Controller
     {
         //
     }
+
+    public function listSinCategorizar(Request $request)
+    {
+//        dd($request);
+        return view('cliente.listsincategorizar');
+    }
 }

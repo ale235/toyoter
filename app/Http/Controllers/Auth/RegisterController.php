@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Cliente;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -63,11 +64,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data);
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'email_verified_at' => now(),
+            'remember_token' => str_random(10),
         ]);
+
+        Cliente::create([
+            'user_id' => $user->id,
+            'razon_social' => $data['nombreapellidorazonsocial'],
+            'iva' => $data['condicioniva'],
+            'domicilio' => $data['domicilio'],
+            'cuit' => $data['cuit'],
+            'telefono' => $data['telefono'],
+            'chasis' => "Sin Descripción"
+        ]);
+
+        $user->assignRole('cliente_sin_categorizar');
+
+//        $table->string('razon_social');
+//        $table->string('telefono');
+//        $table->string('cuit');
+//        $table->string('iva');
+//        $table->string('domicilio');
+//        $table->string('chasis');
+        return $user;
     }
 }

@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+
 Route::get('/', function () {
 
     $items = Session::get('items');
@@ -69,6 +71,8 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('role:admi
 Route::get('/buscar', 'GuestController@index')->name('buscar');
 Route::resource('repuesto','RepuestoController')->middleware('role:admin');
 Route::resource('guest','GuestController');
+Route::get('/cliente/listsincategorizar','ClienteController@listSinCategorizar');
+
 Route::resource('cliente','ClienteController')->middleware('role:admin');
 Route::resource('precio','PrecioController')->middleware('role:admin');
 Route::resource('presupuesto','PresupuestoController');

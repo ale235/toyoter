@@ -18,6 +18,7 @@ class RolesTableSeedeer extends Seeder
         $role1 = Role::create(['name' => 'cliente_minorista']);
         $role2 = Role::create(['name' => 'cliente_mayorista']);
         $role3 = Role::create(['name' => 'cliente_personalizado']);
+        $role4 = Role::create(['name' => 'cliente_sin_categorizar']);
 
         $role1->givePermissionTo('ver_precio_minorista');
         $role2->givePermissionTo('ver_precio_mayorista');
