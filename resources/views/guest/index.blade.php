@@ -123,7 +123,7 @@
                 });
             });
         } );
-        $('.plus').on('click', function(e) {
+        $('#cart').on('click', '.plus',function(e) {
             e.stopPropagation();
             var item = $(e.currentTarget).closest('tr').find('.codigotabla')[0].textContent;
 
@@ -148,7 +148,7 @@
                 }
             });
         });
-        $('.minus').on('click', function(e) {
+        $('#cart').on('click', '.minus',function(e) {
             e.stopPropagation();
             var item = $(e.currentTarget).closest('tr').find('.codigotabla')[0].textContent;
 

@@ -7,7 +7,6 @@ use Illuminate\Notifications\Notifiable;
 
 class Cliente extends Model
 {
-    use Notifiable;
 
     protected $table = 'clientes';
     protected $primaryKey = 'id';

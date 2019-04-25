@@ -135,24 +135,27 @@
     </head>
     <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="clearfix-xs">
+        <nav class="navbar navbar-expand-lg navbar-dark ">
+            {{--<div class="">--}}
                 <a class="navbar-brand" href="#">
-                    <img src="{{ asset('images/toyoterlogo.png') }}" alt="Smiley face" class="img-fluid" width="15%" style=" min-width: 100px;">
+                    {{--<span class="d-lg-inline-block d-none">--}}
+                    <img src="{{ asset('images/toyoterlogo.png') }}" alt="Smiley face" class="img-fluid " width="15%" style=" min-width: 100px;">
+                    {{--</span>--}}
+                    {{--<i class="fa fa-star d-inline-block d-lg-none"></i>--}}
                 </a>
-                <button class="navbar-toggler float-right" type="button" style="    margin-top: -40px;" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler collapsed" type="button" style="margin: -40px 275px 0px 267px" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-            </div>
+            {{--</div>--}}
             <div class="collapse navbar-collapse text-right" id="navbarsExample02" >
                 <ul class="navbar-nav ml-auto">
                     @role('cliente_minorista|admin')
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle fas fa-shopping-cart" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span style="">Imprimir Presupuesto</span>
+                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <strong>Exportar Presupuesto</strong>
                         </a>
-                        <div class="dropdown-menu" style="left: -700px;" aria-labelledby="navbarDropdown">                             {{--{{csrf_field()}}--}}
-                                <table id="cart" class="table table-hover table-condensed">
+                        <div class="dropdown-menu" style="left: -700px;" aria-labelledby="navbarDropdown">
+                            <table id="cart" class="table table-hover table-condensed">
                                     <thead>
                                     <tr>
                                         <th style="width:50%">Producto</th>
@@ -182,7 +185,7 @@
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <button class="btn btn-info btn-sm minus"><a><i class="fa fa-minus"></i></a></button>
                                                     <button class="btn btn-info btn-sm plus"><a><i class="fa fa-plus"></i></a></button>
-                                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                                    {{--<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>--}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -199,19 +202,18 @@
                                     </tr>
                                     </tfoot>
                                 </table>
-
                         </div>
                     </li>
-                    {{--<i class="nav-item">--}}
-                        {{--<a class="nav-link" href=""><li class="fas fa-shopping-cart"></li></a>--}}
-                    {{--</i>--}}
                     @endrole
                     <li class="nav-item"><a class="nav-link" href="{{ url('/buscar') }}"><strong><p>Buscar</p></strong></a>
                     </li>
                     @if (Route::has('login'))
                         @auth
                         @role('admin')
-                        <li class="nav-item active"><a class="nav-link" href="{{ url('/home') }}"><strong>Admin</strong></a>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/home') }}">
+                                <strong>Admin</strong>
+                            </a>
                         </li>
                         @endrole
                         <li>
@@ -224,6 +226,12 @@
                                 @csrf
                             </form>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/') }}">
+                                <strong>{{ Auth::user()->name }}</strong>
+                            </a>
+                        </li>
+
                     @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">
@@ -231,7 +239,7 @@
                             </a>
                         </li>
                         @if (Route::has('register'))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                         <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                         @endif
                         @endauth
                     @endif
