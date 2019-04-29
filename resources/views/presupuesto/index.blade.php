@@ -1,20 +1,16 @@
 @extends ('layouts.admin')
 @section ('contenido')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 table-responsive" style="overflow-x:auto;">
-                <table id="example" class="table table-striped table-bordered dt-responsive nowrap table-dark" style="width:100%">
-                    <thead>
-                    <tr>
-                        <th>Nro Presupuesto</th>
-                        <th>Cliente</th>
-                        <th>Monto</th>
-                        <th>Acción</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
+    <div class="col-md-12 table-responsive" style="overflow-x:auto;">
+        <table id="example" class="table table-striped table-bordered dt-responsive nowrap table-dark" style="width:100%">
+            <thead>
+            <tr>
+                <th>Nro Presupuesto</th>
+                <th>Cliente</th>
+                <th>Monto</th>
+                <th>Acción</th>
+            </tr>
+            </thead>
+        </table>
     </div>
 @endsection
 
@@ -33,14 +29,14 @@
             ],
             language: {
                 "sProcessing": "Procesando...",
-                "sLengthMenu": "<span style='color: #fff'>Mostrar _MENU_ registros</span>",
+                "sLengthMenu": "<span style='color: #000'>Mostrar _MENU_ registros</span>",
                 "sZeroRecords": "No se encontraron resultados",
                 "sEmptyTable": "Ningún dato disponible en esta tabla",
-                "sInfo": "<span style='color: #fff'>Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros</span>",
+                "sInfo": "<span style='color: #000'>Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros</span>",
                 "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
                 "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
                 "sInfoPostFix": "",
-                "sSearch": "<span style='color: #fff'>Buscar:</span>",
+                "sSearch": "<span style='color: #000'>Buscar:</span>",
                 "sUrl": "",
                 "sInfoThousands": ",",
                 "sLoadingRecords": "Cargando...",

@@ -87,6 +87,10 @@
                                 bandera = 1;
                             }
                         });
+
+                        $('.totalazo').text(parseFloat($('.totalazo').text()) + data[0].precio);
+
+
                         if(bandera == 0){
                             $('#cart').prepend(
                                 '<tr>' +
@@ -109,7 +113,6 @@
                                 '<div class="btn-group" role="group" aria-label="Basic example">' +
                                 '<button class="btn btn-info btn-sm minus"><a><i class="fa fa-minus"></i></a></button>' +
                                 '<button class="btn btn-info btn-sm plus"><a><i class="fa fa-plus"></i></a></button>' +
-                                '<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>' +
                                 '</div>' +
                                 '</td>' +
                                 '</tr>');
@@ -132,6 +135,8 @@
             var cantidad = parseInt($(e.currentTarget).closest('tr').find('.cantidadtabla').val()) + 1;
             $(e.currentTarget).closest('tr').find('.cantidadtabla').val(cantidad);
 
+            $('.totalazo').text(parseFloat($('.totalazo').text()) + parseFloat(precio.substring(1)))
+
 
             $(e.currentTarget).closest('tr').find('.subtotaltabla')[0].textContent ="$" + Math.trunc(parseFloat(precio.substring(1)) * parseFloat(cantidad));
 
@@ -147,6 +152,8 @@
                     console.log("aca");
                 }
             });
+
+
         });
         $('#cart').on('click', '.minus',function(e) {
             e.stopPropagation();
@@ -156,6 +163,8 @@
 
             var cantidad = parseInt($(e.currentTarget).closest('tr').find('.cantidadtabla').val()) - 1;
             $(e.currentTarget).closest('tr').find('.cantidadtabla').val(cantidad);
+
+            $('.totalazo').text( Math.trunc(parseFloat($('.totalazo').text()) - parseFloat(precio.substring(1))));
 
 
             $(e.currentTarget).closest('tr').find('.subtotaltabla')[0].textContent ="$" + Math.trunc(parseFloat(precio.substring(1)) * parseFloat(cantidad));

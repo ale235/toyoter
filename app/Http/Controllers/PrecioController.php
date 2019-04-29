@@ -115,18 +115,13 @@ class PrecioController extends Controller
     {
         set_time_limit(0);
 
-        $repuestos = DB::table('repuestos')->get();
+        DB::table('repuestos as r')
+            ->join('precios as p','p.id','=','r.precio_id')
+            ->update([
+                'p.precio_minorista' => DB::raw('p.precio_sugerido * '.((float)($request->get('coeficienteminorista')/100) + 1).''),
+                'p.precio_minorista_co' => $request->get('coeficienteminorista'),
+                'p.updated_at' => Carbon::now()->toDateTimeString()]);
 
-        foreach ($repuestos as $repuesto) {
-
-            $precioacual = Precio::find($repuesto->precio_id);
-            Precio::find($repuesto->precio_id)->update(
-                [
-                    'precio_minorista' => DB::raw('p.precio_sugerido * '.((float)($request->get('coeficienteminorista')/100)+1).''),
-                    'precio_minorista_co' => $request->get('coeficienteminorista'),
-                    'updated_at' => Carbon::now()->toDateTimeString()
-                ]);
-        }
         return view('precio.create');
 
     }

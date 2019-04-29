@@ -149,7 +149,7 @@
             {{--</div>--}}
             <div class="collapse navbar-collapse text-right" id="navbarsExample02" >
                 <ul class="navbar-nav ml-auto">
-                    @role('cliente_minorista|admin')
+                    @role('cliente_minorista|cliente_mayorista')
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <strong>Exportar Presupuesto</strong>
@@ -194,11 +194,18 @@
                                     <tfoot>
                                     <tr>
                                         <td colspan="2" class="hidden-xs"></td>
+                                        @if(count($sessions) != 0)
                                         <form id="table-form" action="{{ url('exportpresupuesto') }}" method="GET">
 
-                                        <td> <button type="submit" class="btn btn-danger btn-sm"> <a  class="btn btn-success btn-block">Imprimir Presupuesto</a></button></td>
+                                                <td>
+                                                    <button type="submit" class="btn btn-sm">
+                                                        <a  class="btn btn-success btn-block">Imprimir Presupuesto</a>
+                                                    </button>
+                                                </td>
                                         </form>
-                                        <td class="hidden-xs text-center"><strong>Total {{$total}}</strong></td>
+                                        @endif
+                                        <td class="hidden-xs text-center"><strong>Total: <span class="totalazo">{{$total}}</span></strong></td>
+
                                     </tr>
                                     </tfoot>
                                 </table>
@@ -226,12 +233,13 @@
                                 @csrf
                             </form>
                         </li>
+                        @hasanyrole('cliente_minorista|cliente_mayorista|cliente_sin_categorizar')
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ url('/') }}">
+                            <a class="nav-link" href="{{ url('/guest') }}/{{Auth::user()->id}}/edit">
                                 <strong>{{ Auth::user()->name }}</strong>
                             </a>
                         </li>
-
+                        @endhasanyrole
                     @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">

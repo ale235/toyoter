@@ -16,8 +16,6 @@
                     </thead>
                 </table>
             </div>
-        </div>
-    </div>
 @push('scripts')
 <script>
     $(document).ready(function() {

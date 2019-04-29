@@ -69,7 +69,15 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        $clienteedit = DB::table('clientes as c')
+            ->join('users as u','c.user_id','=','u.id')
+            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user')
+            ->where('c.id','=',$cliente->id)
+            ->first();
+
+        $user = User::find($clienteedit->id_user)->roles->pluck('name');
+
+        return view('cliente.show',['roles' => Role::all(), 'cliente' => $clienteedit, 'role' => $user[0]]);
     }
 
     /**

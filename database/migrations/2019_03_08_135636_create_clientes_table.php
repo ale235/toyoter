@@ -21,11 +21,11 @@ class CreateClientesTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
             $table->string('razon_social');
-            $table->string('telefono');
-            $table->string('cuit');
-            $table->string('iva');
-            $table->string('domicilio');
-            $table->string('chasis');
+            $table->string('telefono')->nullable();
+            $table->string('cuit')->nullable();
+            $table->string('iva')->nullable();
+            $table->string('domicilio')->nullable();
+            $table->string('chasis')->nullable();
 
             $table->timestamps();
         });

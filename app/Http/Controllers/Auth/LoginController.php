@@ -41,4 +41,13 @@ class LoginController extends Controller
     {
         return 'name';
     }
+
+    protected function authenticated($request, $user){
+//        dd($user);
+        if($user->hasRole('admin')){
+            return redirect('/home');
+        } else {
+            return redirect('/');
+        }
+    }
 }
