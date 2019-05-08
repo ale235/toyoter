@@ -17,8 +17,8 @@ Route::get('/', function () {
 
     $items = Session::get('items');
     $repuestos  = [];
-//        dd($items);
-    if(count($items) == 1){
+
+    if(!is_null($items) && count($items) == 1 ){
         $items  = $items[0];
     }
     $total = 0;
@@ -55,8 +55,11 @@ Route::get('/', function () {
                     ->select('r.codigo','p.precio_sugerido as precio','r.descripcion')
                     ->get();
             }
+            if(count($repuesto) == 0){
+                $repuesto[0] = (object) array('precio' => 0);
+
+            }
             $repuesto['cantidad'] = $valor;
-//            dd($repuesto);
             $total = $total + ($repuesto['cantidad'] * $repuesto[0]->precio);
             array_push($repuestos, $repuesto);
         }

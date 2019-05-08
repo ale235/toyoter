@@ -24,7 +24,7 @@ class GuestController extends Controller
         $items = Session::get('items');
         $repuestos  = [];
 //        dd($items);
-        if(count($items) == 1){
+        if(!is_null($items) && count($items) == 1){
             $items  = $items[0];
         }
          $total = 0;
