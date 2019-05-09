@@ -54,6 +54,7 @@ Route::get('listarClientes', function (){
 
     $clientes = DB::table('users')
         ->join('clientes', 'clientes.user_id', '=', 'users.id')
+        ->where('users.id','!=',1)
         ->get();
 
     return datatables($clientes)

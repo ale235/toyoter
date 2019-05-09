@@ -77,6 +77,7 @@ Route::resource('guest','GuestController');
 Route::get('/cliente/listsincategorizar','ClienteController@listSinCategorizar');
 
 Route::resource('cliente','ClienteController')->middleware('role:admin');
+Route::get('admin/edit','ClienteController@modificarAdmin');
 Route::resource('precio','PrecioController')->middleware('role:admin');
 Route::resource('presupuesto','PresupuestoController');
 Route::get('addtosessions','PresupuestoController@addSessions');

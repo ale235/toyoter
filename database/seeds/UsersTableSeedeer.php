@@ -26,16 +26,17 @@ class UsersTableSeedeer extends Seeder
 
                 case 1:
                     $u->assignRole('admin');
-                    $u->name = 'Alejandro';
+                    $u->name = 'Norberto';
                     $u->email = 'admin@admin.com';
                     $cliente = new Cliente();
                     $cliente->user_id = $u->id;
-                    $cliente->telefono = "444444";
+                    $cliente->telefono = "1111111";
                     $cliente->razon_social = "Aya SA";
                     $cliente->domicilio = "Lavalle 3676";
                     $cliente->iva = "Inscripto";
                     $cliente->chasis = "3G1J85CC2GS999589";
                     $cliente->cuit = "20342475806";
+                    $cliente->save();
                     $u->save();
                     break;
 
@@ -57,7 +58,7 @@ class UsersTableSeedeer extends Seeder
 
                 case 3:
                     $u->assignRole('cliente_mayorista');
-                    $u->name = 'Norberto';
+                    $u->name = 'Alejandro';
                     $u->email = 'cliente@mayorista.com';
                     $cliente = new Cliente();
                     $cliente->user_id = $u->id;

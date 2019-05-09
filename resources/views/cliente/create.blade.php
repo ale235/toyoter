@@ -46,6 +46,13 @@
                         </div>
                     </div>
 
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>CUIT</label><em>*</em>
+                            <input type="text" name="cuit" id="cuit" class="form-control" value="{{ old('cuit') ? old('cuit'):@$cliente->cuit }}">
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-md-6">
 
@@ -54,9 +61,32 @@
                             <label>Rol</label><em>*</em>
                             <select name="role" class="form-control">
                                 @foreach($roles as $rol)
-                                    <option>{{$rol->name}}</option>
+                                    @if($rol->name != 'admin' && $rol->name != 'cliente_personalizado')
+                                    <option value="{{$rol->name}}">{{$rol->name}}</option>
+                                    @endif
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Domicilio</label><em>*</em>
+                            <input type="text" name="domicilio" id="domicilio" class="form-control" value="{{ old('domicilio') ? old('domicilio'):@$cliente->domicilio }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Posición frente al IVA</label><em>*</em>
+                            <input type="text" name="iva" id="iva" class="form-control" value="{{ old('iva') ? old('iva'):@$cliente->iva }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>CHASIS</label><em>*</em>
+                            <input type="text" name="chasis" id="chasis" class="form-control" value="{{ old('chasis') ? old('chasis'):@$cliente->chasis }}">
                         </div>
                     </div>
 
@@ -76,8 +106,9 @@
 
                     <div class="row form-group">
                         <div class="col-md-9">
-                            <button type="submit" class="btn btn-primary">Primary</button></div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
+                    </div>
                 </div>
             </form>
         </div>

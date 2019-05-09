@@ -27,6 +27,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
+//        dd(Role::all());
         return view('cliente.create',['roles' => Role::all()]);
     }
 
@@ -38,12 +39,11 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request);
         $usuario = new User([
             'name' => $request->get('username'),
             'email' => $request->get('mail'),
             'email_verified_at' => now(),
-            'password' => bcrypt($request->get('username')), // secret
+            'password' => bcrypt($request->get('username')), // El user es la contraseña
             'remember_token' => str_random(10),
         ]);
         $usuario->save();
@@ -54,11 +54,14 @@ class ClienteController extends Controller
             'razon_social' => $request->get('razon_social'),
             'telefono' => $request->get('telefono'),
             'user_id' => $usuario->id,
+            'cuit' => $request->get('cuit'),
+            'iva' => $request->get('iva'),
+            'chasis' => $request->get('chasis'),
+            'domicilio' => $request->get('domicilio')
         ]);
         $cliente->save();
 
         return view('cliente.create',['roles' => Role::all()]);
-//        return view('cliente.show', $cliente->id);
     }
 
     /**
@@ -71,7 +74,7 @@ class ClienteController extends Controller
     {
         $clienteedit = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user')
+            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
             ->where('c.id','=',$cliente->id)
             ->first();
 
@@ -90,7 +93,7 @@ class ClienteController extends Controller
     {
         $clienteedit = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user')
+            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
             ->where('c.id','=',$cliente->id)
             ->first();
 
@@ -108,23 +111,41 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        dd($cliente);
-        User::findById($cliente)
+//        dd($request->get('role'));
+        User::find($cliente->user_id)
                     ->update([
                         'name' => $request->get('username'),
                         'email' => $request->get('mail'),
                         'email_verified_at' => now(),
                         'password' => bcrypt($request->get('username')), // secret
                         'remember_token' => str_random(10),
-                            ])
-                    ->assignRole($request->get('role'));
+                            ]);
+        $user = User::find($cliente->user_id);
+        $user->assignRole($request->get('role'));
 
-        Cliente::findById($cliente)->update([
+        Cliente::find($cliente->id)->update([
             'razon_social' => $request->get('razon_social'),
             'telefono' => $request->get('telefono'),
         ]);
 
-        return view('cliente.create',['roles' => Role::all()]);
+        if ($request->get('role') == 'admin') {
+            $clienteedit = DB::table('clientes as c')
+                ->join('users as u','c.user_id','=','u.id')
+                ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+                ->where('u.id','=',1)
+                ->first();
+
+            return view('admin.edit',['cliente' => $clienteedit]);
+            }
+        $clienteedit = DB::table('clientes as c')
+            ->join('users as u','c.user_id','=','u.id')
+            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->where('c.id','=',$cliente->id)
+            ->first();
+
+        $user = User::find($clienteedit->id_user)->roles->pluck('name');
+
+        return view('cliente.show',['roles' => Role::all(), 'cliente' => $clienteedit, 'role' => $user[0]]);
     }
 
     /**
@@ -142,5 +163,18 @@ class ClienteController extends Controller
     {
 //        dd($request);
         return view('cliente.listsincategorizar');
+    }
+
+    public function modificarAdmin()
+    {
+        $clienteedit = DB::table('clientes as c')
+            ->join('users as u','c.user_id','=','u.id')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->where('u.id','=',1)
+            ->first();
+
+//        dd($clienteedit);
+
+        return view('admin.edit',['cliente' => $clienteedit]);
     }
 }

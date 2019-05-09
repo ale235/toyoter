@@ -121,6 +121,9 @@
                         <li><a href="{{ url('presupuesto') }}">Listar Presupuestos</a></li>
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="{{ url('admin/edit') }}"><i class='fa fa-link'></i> <span>ADMINISTRADOR</span> <i class="fa fa-angle-left pull-right"></i></a>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->

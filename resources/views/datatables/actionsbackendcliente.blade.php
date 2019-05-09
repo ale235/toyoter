@@ -2,7 +2,7 @@
 <a class="btn btn-app" href="{{route('cliente.show', $id)}}">
     <i class="fa fa-users"></i> Ver
 </a>
-<a class="btn btn-app" href="{{url('/cliente/')}}/{{ $id }}">
+<a class="btn btn-app" href="{{url('/cliente/')}}/{{ $id }}/edit">
     <i class="fa fa-edit"></i> Editar
 </a>
 
