@@ -117,7 +117,32 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-//        dd($request->get('role'));
+        if ($request->get('role') == 'admin') {
+            User::find($cliente->user_id)
+                ->update([
+                    'name' => $request->get('username'),
+                    'email' => $request->get('mail'),
+                    'email_verified_at' => now(),
+                ]);
+
+            Cliente::find($cliente->id)->update([
+                'razon_social' => $request->get('razon_social'),
+                'telefono' => $request->get('telefono'),
+                'cuit' => $request->get('cuit'),
+                'iva' => $request->get('iva'),
+                'chasis' => $request->get('chasis'),
+                'domicilio' => $request->get('domicilio')
+            ]);
+
+            $clienteedit = DB::table('clientes as c')
+                ->join('users as u', 'c.user_id', '=', 'u.id')
+                ->select('u.id', 'c.razon_social', 'u.name as username', 'u.email as mail', 'c.telefono', 'u.id as id_user', 'c.iva', 'c.chasis', 'c.domicilio', 'c.cuit')
+                ->where('u.id', '=', 1)
+                ->first();
+
+            return view('admin.edit', ['cliente' => $clienteedit]);
+        }
+
         User::find($cliente->user_id)
                     ->update([
                         'name' => $request->get('username'),
@@ -138,15 +163,6 @@ class ClienteController extends Controller
             'domicilio' => $request->get('domicilio')
         ]);
 
-        if ($request->get('role') == 'admin') {
-            $clienteedit = DB::table('clientes as c')
-                ->join('users as u','c.user_id','=','u.id')
-                ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
-                ->where('u.id','=',1)
-                ->first();
-
-            return view('admin.edit',['cliente' => $clienteedit]);
-            }
         $clienteedit = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
             ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
