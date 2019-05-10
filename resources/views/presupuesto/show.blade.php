@@ -12,27 +12,27 @@
             </tr>
 
             <tr>
-                <td class="tg-wp8o" colspan="5"><img src="{{asset('/images/toyoterlogo.png')}}" width="20%"></td>
+                <td class="tg-wp8o" colspan="5"><img src="{{asset('/images/toyoterlogo-presupuesto.png')}}" width="20%"></td>
                 {{--<td class="tg-73oq">Fecha de Hoy: </td>--}}
                 {{--<td class="tg-73oq" colspan="2">01/02/2019</td>--}}
             </tr>
             <tr>
                 <td class="tg-73oq"><strong>Razón social:</strong></td>
-                <td class="tg-73oq">Norberto Sodero</td>
+                <td class="tg-73oq">{{$admin->razon_social}}</td>
                 {{--<td class="tg-73oq"></td>--}}
                 <td class="tg-73oq"><strong>CUIT:</strong></td>
-                <td class="tg-73oq" colspan="2">20-24876880-1</td>
+                <td class="tg-73oq" colspan="2">{{$admin->cuit}}</td>
             </tr>
             <tr>
                 <td class="tg-73oq"><strong>Domicilio comercial:</strong></td>
-                <td class="tg-73oq">San Juan 2653 Sta Fe</td>
+                <td class="tg-73oq">{{$admin->domicilio}}</td>
                 {{--<td class="tg-73oq"></td>--}}
                 <td class="tg-73oq"><strong>IIBB:</strong></td>
                 <td class="tg-73oq" colspan="2">921-3907013-0</td>
             </tr>
             <tr>
                 <td class="tg-73oq"><strong>Cond IVA:</strong></td>
-                <td class="tg-73oq">Inscrito</td>
+                <td class="tg-73oq">{{$admin->iva}}</td>
                 {{--<td class="tg-73oq"></td>--}}
                 <td class="tg-73oq"><strong>Fecha Inicio de Actividades:</strong></td>
                 <td class="tg-73oq" colspan="2">01/02/2007</td>
@@ -49,14 +49,14 @@
             </tr>
             <tr>
                 <td class="tg-0lax"><strong>Cond. IVA:</strong></td>
-                <td class="tg-0lax"></td>
+                <td class="tg-0lax">{{$cliente->iva}}</td>
                 {{--<td class="tg-0lax"></td>--}}
                 <td class="tg-0lax"><strong>Domicilio:</strong></td>
-                <td class="tg-0lax" colspan="2"></td>
+                <td class="tg-0lax" colspan="2">{{$cliente->domicilio}}</td>
             </tr>
             <tr>
                 <td class="tg-0lax"><strong>Chasis:</strong></td>
-                <td class="tg-0lax"  colspan="4"></td>
+                <td class="tg-0lax"  colspan="4">{{$cliente->chasis}}</td>
             </tr>
             <tr>
                 <td class="tg-0lax" colspan="5"></td>

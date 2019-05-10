@@ -3,7 +3,7 @@
     <!-- Input addon -->
     <div class="box box-info">
         <div class="box-header with-border">
-            <h3 class="box-title">Nuevo Artículo</h3>
+            <h3 class="box-title">Nuevo Cliente</h3>
         </div>
         @if(count($errors)>0)
             <div class="alert alert-danger">

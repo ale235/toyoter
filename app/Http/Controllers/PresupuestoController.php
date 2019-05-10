@@ -176,6 +176,12 @@ class PresupuestoController extends Controller
             ->first();
 //        dd();
 
+        $admin = DB::table('clientes as c')
+            ->join('users as u','c.user_id','=','u.id')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->where('u.id','=',1)
+            ->first();
+
         $roleLoggueado = User::findOrFail($cliente->user_id)->roles->pluck('name')[0];
 
         if($roleLoggueado == 'cliente_minorista'){
@@ -206,7 +212,7 @@ class PresupuestoController extends Controller
             $repuesto->subtotal = $repuesto->precio * $repuesto->cantidad;
         }
 
-        return view('presupuesto.show',['repuestos' => $repuestos, 'cliente' => $cliente, 'presupuesto' => $presupuesto]);
+        return view('presupuesto.show',['repuestos' => $repuestos, 'cliente' => $cliente, 'presupuesto' => $presupuesto, 'admin' => $admin]);
     }
 
     /**
@@ -217,12 +223,19 @@ class PresupuestoController extends Controller
      */
     public function edit(Presupuesto $presupuesto)
     {
+        ini_set('max_execution_time', 120);
         //--Repo de Info para usar--
         //Tomamos el rol del Usuario que está logueado, para poder tomar el precio de los repuestos
         $cliente = DB::table('clientes')
             ->where('id','=',$presupuesto->cliente_id)
             ->first();
 //        dd();
+
+        $admin = DB::table('clientes as c')
+            ->join('users as u','c.user_id','=','u.id')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->where('u.id','=',1)
+            ->first();
 
         $roleLoggueado = User::findOrFail($cliente->user_id)->roles->pluck('name')[0];
 
@@ -254,8 +267,9 @@ class PresupuestoController extends Controller
             $repuesto->subtotal = $repuesto->precio * $repuesto->cantidad;
         }
 
-        $pdf = PDF::loadView('exports.presupuesto', ['repuestos' => $repuestos, 'cliente' => $cliente, 'presupuesto' => $presupuesto]);
-        return $pdf->download('invoice.pdf');    }
+        $pdf = PDF::loadView('exports.presupuesto', ['repuestos' => $repuestos, 'cliente' => $cliente, 'presupuesto' => $presupuesto, 'admin' => $admin]);
+        return $pdf->download('Presupuesto-'.trim($cliente->razon_social).'-'.date('d/m/Y', strtotime($presupuesto->created_at)).'.pdf');
+    }
 
     /**
      * Update the specified resource in storage.
@@ -286,6 +300,13 @@ class PresupuestoController extends Controller
      */
     public function exportPresupuesto(Request $request)
     {
+
+        $admin = DB::table('clientes as c')
+            ->join('users as u','c.user_id','=','u.id')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->where('u.id','=',1)
+            ->first();
+
         //--Repo de Info para usar--
         //Tomamos el rol del Usuario que está logueado, para poder tomar el precio de los repuestos
         $roleLoggueado = Auth::user()->roles->pluck('name');
@@ -363,7 +384,7 @@ class PresupuestoController extends Controller
         $actualizarPresupuesto->montototal = $total;
         $actualizarPresupuesto->update();
 
-        $pdf = PDF::loadView('exports.presupuesto', ['repuestos' => $arrayRepuestos, 'cliente' => $cliente, 'presupuesto' => $actualizarPresupuesto]);
-        return $pdf->download('invoice.pdf');
+        $pdf = PDF::loadView('exports.presupuesto', ['repuestos' => $arrayRepuestos, 'cliente' => $cliente, 'presupuesto' => $actualizarPresupuesto, 'admin' => $admin]);
+        return $pdf->download('Presupuesto-'.trim($cliente->razon_social).'-'.date('d/m/Y', strtotime($presupuesto->created_at)).'.pdf');
     }
 }

@@ -88,7 +88,7 @@
                             }
                         });
 
-                        $('.totalazo').text(parseFloat($('.totalazo').text()) + data[0].precio);
+                        $('.totalazo').text((parseFloat($('.totalazo').text()) + data[0].precio).toFixed(2));
 
 
                         if(bandera == 0){
@@ -102,12 +102,12 @@
                                 '</div>' +
                                 '</div>' +
                                 '</td>' +
-                                '<td data-th="Precio" class="preciotabla">$'+data[0].precio+'' +
+                                '<td data-th="Precio" class="preciotabla">$'+data[0].precio.toFixed(2)+'' +
                                 '</td>' +
                                 '<td data-th="Cantidad">' +
                                 '<input type="number" min="1" step="1" readonly class="form-control text-center cantidadtabla" value="1">' +
                                 '</td>' +
-                                '<td data-th="Subtotal" class="text-center subtotaltabla">$'+data[0].precio+'' +
+                                '<td data-th="Subtotal" class="text-center subtotaltabla">$'+data[0].precio.toFixed(2)+'' +
                                 '</td>' +
                                 '<td class="actions" data-th="">' +
                                 '<div class="btn-group" role="group" aria-label="Basic example">' +
@@ -119,12 +119,30 @@
                             bandera = 1
                         }
 
+                        $('.imprimir').show();
+
                     },
                     error:function(){
                         console.log("aca");
                     }
                 });
             });
+            setInterval(function() {
+                $.ajax({
+                    type:'get',
+                    url:'{!!URL::to('check')!!}',
+                    success:function(data){
+                        if(data == "true"){
+                            $('.shop').hide(); // hides
+                        }
+                    },
+                    error:function(){
+                        console.log("aca");
+                    }
+                });
+            }, 1000); //5 seconds
+
+
         } );
         $('#cart').on('click', '.plus',function(e) {
             e.stopPropagation();

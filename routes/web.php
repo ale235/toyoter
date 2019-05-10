@@ -96,3 +96,9 @@ Route::post('import', 'RepuestoController@import')->name('import')->middleware('
 Route::get('autocomplete',array('as'=>'autocomplete', 'uses'=>'RepuestoController@autocomplete'));
 Route::get('repuestos', 'GuestController@repuestos')->middleware('role:admin');
 
+Route::get('/clientesSinActivar','HomeController@clientesSinActivar');
+
+Route::get('/check',function(){
+    return (Auth::guest()) ? 'true' : 'false';
+});
+

@@ -61,7 +61,13 @@ class ClienteController extends Controller
         ]);
         $cliente->save();
 
-        return view('cliente.create',['roles' => Role::all()]);
+        $clienteedit = DB::table('clientes as c')
+            ->join('users as u','c.user_id','=','u.id')
+            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->where('c.id','=',$cliente->id)
+            ->first();
+
+        return view('cliente.show',['roles' => Role::all(),'cliente' => $clienteedit, 'role' => $request->get('role')]);
     }
 
     /**
@@ -126,6 +132,10 @@ class ClienteController extends Controller
         Cliente::find($cliente->id)->update([
             'razon_social' => $request->get('razon_social'),
             'telefono' => $request->get('telefono'),
+            'cuit' => $request->get('cuit'),
+            'iva' => $request->get('iva'),
+            'chasis' => $request->get('chasis'),
+            'domicilio' => $request->get('domicilio')
         ]);
 
         if ($request->get('role') == 'admin') {

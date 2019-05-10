@@ -194,16 +194,14 @@
                                     <tfoot>
                                     <tr>
                                         <td colspan="2" class="hidden-xs"></td>
-                                        @if(count($sessions) != 0)
-                                        <form id="table-form" action="{{ url('exportpresupuesto') }}" method="GET">
+                                        <form  id="table-form" action="{{ url('exportpresupuesto') }}" method="GET">
 
-                                                <td>
+                                                <td class="imprimir" {{ (count($sessions) == 0) ? 'style=display:none' : "" }}>
                                                     <button type="submit" class="btn btn-sm">
                                                         <a  class="btn btn-success btn-block">Imprimir Presupuesto</a>
                                                     </button>
                                                 </td>
                                         </form>
-                                        @endif
                                         <td class="hidden-xs text-center"><strong>Total: <span class="totalazo">{{$total}}</span></strong></td>
 
                                     </tr>
