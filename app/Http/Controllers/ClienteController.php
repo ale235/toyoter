@@ -39,6 +39,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request);
         $usuario = new User([
             'name' => $request->get('username'),
             'email' => $request->get('mail'),
@@ -57,13 +58,17 @@ class ClienteController extends Controller
             'cuit' => $request->get('cuit'),
             'iva' => $request->get('iva'),
             'chasis' => $request->get('chasis'),
-            'domicilio' => $request->get('domicilio')
+            'provincia' => $request->get('provincia'),
+            'localidad' => $request->get('localidad'),
+            'calleynumero' => $request->get('calleynumero'),
+            'codigopostal' => $request->get('codigopostal'),
+            'logoempresa' => $request->get('filepath'),
         ]);
         $cliente->save();
 
         $clienteedit = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.provincia','c.localidad','c.calleynumero','c.codigopostal','c.cuit','c.logoempresa')
             ->where('c.id','=',$cliente->id)
             ->first();
 
@@ -99,7 +104,7 @@ class ClienteController extends Controller
     {
         $clienteedit = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.provincia','c.localidad','c.calleynumero','c.codigopostal','c.cuit','c.logoempresa')
             ->where('c.id','=',$cliente->id)
             ->first();
 
@@ -131,7 +136,12 @@ class ClienteController extends Controller
                 'cuit' => $request->get('cuit'),
                 'iva' => $request->get('iva'),
                 'chasis' => $request->get('chasis'),
-                'domicilio' => $request->get('domicilio')
+                'provincia' => $request->get('provincia'),
+                'localidad' => $request->get('localidad'),
+                'calleynumero' => $request->get('calleynumero'),
+                'codigopostal' => $request->get('codigopostal'),
+                'logoempresa' => $request->get('logoempresa'),
+
             ]);
 
             $clienteedit = DB::table('clientes as c')
@@ -195,7 +205,7 @@ class ClienteController extends Controller
     {
         $clienteedit = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.provincia','c.localidad','c.calleynumero','c.codigopostal','c.cuit','c.logoempresa')
             ->where('u.id','=',1)
             ->first();
 

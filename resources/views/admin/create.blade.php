@@ -69,8 +69,43 @@
 
                     <div class="row form-group">
                         <div class="col-md-9">
-                            <label>Domicilio</label><em>*</em>
-                            <input type="text" name="domicilio" id="domicilio" class="form-control" value="{{ old('domicilio') ? old('domicilio'):@$cliente->domicilio }}">
+                            <label>Provincia</label><em>*</em>
+                            <input type="text" name="provincia" id="provincia" class="form-control" value="{{ old('provincia') ? old('provincia'):@$cliente->provincia }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Localidad</label><em>*</em>
+                            <input type="text" name="localidad" id="localidad" class="form-control" value="{{ old('localidad') ? old('localidad'):@$cliente->localidad }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Dirección (Calle/Número/Piso)</label><em>*</em>
+                            <input type="text" name="calleynumero" id="calleynumero" class="form-control" value="{{ old('calleynumero') ? old('calleynumero'):@$cliente->calleynumero }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Código Postal</label><em>*</em>
+                            <input type="text" name="codigopostal" id="codigopostal" class="form-control" value="{{ old('codigopostal') ? old('codigopostal'):@$cliente->codigopostal }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                                <i class="fa fa-picture-o"></i> Elegir
+                                            </a>
+                                        </span>
+                                <input id="thumbnail" class="form-control" type="text" name="filepath" value="{{asset($cliente->logoempresa)}}">
+                            </div>
+                            <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($cliente->logoempresa)}}">
                         </div>
                     </div>
 

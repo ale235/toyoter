@@ -53,6 +53,20 @@
                         </div>
                     </div>
 
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Posición frente al IVA</label><em>*</em>
+                            <input type="text" name="iva" id="iva" class="form-control" value="{{ old('iva') ? old('iva'):@$cliente->iva }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>CHASIS</label><em>*</em>
+                            <input type="text" name="chasis" id="chasis" class="form-control" value="{{ old('chasis') ? old('chasis'):@$cliente->chasis }}">
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-md-6">
 
@@ -71,22 +85,43 @@
 
                     <div class="row form-group">
                         <div class="col-md-9">
-                            <label>Domicilio</label><em>*</em>
-                            <input type="text" name="domicilio" id="domicilio" class="form-control" value="{{ old('domicilio') ? old('domicilio'):@$cliente->domicilio }}">
+                            <label>Provincia</label><em>*</em>
+                            <input type="text" name="provincia" id="provincia" class="form-control" value="{{ old('provincia')}}">
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-md-9">
-                            <label>Posición frente al IVA</label><em>*</em>
-                            <input type="text" name="iva" id="iva" class="form-control" value="{{ old('iva') ? old('iva'):@$cliente->iva }}">
+                            <label>Localidad</label><em>*</em>
+                            <input type="text" name="localidad" id="localidad" class="form-control" value="{{ old('localidad')}}">
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-md-9">
-                            <label>CHASIS</label><em>*</em>
-                            <input type="text" name="chasis" id="chasis" class="form-control" value="{{ old('chasis') ? old('chasis'):@$cliente->chasis }}">
+                            <label>Dirección (Calle/Número/Piso)</label><em>*</em>
+                            <input type="text" name="calleynumero" id="calleynumero" class="form-control" value="{{ old('calleynumero')}}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Código Postal</label><em>*</em>
+                            <input type="text" name="codigopostal" id="codigopostal" class="form-control" value="{{ old('codigopostal')}}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                                <i class="fa fa-picture-o"></i> Elegir
+                                            </a>
+                                        </span>
+                                <input id="thumbnail" class="form-control" type="text" name="filepath">
+                            </div>
+                            <img id="holder" style="margin-top:15px;max-height:100px;">
                         </div>
                     </div>
 
