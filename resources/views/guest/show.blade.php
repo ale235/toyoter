@@ -1,5 +1,18 @@
 @extends('layouts.guest')
 
+@section('card')
+    <meta name="description" content="{{$repuesto->descripcion}}" />
+
+
+    <meta name="twitter:card" value="summary">
+
+
+    <meta property="og:title" content="{{$repuesto->descripcion}}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{url('/guest')}}/{{$repuesto->id}}" />
+    <meta property="og:image" content="{{asset('/images/noimg.jpg')}}" />
+    <meta property="og:description" content="{{$repuesto->descripcion}}" />
+
 @section('content')
     <div class="container">
         <div class="row">

@@ -102,3 +102,5 @@ Route::get('/check',function(){
     return (Auth::guest()) ? 'true' : 'false';
 });
 
+Route::get('/send/send_feedback', 'HomeController@sendFeedback');
+

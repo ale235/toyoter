@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Mail\AcceptMail;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\FeedbackMail;
 use App\User;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
-use \Spatie\Permission\Models\Role;
 
 class HomeController extends Controller
 {
@@ -47,6 +46,17 @@ class HomeController extends Controller
 
 //        $data = Repuesto::whereRaw(DB::raw('CONCAT(codigo," ",descripcion)'), 'like', $request->get('query'))->get();
         return response()->json(count($users));
+    }
+
+
+
+    public function sendFeedback()
+    {
+        $comment = 'Hola Loquincha. Como andas wey.';
+        $toEmail = "alejandrocolautti@gmail.com";
+        Mail::to($toEmail)->send(new AcceptMail($comment));
+
+        return 'Email has been sent to '. $toEmail;
     }
 
 }
