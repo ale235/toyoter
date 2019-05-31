@@ -6,6 +6,7 @@
     .tg .tg-wp8o{border-color:#000000;text-align:center;vertical-align:top}
     .tg .tg-73oq{border-color:#000000;text-align:left;vertical-align:top}
     .tg .tg-0lax{text-align:left;vertical-align:top}
+    div.breakNow { page-break-inside:avoid; page-break-after:always; }
 </style>
 <table class="tg" align="center" width="100%" style="border:2px solid #000">
     <tr style="background-color: #9f191f;">
@@ -43,7 +44,11 @@
     </tr>
     <tr>
         <td class="tg-0lax" colspan="5"></td>
-    </tr>
+    </tr>cccccccccccccccc
+</table>
+
+<div class="breakNow"></div>
+<table class="tg" align="center" width="100%" style="border:2px solid #000">
     <tr>
         <td class="tg-0lax"><strong>CUIT: </strong></td>
         <td class="tg-0lax">{{$cliente->cuit}}</td>

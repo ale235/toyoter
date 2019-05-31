@@ -232,7 +232,7 @@ class GuestController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        dd($request);
+        dd($request);
         $cliente = DB::table('clientes as c')
                     ->where('c.user_id','=',$id)
                     ->first();

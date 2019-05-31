@@ -24,7 +24,11 @@ class CreateClientesTable extends Migration
             $table->string('telefono')->nullable();
             $table->string('cuit')->nullable();
             $table->string('iva')->nullable();
-            $table->string('domicilio')->nullable();
+            $table->string('provincia')->nullable();
+            $table->string('localidad')->nullable();
+            $table->string('calleynumero')->nullable();
+            $table->string('codigopostal')->nullable();
+            $table->string('logoempresa')->nullable();
             $table->string('chasis')->nullable();
 
             $table->timestamps();

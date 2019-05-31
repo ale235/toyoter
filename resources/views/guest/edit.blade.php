@@ -62,7 +62,7 @@
                                 <label for="cuit" class="col-md-4 col-form-label text-md-right">{{ __('CUIT') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="cuit" type="number" class="form-control{{ $errors->has('cuit') ? ' is-invalid' : '' }}" name="cuit" value="{{$cliente->cuit}}" required>
+                                    <input id="cuit" type="number" class="form-control{{ $errors->has('cuit') ? ' is-invalid' : '' }}" name="cuit" value="{{$cliente->cuit}}">
 
                                     @if ($errors->has('cuit'))
                                         <span class="invalid-feedback" role="alert">
@@ -76,7 +76,7 @@
                                 <label for="condicioniva" class="col-md-4 col-form-label text-md-right">{{ __('Condición IVA') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="condicioniva" type="text" class="form-control{{ $errors->has('condicioniva') ? ' is-invalid' : '' }}" name="condicioniva" value="{{$cliente->iva}}" required>
+                                    <input id="condicioniva" type="text" class="form-control{{ $errors->has('condicioniva') ? ' is-invalid' : '' }}" name="condicioniva" value="{{$cliente->iva}}">
 
                                     @if ($errors->has('condicioniva'))
                                         <span class="invalid-feedback" role="alert">
@@ -87,14 +87,56 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="domicilio" class="col-md-4 col-form-label text-md-right">{{ __('Domicilio') }}</label>
+                                <label for="provincia" class="col-md-4 col-form-label text-md-right">{{ __('Provincia') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="domicilio" type="text" class="form-control{{ $errors->has('domicilio') ? ' is-invalid' : '' }}" name="domicilio" value="{{$cliente->domicilio}}" required>
+                                    <input id="provincia" type="text" class="form-control{{ $errors->has('provincia') ? ' is-invalid' : '' }}" name="provincia" value="{{$cliente->provincia}}">
 
-                                    @if ($errors->has('domicilio'))
+                                    @if ($errors->has('provincia'))
                                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('domicilio') }}</strong>
+                                    <strong>{{ $errors->first('provincia') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="localidad" class="col-md-4 col-form-label text-md-right">{{ __('Localidad') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="localidad" type="text" class="form-control{{ $errors->has('localidad') ? ' is-invalid' : '' }}" name="localidad" value="{{$cliente->localidad}}">
+
+                                    @if ($errors->has('localidad'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('localidad') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="cp" class="col-md-4 col-form-label text-md-right">{{ __('Código Postal') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="codigopostal" type="text" class="form-control{{ $errors->has('codigopostal') ? ' is-invalid' : '' }}" name="codigopostal" value="{{$cliente->codigopostal}}">
+
+                                    @if ($errors->has('codigopostal'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('codigopostal') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="calleynumero" class="col-md-4 col-form-label text-md-right">{{ __('Dirección (Calle/Número/Piso))') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="calleynumero" type="text" class="form-control{{ $errors->has('calleynumero') ? ' is-invalid' : '' }}" name="calleynumero" value="{{$cliente->calleynumero}}">
+
+                                    @if ($errors->has('calleynumero'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('calleynumero') }}</strong>
                                 </span>
                                     @endif
                                 </div>
@@ -104,7 +146,7 @@
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{$cliente->telefono}}" required>
+                                    <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{$cliente->telefono}}">
 
                                     @if ($errors->has('telefono'))
                                         <span class="invalid-feedback" role="alert">
@@ -113,7 +155,23 @@
                                     @endif
                                 </div>
                             </div>
+                            @role('cliente_mayorista')
+                            <div class="form-group row">
+                                <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo de la Empresa') }}</label>
 
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                                <i class="fa fa-picture-o"></i> Elegir
+                                            </a>
+                                        </span>
+                                        <input id="thumbnail" class="form-control" type="text" name="filepath" value="{{asset($cliente->logoempresa)}}">
+                                    </div>
+                                    <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($cliente->logoempresa)}}">
+                                </div>
+                            </div>
+                            @endrole
                             {{--<hr>--}}
                             {{--<sup class="">Dejar en Blanco si no se desea cambiar la Contraseña.</sup>--}}
 
@@ -148,6 +206,12 @@
                                     </button>
                                 </div>
                             </div>
+
+                            @if (Route::has('password.request'))
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                            {{ __('Forgot Your Password?') }}
+                            </a>
+                            @endif
 
                         </form>
                     </div>

@@ -73,8 +73,22 @@
 
                     <div class="row form-group">
                         <div class="col-md-9">
-                            <label>Domicilio</label><em>*</em>
-                            <input type="text" name="domicilio" id="domicilio" class="form-control" value="{{ old('domicilio') ? old('domicilio'):@$cliente->domicilio }}">
+                            <label>Provincia</label><em>*</em>
+                            <input type="text" name="provincia" id="provincia" class="form-control" value="{{ old('provincia') ? old('provincia'):@$cliente->provincia }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Localidad</label><em>*</em>
+                            <input type="text" name="localidad" id="localidad" class="form-control" value="{{ old('localidad') ? old('localidad'):@$cliente->localidad }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Código Postal</label><em>*</em>
+                            <input type="text" name="cp" id="cp" class="form-control" value="{{ old('cp') ? old('cp'):@$cliente->cp }}">
                         </div>
                     </div>
 

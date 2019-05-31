@@ -76,7 +76,10 @@ class RegisterController extends Controller
             'user_id' => $user->id,
             'razon_social' => $data['nombreapellidorazonsocial'],
             'iva' => $data['condicioniva'],
-            'domicilio' => $data['domicilio'],
+            'provincia' => $data['provincia'],
+            'localidad' => $data['localidad'],
+            'calleynumero' => $data['calleynumero'],
+            'codigopostal' => $data['codigopostal'],
             'cuit' => $data['cuit'],
             'telefono' => $data['telefono'],
             'chasis' => "Sin Descripción"

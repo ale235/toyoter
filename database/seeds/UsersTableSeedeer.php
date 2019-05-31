@@ -32,8 +32,12 @@ class UsersTableSeedeer extends Seeder
                     $cliente->user_id = $u->id;
                     $cliente->telefono = "1111111";
                     $cliente->razon_social = "Aya SA";
-                    $cliente->domicilio = "Lavalle 3676";
+                    $cliente->provincia = "Santa Fe";
+                    $cliente->localidad = "Capital";
+                    $cliente->calleynumero = "Lavalle 3676";
+                    $cliente->codigopostal = '3000';
                     $cliente->iva = "Inscripto";
+                    $cliente->logoempresa = "/images/toyoterlogo-presupuesto.png";
                     $cliente->chasis = "3G1J85CC2GS999589";
                     $cliente->cuit = "20342475806";
                     $cliente->save();
@@ -48,7 +52,10 @@ class UsersTableSeedeer extends Seeder
                     $cliente->user_id = $u->id;
                     $cliente->telefono = "444444";
                     $cliente->razon_social = "Aya SA";
-                    $cliente->domicilio = "Lavalle 3676";
+                    $cliente->provincia = "Santa Fe";
+                    $cliente->localidad = "Capital";
+                    $cliente->calleynumero = "Lavalle 3676";
+                    $cliente->codigopostal = '3000';
                     $cliente->iva = "Inscripto";
                     $cliente->chasis = "3G1J85CC2GS999589";
                     $cliente->cuit = "20342475806";
@@ -59,14 +66,18 @@ class UsersTableSeedeer extends Seeder
                 case 3:
                     $u->assignRole('cliente_mayorista');
                     $u->name = 'Alejandro';
-                    $u->email = 'cliente@mayorista.com';
+                    $u->email = 'alejandrocolautti@gmail.com';
                     $cliente = new Cliente();
                     $cliente->user_id = $u->id;
                     $cliente->telefono = "444444";
                     $cliente->razon_social = "Aya SA";
-                    $cliente->domicilio = "Lavalle 3676";
+                    $cliente->provincia = "Santa Fe";
+                    $cliente->localidad = "Capital";
+                    $cliente->calleynumero = "Lavalle 3676";
+                    $cliente->codigopostal = '3000';
                     $cliente->iva = "Inscripto";
                     $cliente->chasis = "3G1J85CC2GS999589";
+                    $cliente->logoempresa = "/images/logo.jpg";
                     $cliente->cuit = "20342475806";
                     $cliente->save();
                     $u->save();
@@ -81,7 +92,10 @@ class UsersTableSeedeer extends Seeder
                     $cliente->telefono = "444444";
                     $cliente->razon_social = "Aya SA";
                     $cliente->iva = "Inscripto";
-                    $cliente->domicilio = "3G1J85CC2GS999589";
+                    $cliente->provincia = "Santa Fe";
+                    $cliente->localidad = "Capital";
+                    $cliente->calleynumero = "Lavalle 3676";
+                    $cliente->codigopostal = '3000';
                     $cliente->chasis = "3G1J85CC2GS999589";
                     $cliente->cuit = "20342475806";
                     $cliente->save();

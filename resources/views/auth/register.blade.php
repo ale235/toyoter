@@ -85,7 +85,7 @@
                                 <label for="cuit" class="col-md-4 col-form-label text-md-right">{{ __('CUIT') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="cuit" type="number" class="form-control{{ $errors->has('cuit') ? ' is-invalid' : '' }}" name="cuit" value="{{ old('cuit') }}" required>
+                                    <input id="cuit" type="number" class="form-control{{ $errors->has('cuit') ? ' is-invalid' : '' }}" name="cuit" value="{{ old('cuit') }}">
 
                                     @if ($errors->has('cuit'))
                                         <span class="invalid-feedback" role="alert">
@@ -100,7 +100,7 @@
                                 <label for="condicioniva" class="col-md-4 col-form-label text-md-right">{{ __('Condición IVA') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="condicioniva" type="text" class="form-control{{ $errors->has('condicioniva') ? ' is-invalid' : '' }}" name="condicioniva" value="{{ old('condicioniva') }}" required>
+                                    <input id="condicioniva" type="text" class="form-control{{ $errors->has('condicioniva') ? ' is-invalid' : '' }}" name="condicioniva" value="{{ old('condicioniva') }}">
 
                                     @if ($errors->has('condicioniva'))
                                         <span class="invalid-feedback" role="alert">
@@ -111,15 +111,57 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="domicilio" class="col-md-4 col-form-label text-md-right">{{ __('Domicilio') }}</label>
+                                <label for="provincia" class="col-md-4 col-form-label text-md-right">{{ __('Provincia') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="domicilio" type="text" class="form-control{{ $errors->has('domicilio') ? ' is-invalid' : '' }}" name="domicilio" value="{{ old('domicilio') }}" required>
+                                    <input id="provincia" type="text" class="form-control{{ $errors->has('provincia') ? ' is-invalid' : '' }}" name="provincia" value="{{ old('provincia') }}">
 
-                                    @if ($errors->has('domicilio'))
+                                    @if ($errors->has('provincia'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('domicilio') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('provincia') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="localidad" class="col-md-4 col-form-label text-md-right">{{ __('Localidad') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="localidad" type="text" class="form-control{{ $errors->has('localidad') ? ' is-invalid' : '' }}" name="localidad" value="{{ old('localidad') }}">
+
+                                    @if ($errors->has('localidad'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('localidad') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="cp" class="col-md-4 col-form-label text-md-right">{{ __('Código Postal') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="codigopostal" type="text" class="form-control{{ $errors->has('codigopostal') ? ' is-invalid' : '' }}" name="codigopostal" value="{{ old('codigopostal') }}">
+
+                                    @if ($errors->has('codigopostal'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('codigopostal') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="calleynumero" class="col-md-4 col-form-label text-md-right">{{ __('Dirección (Calle/Número/Piso))') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="calleynumero" type="text" class="form-control{{ $errors->has('calleynumero') ? ' is-invalid' : '' }}" name="calleynumero" value="{{ old('callenumero') }}">
+
+                                    @if ($errors->has('calleynumero'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('calleynumero') }}</strong>
+                                </span>
                                     @endif
                                 </div>
                             </div>
@@ -128,7 +170,7 @@
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}" required>
+                                    <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}">
 
                                     @if ($errors->has('telefono'))
                                         <span class="invalid-feedback" role="alert">
