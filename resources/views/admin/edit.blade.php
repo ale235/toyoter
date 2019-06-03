@@ -116,7 +116,7 @@
                                                 <i class="fa fa-picture-o"></i> Elegir
                                             </a>
                                         </span>
-                                <input id="thumbnail" class="form-control" type="text" name="filepath" value="{{asset($cliente->logoempresa)}}">
+                                <input id="thumbnail" class="form-control" type="text" name="filepath" value="{{$cliente->logoempresa}}">
                             </div>
                             <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($cliente->logoempresa)}}">
                         </div>

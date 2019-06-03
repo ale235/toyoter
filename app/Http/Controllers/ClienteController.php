@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Mail\AcceptMail;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 
 class ClienteController extends Controller
@@ -44,8 +46,8 @@ class ClienteController extends Controller
             'name' => $request->get('username'),
             'email' => $request->get('mail'),
             'email_verified_at' => now(),
-            'password' => bcrypt($request->get('username')), // El user es la contraseña
-            'remember_token' => str_random(10),
+//            'password' => bcrypt($request->get('username')), // El user es la contraseña
+//            'remember_token' => str_random(10),
         ]);
         $usuario->save();
 
@@ -85,12 +87,12 @@ class ClienteController extends Controller
     {
         $clienteedit = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.provincia','c.localidad','c.calleynumero','c.codigopostal','c.cuit','c.logoempresa')
             ->where('c.id','=',$cliente->id)
             ->first();
-
+//        dd($clienteedit);
         $user = User::find($clienteedit->id_user)->roles->pluck('name');
-
+//        dd($clienteedit);
         return view('cliente.show',['roles' => Role::all(), 'cliente' => $clienteedit, 'role' => $user[0]]);
     }
 
@@ -109,7 +111,6 @@ class ClienteController extends Controller
             ->first();
 
         $user = User::find($clienteedit->id_user)->roles->pluck('name');
-
         return view('cliente.edit',['roles' => Role::all(), 'cliente' => $clienteedit, 'role' => $user[0]]);
     }
 
@@ -140,13 +141,13 @@ class ClienteController extends Controller
                 'localidad' => $request->get('localidad'),
                 'calleynumero' => $request->get('calleynumero'),
                 'codigopostal' => $request->get('codigopostal'),
-                'logoempresa' => $request->get('logoempresa'),
+                'logoempresa' => $request->get('filepath'),
 
             ]);
 
             $clienteedit = DB::table('clientes as c')
                 ->join('users as u', 'c.user_id', '=', 'u.id')
-                ->select('u.id', 'c.razon_social', 'u.name as username', 'u.email as mail', 'c.telefono', 'u.id as id_user', 'c.iva', 'c.chasis', 'c.domicilio', 'c.cuit')
+                ->select('u.id', 'c.razon_social', 'u.name as username', 'u.email as mail', 'c.telefono', 'u.id as id_user', 'c.iva', 'c.chasis', 'c.cuit','c.provincia','c.localidad','c.calleynumero','c.codigopostal','c.cuit','c.logoempresa')
                 ->where('u.id', '=', 1)
                 ->first();
 
@@ -158,10 +159,13 @@ class ClienteController extends Controller
                         'name' => $request->get('username'),
                         'email' => $request->get('mail'),
                         'email_verified_at' => now(),
-                        'password' => bcrypt($request->get('username')), // secret
-                        'remember_token' => str_random(10),
+//                        'password' => bcrypt($request->get('username')), // secret
+//                        'remember_token' => str_random(10),
                             ]);
         $user = User::find($cliente->user_id);
+        $userrolebefore = User::find($user->id)->roles->pluck('name');
+
+        $user->removeRole($userrolebefore[0]);
         $user->assignRole($request->get('role'));
 
         Cliente::find($cliente->id)->update([
@@ -170,16 +174,29 @@ class ClienteController extends Controller
             'cuit' => $request->get('cuit'),
             'iva' => $request->get('iva'),
             'chasis' => $request->get('chasis'),
-            'domicilio' => $request->get('domicilio')
+            'provincia' => $request->get('provincia'),
+            'localidad' => $request->get('localidad'),
+            'calleynumero' => $request->get('calleynumero'),
+            'codigopostal' => $request->get('codigopostal'),
+            'logoempresa' => $request->get('filepath'),
         ]);
 
         $clienteedit = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->select('c.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.cuit','c.provincia','c.localidad','c.calleynumero','c.codigopostal','c.cuit','c.logoempresa')
             ->where('c.id','=',$cliente->id)
             ->first();
 
         $user = User::find($clienteedit->id_user)->roles->pluck('name');
+
+        if($userrolebefore[0]=='cliente_sin_categorizar'){
+            if($request->get('role') == 'cliente_mayorista' || $request->get('role') == 'cliente_minorista'){
+                $comment = 'El cliente fue Activado. Ya puede ver los precios de los repuestos.';
+                $toEmail = $clienteedit->mail;
+                Mail::to($toEmail)->send(new AcceptMail($comment));
+            }
+        }
+
 
         return view('cliente.show',['roles' => Role::all(), 'cliente' => $clienteedit, 'role' => $user[0]]);
     }

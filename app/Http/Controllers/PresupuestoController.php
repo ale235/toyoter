@@ -178,7 +178,7 @@ class PresupuestoController extends Controller
 
         $admin = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.provincia','c.cuit', 'c.localidad', 'c.codigopostal', 'c.calleynumero', 'c.logoempresa')
             ->where('u.id','=',1)
             ->first();
 
@@ -233,7 +233,7 @@ class PresupuestoController extends Controller
 
         $admin = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.provincia','c.cuit', 'c.localidad', 'c.calleynumero', 'c.codigopostal', 'c.logoempresa')
             ->where('u.id','=',1)
             ->first();
 
@@ -303,7 +303,7 @@ class PresupuestoController extends Controller
 
         $admin = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.domicilio','c.cuit')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.provincia','c.cuit', 'c.localidad', 'c.codigopostal', 'c.calleynumero', 'c.logoempresa')
             ->where('u.id','=',1)
             ->first();
 

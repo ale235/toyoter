@@ -23,7 +23,13 @@
                             <div class="preview col-md-6">
 
                                 <div class="preview-pic tab-content">
-                                    <div class="tab-pane active" id="pic-1"><img src="/images/noimg.jpg" /></div>
+                                    <div class="tab-pane active" id="pic-1">
+                                        @if(empty($imagen))
+                                            <img src="/images/noimg.jpg" />
+                                        @else
+                                            <img src="{{asset($imagen->ruta)}}" />
+                                        @endif
+                                    </div>
                                     <div class="tab-pane" id="pic-2"><img src="/images/noimg.jpg" /></div>
                                     <div class="tab-pane" id="pic-3"><img src="/images/noimg.jpg" /></div>
                                     <div class="tab-pane" id="pic-4"><img src="/images/noimg.jpg" /></div>
@@ -47,10 +53,10 @@
                                 <h4 class="price">Precio Minorista: <span>${{$repuesto->precio_minorista}}</span></h4>
                                 @endrole
                                 @role('cliente_minorista')
-                                <h4 class="price">Precio Minorista: <span>${{$repuesto->precio_minorista}}</span></h4>
+                                <h4 class="price">Precio: <span>${{$repuesto->precio_minorista}}</span></h4>
                                 @endrole
                                 @role('cliente_mayorista')
-                                <h4 class="price">Precio Mayorista: <span>${{$repuesto->precio_mayorista}}</span></h4>
+                                <h4 class="price">Precio: <span>${{$repuesto->precio_mayorista}}</span></h4>
                                 @endrole
                                 {{--<h4 class="price">Precio: <span>${{$repuesto->precio_minorista}}</span></h4>--}}
                                 <p class="vote">Marca del Repuesto: {{$repuesto->marca_repuesto}}</p>
@@ -64,8 +70,31 @@
                                             <!-- ícone -->
                                             <i class="fa fa-whatsapp"></i>
                                             Enviar
-                                        </a>
-
+                                    </a>
+                                    @role('admin')
+                                    <br>
+                                    <br>
+                                    <form method="POST" action="{{'/guest/cambiarimagen'}}" novalidate>
+                                        @csrf
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                                    <i class="fa fa-picture-o"></i> Elegir
+                                                </a>
+                                            </span>
+                                                    <input id="thumbnail" class="form-control" type="text" name="filepath">
+                                                </div>
+                                                <img id="holder" style="margin-top:15px;max-height:100px;">
+                                            </div>
+                                        </div>
+                                        <input style="display: none" name="repuesto_id" value="{{$repuesto->id}}"/>
+                                        <button type="submit" class="btn btn-primary ">
+                                            {{ __('Cambiar Imagen') }}
+                                        </button>
+                                    </form>
+                                    @endrole
                                 </div>
                             </div>
                         </div>

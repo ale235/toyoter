@@ -11,5 +11,5 @@ class Imagen extends Model
 
     public $timestamps = true;
 
-    protected $fillable = ['repuesto_id', 'ruta', 'telefono'];
+    protected $fillable = ['repuesto_id', 'ruta'];
 }

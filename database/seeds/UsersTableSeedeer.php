@@ -103,10 +103,6 @@ class UsersTableSeedeer extends Seeder
                     break;
 
             }
-            if ($u->id == 1) {
-            } else {
-                $u->assignRole('cliente_minorista');
-            }
         });
     }
 }

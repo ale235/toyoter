@@ -12,7 +12,7 @@
             </tr>
 
             <tr>
-                <td class="tg-wp8o" colspan="5"><img src="{{asset('/images/toyoterlogo-presupuesto.png')}}" width="20%"></td>
+                <td class="tg-wp8o" colspan="5"><img src="{{asset($admin->logoempresa)}}" width="20%"></td>
                 {{--<td class="tg-73oq">Fecha de Hoy: </td>--}}
                 {{--<td class="tg-73oq" colspan="2">01/02/2019</td>--}}
             </tr>
@@ -24,11 +24,19 @@
                 <td class="tg-73oq" colspan="2">{{$admin->cuit}}</td>
             </tr>
             <tr>
-                <td class="tg-73oq"><strong>Domicilio comercial:</strong></td>
-                <td class="tg-73oq">{{$admin->domicilio}}</td>
+                <td class="tg-73oq"><strong>Provincia:</strong></td>
+                <td class="tg-73oq">{{$admin->provincia}}</td>
                 {{--<td class="tg-73oq"></td>--}}
-                <td class="tg-73oq"><strong>IIBB:</strong></td>
-                <td class="tg-73oq" colspan="2">921-3907013-0</td>
+                <td class="tg-73oq"><strong>Localidad::</strong></td>
+                <td class="tg-73oq" colspan="2">{{$admin->localidad}}</td>
+            </tr>
+
+            <tr>
+                <td class="tg-73oq"><strong>Dirección: </strong></td>
+                <td class="tg-73oq">{{$admin->calleynumero}}</td>
+                {{--<td class="tg-73oq"></td>--}}
+                <td class="tg-73oq"><strong>CP:</strong></td>
+                <td class="tg-73oq" colspan="2">{{$admin->codigopostal}}</td>
             </tr>
             <tr>
                 <td class="tg-73oq"><strong>Cond IVA:</strong></td>
@@ -40,23 +48,47 @@
             <tr>
                 <td class="tg-0lax" colspan="5"></td>
             </tr>
+            <tr style="background-color: #9f191f;">
+                <th class="tg-baqh" colspan="5">
+                    <div style=" display: block">
+                        <span><strong style="color: white">PRESUPESTO - N°: {{$presupuesto->id}}</strong></span>
+                        <span style="color: white; float: right">Fecha: {{now()->format('d/m/y')}}</span>
+                    </div>
+                </th>
+            </tr>
+            @if($cliente->logoempresa != "")
+            <tr>
+                <td class="tg-wp8o" colspan="5"><img src="{{asset($cliente->logoempresa)}}" width="20%"></td>
+                {{--<td class="tg-73oq">Fecha de Hoy: </td>--}}
+                {{--<td class="tg-73oq" colspan="2">01/02/2019</td>--}}
+            </tr>
+            @endif
             <tr>
                 <td class="tg-0lax"><strong>CUIT: </strong></td>
                 <td class="tg-0lax">{{$cliente->cuit}}</td>
                 {{--<td class="tg-0lax"></td>--}}
                 <td class="tg-0lax"><strong>Apellido y Nombre / Razón Social:</strong></td>
-                <td class="tg-0lax" colspan="2"></td>
+                <td class="tg-0lax" colspan="2">{{$cliente->razon_social}}</td>
             </tr>
             <tr>
                 <td class="tg-0lax"><strong>Cond. IVA:</strong></td>
                 <td class="tg-0lax">{{$cliente->iva}}</td>
                 {{--<td class="tg-0lax"></td>--}}
-                <td class="tg-0lax"><strong>Domicilio:</strong></td>
-                <td class="tg-0lax" colspan="2">{{$cliente->domicilio}}</td>
+                <td class="tg-0lax"><strong>Provincia:</strong></td>
+                <td class="tg-0lax" colspan="2">{{$cliente->provincia}}</td>
             </tr>
             <tr>
+                <td class="tg-0lax"><strong>Localidad:</strong></td>
+                <td class="tg-0lax">{{$cliente->localidad}}</td>
+                {{--<td class="tg-0lax"></td>--}}
+                <td class="tg-0lax"><strong>Dirección:</strong></td>
+                <td class="tg-0lax" colspan="2">{{$cliente->calleynumero}}</td>
+            </tr>
+            <tr>
+                <td class="tg-0lax"><strong>CP:</strong></td>
+                <td class="tg-0lax">{{$cliente->codigopostal}}</td>
                 <td class="tg-0lax"><strong>Chasis:</strong></td>
-                <td class="tg-0lax"  colspan="4">{{$cliente->chasis}}</td>
+                <td class="tg-0lax"  colspan="2">{{$cliente->chasis}}</td>
             </tr>
             <tr>
                 <td class="tg-0lax" colspan="5"></td>

@@ -137,7 +137,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark ">
             {{--<div class="">--}}
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{url('/')}}">
                     {{--<span class="d-lg-inline-block d-none">--}}
                     <img src="{{ asset('images/toyoterlogo.png') }}" alt="Smiley face" class="img-fluid " width="15%" style=" min-width: 100px;">
                     {{--</span>--}}
@@ -266,6 +266,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <script src="{{asset('/vendor/laravel-filemanager/js/lfm.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.js" type="text/javascript"></script>
+    <script>
+        $('#lfm').filemanager('image');
+    </script>
         @stack('scripts')
 
     <style>

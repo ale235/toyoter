@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Imagen;
 use App\Repuesto;
 use App\User;
 use Illuminate\Http\Request;
@@ -154,7 +155,12 @@ class GuestController extends Controller
             }
         }
 //        dd($repuestoshow);
-        return view('guest.show',['repuesto'=>$repuestoshow, 'sessions' => $repuestos, 'total' => $total]);
+
+        $imagen = DB::table('imagenes as i')
+                    ->where('i.repuesto_id','=',$id)
+                    ->orderBy('created_at','desc')
+                    ->first();
+        return view('guest.show',['repuesto'=>$repuestoshow, 'sessions' => $repuestos, 'total' => $total, 'imagen' => $imagen]);
 
     }
 
@@ -232,7 +238,7 @@ class GuestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request);
+
         $cliente = DB::table('clientes as c')
                     ->where('c.user_id','=',$id)
                     ->first();
@@ -243,10 +249,16 @@ class GuestController extends Controller
                 'iva' => $request->get('condicioniva'),
                 'domicilio' => $request->get('domicilio'),
                 'telefono' => $request->get('telefono'),
-//                'telefono' => $request->get('telefono'),
-//                'telefono' => $request->get('telefono'),
+                'iva' => $request->get('condicioniva'),
+                'chasis' => $request->get('chasis'),
+                'provincia' => $request->get('provincia'),
+                'localidad' => $request->get('localidad'),
+                'calleynumero' => $request->get('calleynumero'),
+                'codigopostal' => $request->get('codigopostal'),
+                'logoempresa' => $request->get('filepath'),
             ]
         );
+//        dd($request);
 
         User::find($id)->update(
             [
@@ -280,5 +292,23 @@ class GuestController extends Controller
                 ->leftJoin('precios', 'precios.id', '=', 'repuestos.precio_id')
                 ->select('repuestos.id', 'repuestos.codigo', 'repuestos.descripcion','marca_repuestos.nombre as marca_repuesto', 'marca_vehiculos.nombre as marca_vehiculo', 'secciones.nombre as seccion')
             )->toJson();
+    }
+
+    public function cambiarimagen(Request $request)
+    {
+//        dd($request);
+        $imagen = new Imagen(
+        [
+            'repuesto_id' => $request->get('repuesto_id'),
+            'ruta' => $request->get('filepath')
+        ]
+        );
+        $imagen->save();
+
+//        $this->show($request->get('respuesto_id'));
+
+        return redirect()->action(
+            'GuestController@show', ['id' => $request->get('repuesto_id')]
+        );
     }
 }

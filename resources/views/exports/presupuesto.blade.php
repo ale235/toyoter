@@ -19,7 +19,7 @@
     </tr>
 
     <tr>
-        <td class="tg-wp8o" colspan="5"><img src="{{public_path('/images/toyoterlogo-presupuesto.png')}}"></td>
+        <td class="tg-wp8o" colspan="5"><img src="{{public_path().$admin->logoempresa}}"></td>
     </tr>
     <tr>
         <td class="tg-73oq"><strong>Razón social:</strong></td>
@@ -29,8 +29,8 @@
         <td class="tg-73oq" colspan="2">{{$admin->cuit}}</td>
     </tr>
     <tr>
-        <td class="tg-73oq"><strong>Domicilio comercial:</strong></td>
-        <td class="tg-73oq">{{$admin->domicilio}}</td>
+        <td class="tg-73oq"><strong>Provincia:</strong></td>
+        <td class="tg-73oq">{{$admin->provincia}}</td>
         {{--<td class="tg-73oq"></td>--}}
         <td class="tg-73oq"><strong>IIBB:</strong></td>
         <td class="tg-73oq" colspan="2">921-3907013-0</td>
@@ -43,12 +43,36 @@
         <td class="tg-73oq" colspan="2">01/02/2007</td>
     </tr>
     <tr>
+        <td class="tg-73oq"><strong>Localidad:</strong></td>
+        <td class="tg-73oq">{{$admin->localidad}}</td>
+        {{--<td class="tg-73oq"></td>--}}
+        <td class="tg-73oq"><strong>Dirección:</strong></td>
+        <td class="tg-73oq" colspan="2">{{$admin->calleynumero}}</td>
+    </tr>
+    <tr>
+        <td class="tg-73oq"><strong>CP:</strong></td>
+        <td class="tg-73oq" colspan="4">{{$admin->codigopostal}}</td>
+        {{--<td class="tg-73oq"></td>--}}
+    </tr>
+    <tr>
         <td class="tg-0lax" colspan="5"></td>
-    </tr>cccccccccccccccc
+    </tr>
 </table>
 
 <div class="breakNow"></div>
 <table class="tg" align="center" width="100%" style="border:2px solid #000">
+    <tr style="background-color: #9f191f;">
+        <th class="tg-baqh" colspan="5">
+            <div>
+                <span><strong style="color: white">PRESUPESTO - N°: {{$presupuesto->id}}</strong></span>
+                <span style="color: white; float: right">Fecha: {{now()->format('d/m/y')}}</span>
+            </div>
+        </th>
+    </tr>
+
+    <tr>
+        <td class="tg-wp8o" colspan="5"><img style="max-width:600px;" src="{{public_path().$cliente->logoempresa}}"></td>
+    </tr>
     <tr>
         <td class="tg-0lax"><strong>CUIT: </strong></td>
         <td class="tg-0lax">{{$cliente->cuit}}</td>
@@ -61,11 +85,20 @@
         <td class="tg-0lax">{{$cliente->iva}}</td>
         {{--<td class="tg-0lax"></td>--}}
         <td class="tg-0lax"><strong>Domicilio:</strong></td>
-        <td class="tg-0lax" colspan="2">{{$cliente->domicilio}}</td>
+        <td class="tg-0lax" colspan="2">{{$cliente->provincia}}</td>
     </tr>
     <tr>
+        <td class="tg-0lax"><strong>Localidad:</strong></td>
+        <td class="tg-0lax">{{$cliente->localidad}}</td>
+        {{--<td class="tg-0lax"></td>--}}
+        <td class="tg-0lax"><strong>Dirección:</strong></td>
+        <td class="tg-0lax" colspan="2">{{$cliente->calleynumero}}</td>
+    </tr>
+    <tr>
+        <td class="tg-0lax"><strong>CP:</strong></td>
+        <td class="tg-0lax">{{$cliente->codigopostal}}</td>
         <td class="tg-0lax"><strong>Chasis:</strong></td>
-        <td class="tg-0lax"  colspan="4">{{$cliente->chasis}}</td>
+        <td class="tg-0lax"  colspan="2">{{$cliente->chasis}}</td>
     </tr>
     <tr>
         <td class="tg-0lax" colspan="5"></td>

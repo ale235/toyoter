@@ -73,7 +73,8 @@
                     <div class="row form-group">
                         <div class="col-md-9">
                             <label>Rol</label><em>*</em>
-                            <select name="role" class="form-control">
+                            <select name="role" class="form-control roles">
+                                <option value="cliente_sin_categorizar" selected>cliente_sin_categorizar</option>
                                 @foreach($roles as $rol)
                                     @if($rol->name != 'admin' && $rol->name != 'cliente_personalizado')
                                     <option value="{{$rol->name}}">{{$rol->name}}</option>
@@ -111,7 +112,7 @@
                         </div>
                     </div>
 
-                    <div class="row form-group">
+                    <div class="row form-group" style="display:none;">
                         <div class="col-md-9">
                             <div class="input-group">
                                         <span class="input-group-btn">
@@ -151,5 +152,19 @@
 @endsection
 
 @push ('scripts')
+<script>
+    $(document).ready(function () {
+        $(document).on('change','.roles',function(e){
 
+            if ((this.value ) == "cliente_mayorista") {
+                $('.logoempresaclase').css('display','block');
+            } else {
+                $('.logoempresaclase').css('display','none');
+            }
+
+        });
+
+
+    });
+</script>
 @endpush

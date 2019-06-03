@@ -53,28 +53,6 @@
                         </div>
                     </div>
 
-                </div>
-                <div class="col-md-6">
-
-                    <div class="row form-group">
-                        <div class="col-md-9">
-                            <label>Rol</label><em>*</em>
-                            <select disabled  name="role" class="form-control">
-                                <option selected>{{ $role }}</option>
-                                @foreach($roles as $rol)
-                                    <option>{{$rol->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="col-md-9">
-                            <label>Domicilio</label><em>*</em>
-                            <input disabled type="text" name="domicilio" id="domicilio" class="form-control" value="{{ old('domicilio') ? old('domicilio'):@$cliente->domicilio }}">
-                        </div>
-                    </div>
-
                     <div class="row form-group">
                         <div class="col-md-9">
                             <label>Posición frente al IVA</label><em>*</em>
@@ -90,7 +68,72 @@
                     </div>
 
                 </div>
+                <div class="col-md-6">
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Rol</label><em>*</em>
+                            <select disabled  name="role" class="form-control roles">
+                                <option selected>{{ $role }}</option>
+                                @foreach($roles as $rol)
+                                    <option>{{$rol->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Provincia</label><em>*</em>
+                            <input disabled type="text" name="domicilio" id="domicilio" class="form-control" value="{{ old('domicilio') ? old('domicilio'):@$cliente->provincia }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Localidad</label><em>*</em>
+                            <input disabled type="text" name="domicilio" id="domicilio" class="form-control" value="{{ old('domicilio') ? old('domicilio'):@$cliente->localidad }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Dirección (Calle/Número/Piso)</label><em>*</em>
+                            <input disabled type="text" name="domicilio" id="domicilio" class="form-control" value="{{ old('domicilio') ? old('domicilio'):@$cliente->calleynumero }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Código Postal</label><em>*</em>
+                            <input disabled type="text" name="codigopostal" id="codigopostal" class="form-control" value="{{ old('codigopostal') ? old('codigopostal'):@$cliente->codigopostal }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group logoempresaclase">
+                        <div class="col-md-9">
+                            <label>Logo Empresa</label><em>*</em>
+                            <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($cliente->logoempresa)}}">
+                        </div>
+                    </div>
+
+
+
+                </div>
             </form>
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function () {
+        if ($(".roles").val() == "cliente_mayorista") {
+            $('.logoempresaclase').css('display','block');
+        } else {
+            $('.logoempresaclase').css('display','none');
+        }
+
+    });
+
+</script>
+@endpush

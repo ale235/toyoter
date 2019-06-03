@@ -54,13 +54,27 @@
                         </div>
                     </div>
 
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>Posición frente al IVA</label><em>*</em>
+                            <input type="text" name="iva" id="iva" class="form-control" value="{{ old('iva') ? old('iva'):@$cliente->iva }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <label>CHASIS</label><em>*</em>
+                            <input type="text" name="chasis" id="chasis" class="form-control" value="{{ old('chasis') ? old('chasis'):@$cliente->chasis }}">
+                        </div>
+                    </div>
+
                 </div>
                 <div class="col-md-6">
 
                     <div class="row form-group">
                         <div class="col-md-9">
                             <label>Rol</label><em>*</em>
-                            <select name="role" class="form-control">
+                            <select name="role" class="form-control roles">
                                 <option value="{{ $role }}" selected>{{ $role }}</option>
                                  @foreach($roles as $rol)
                                     @if($rol->name != 'admin' && $rol->name != 'cliente_personalizado')
@@ -87,22 +101,30 @@
 
                     <div class="row form-group">
                         <div class="col-md-9">
+                            <label>Dirección</label><em>*</em>
+                            <input type="text" name="calleynumero" id="calleynumero" class="form-control" value="{{ old('calleynumero') ? old('calleynumero'):@$cliente->calleynumero }}">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
                             <label>Código Postal</label><em>*</em>
-                            <input type="text" name="cp" id="cp" class="form-control" value="{{ old('cp') ? old('cp'):@$cliente->cp }}">
+                            <input type="text" name="codigopostal" id="codigopostal" class="form-control" value="{{ old('codigopostal') ? old('codigopostal'):@$cliente->codigopostal }}">
                         </div>
                     </div>
 
-                    <div class="row form-group">
+                    <div class="row form-group logoempresaclase" style="display: none">
                         <div class="col-md-9">
-                            <label>Posición frente al IVA</label><em>*</em>
-                            <input type="text" name="iva" id="iva" class="form-control" value="{{ old('iva') ? old('iva'):@$cliente->iva }}">
-                        </div>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="col-md-9">
-                            <label>CHASIS</label><em>*</em>
-                            <input type="text" name="chasis" id="chasis" class="form-control" value="{{ old('chasis') ? old('chasis'):@$cliente->chasis }}">
+                            <label>Logo Empresa</label><em>*</em>
+                            <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                                <i class="fa fa-picture-o"></i> Elegir
+                                            </a>
+                                        </span>
+                                <input id="thumbnail" class="form-control" type="text" name="filepath" value="{{$cliente->logoempresa}}">
+                            </div>
+                            <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($cliente->logoempresa)}}">
                         </div>
                     </div>
 
@@ -128,5 +150,53 @@
                 </div>
             </form>
         </div>
+        <div class="box box-body">
+            <form method="POST" action="{{ route('password.email') }}">
+                @csrf
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                        <div class="col-md-12">
+                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+
+                            @if ($errors->has('email'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Send Password Reset Link') }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection
+@push ('scripts')
+<script>
+    $(document).ready(function () {
+        if($('.roles').val() == 'cliente_mayorista'){
+            $('.logoempresaclase').css('display','block');
+        }
+        $(document).on('change','.roles',function(e){
+
+            if ((this.value ) == "cliente_mayorista") {
+                $('.logoempresaclase').css('display','block');
+            } else {
+                $('.logoempresaclase').css('display','none');
+            }
+
+        });
+
+    });
+</script>
+@endpush

@@ -155,6 +155,21 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="chasis" class="col-md-4 col-form-label text-md-right">{{ __('Chasis') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="chasis" type="text" class="form-control{{ $errors->has('chasis') ? ' is-invalid' : '' }}" name="chasis" value="{{$cliente->chasis}}">
+
+                                    @if ($errors->has('chasis'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('chasis') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             @role('cliente_mayorista')
                             <div class="form-group row">
                                 <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo de la Empresa') }}</label>
@@ -166,7 +181,7 @@
                                                 <i class="fa fa-picture-o"></i> Elegir
                                             </a>
                                         </span>
-                                        <input id="thumbnail" class="form-control" type="text" name="filepath" value="{{asset($cliente->logoempresa)}}">
+                                        <input id="thumbnail" class="form-control" type="text" name="filepath" value="{{$cliente->logoempresa}}">
                                     </div>
                                     <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($cliente->logoempresa)}}">
                                 </div>

@@ -102,5 +102,7 @@ Route::get('/check',function(){
     return (Auth::guest()) ? 'true' : 'false';
 });
 
+Route::post('guest/cambiarimagen', 'GuestController@cambiarimagen')->middleware('role:admin');
+
 Route::get('/send/send_feedback', 'HomeController@sendFeedback');
 
