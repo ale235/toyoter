@@ -28,6 +28,7 @@ class AcceptMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.accept');
+        return $this->view('emails.accept')
+                    ->subject("Toyoter - Activación Completa");
     }
 }

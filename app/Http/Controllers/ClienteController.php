@@ -191,7 +191,7 @@ class ClienteController extends Controller
 
         if($userrolebefore[0]=='cliente_sin_categorizar'){
             if($request->get('role') == 'cliente_mayorista' || $request->get('role') == 'cliente_minorista'){
-                $comment = 'El cliente fue Activado. Ya puede ver los precios de los repuestos.';
+                $comment = 'El cliente fue Activado. Ya puede ver los precios de los repuestos y completar los datos faltantes del formulario.';
                 $toEmail = $clienteedit->mail;
                 Mail::to($toEmail)->send(new AcceptMail($comment));
             }

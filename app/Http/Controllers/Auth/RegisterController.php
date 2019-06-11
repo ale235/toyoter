@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Cliente;
+use App\Mail\AcceptMail;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -82,7 +84,8 @@ class RegisterController extends Controller
             'codigopostal' => $data['codigopostal'],
             'cuit' => $data['cuit'],
             'telefono' => $data['telefono'],
-            'chasis' => "Sin Descripción"
+            'chasis' => "Sin Descripción",
+            'logoempresa' => "/images/blank.jpg",
         ]);
 
         $user->assignRole('cliente_sin_categorizar');
@@ -93,6 +96,11 @@ class RegisterController extends Controller
 //        $table->string('iva');
 //        $table->string('domicilio');
 //        $table->string('chasis');
+
+        $comment = 'El cliente '.Cliente::where('user_id','=',$user->id)->first()->razon_social.' fue Activado. Ya puede ver los precios de los repuestos y completar los datos faltantes del formulario.';
+        $toEmail = 'alejandrocolautti@gmail.com';
+        Mail::to($toEmail)->send(new AcceptMail($comment));
+
         return $user;
     }
 }
