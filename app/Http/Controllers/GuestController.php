@@ -311,4 +311,71 @@ class GuestController extends Controller
             'GuestController@show', ['id' => $request->get('repuesto_id')]
         );
     }
+
+    public function configuraciondeprecio(Request $request){
+
+        $items = Session::get('items');
+        $repuestos  = [];
+//        dd($items);
+        if(!is_null($items) && count($items) == 1){
+            $items  = $items[0];
+        }
+        $total = 0;
+        if($items != null){
+            $roleLogged = Auth::user()->roles->pluck('name');
+            $aux = collect();
+            foreach ($items as $item){
+                if(!is_object($item)){
+                    $aux->push($item);
+                } else {
+                    $aux->push($item->codigo);
+                }
+            }
+            $aux = array_count_values($aux->toArray());
+
+            foreach ($aux as $clave => $valor) {
+                if($roleLogged[0] == 'cliente_minorista'){
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_minorista as precio','r.descripcion')
+                        ->get();
+                } else if ($roleLogged[0] == 'cliente_mayorista'){
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
+                        ->get();
+                } else {
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_sugerido as precio','r.descripcion')
+                        ->get();
+                }
+                $repuesto['cantidad'] = $valor;
+                $total = $total + ($repuesto['cantidad'] * $repuesto[0]->precio);
+                array_push($repuestos, $repuesto);
+            }
+        }
+
+//        dd(auth()->user()->roles->pluck('name'));
+        return view('guest.configuraciondeprecios',['sessions' => $repuestos, 'total' => $total]);
+    }
+
+    public function preciocliente(Request $request){
+        $cliente = DB::table('clientes as c')
+            ->where('c.user_id','=',json_decode($request->get('cliente')))
+            ->first();
+
+        Cliente::find($cliente->id)->update(
+            [
+                'porcentaje' => $request->get('porcentaje'),
+                'verdatostoyoter' => ($request->get('verdatostoyoter') == "on"),
+                'vercosto' => ($request->get('vercosto') == "on"),
+            ]);
+
+        return Redirect::to('/');
+    }
+
 }

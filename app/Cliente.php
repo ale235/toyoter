@@ -13,5 +13,5 @@ class Cliente extends Model
 
     public $timestamps = true;
 
-    protected $fillable = ['user_id', 'razon_social', 'telefono', 'cuit', 'iva', 'provincia', 'chasis', 'localidad','calleynumero', 'logoempresa', 'codigopostal'];
+    protected $fillable = ['user_id', 'razon_social', 'telefono', 'cuit', 'iva', 'provincia', 'chasis', 'localidad','calleynumero', 'logoempresa', 'codigopostal','vercosto','porcentaje','verdatostoyoter'];
 }

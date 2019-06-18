@@ -78,6 +78,8 @@ Route::get('/cliente/listsincategorizar','ClienteController@listSinCategorizar')
 
 Route::resource('cliente','ClienteController')->middleware('role:admin');
 Route::get('admin/edit','ClienteController@modificarAdmin');
+Route::get('/configuraciondeprecio', 'GuestController@configuraciondeprecio')->name('configuraciondeprecio')->middleware('role:cliente_mayorista');
+Route::post('guest/preciocliente', 'GuestController@preciocliente');
 Route::resource('precio','PrecioController')->middleware('role:admin');
 Route::resource('presupuesto','PresupuestoController');
 Route::get('addtosessions','PresupuestoController@addSessions');

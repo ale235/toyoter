@@ -29,6 +29,9 @@ class CreateClientesTable extends Migration
             $table->string('calleynumero')->nullable();
             $table->string('codigopostal')->nullable();
             $table->string('logoempresa')->nullable();
+            $table->boolean('vercosto')->nullable();
+            $table->string('porcentaje')->nullable();
+            $table->boolean('verdatostoyoter')->nullable();
             $table->string('chasis')->nullable();
 
             $table->timestamps();
