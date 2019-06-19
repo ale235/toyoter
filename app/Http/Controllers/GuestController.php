@@ -359,8 +359,10 @@ class GuestController extends Controller
             }
         }
 
+        $cliente = Cliente::where('user_id','=',Auth::user()->id)->first();
+
 //        dd(auth()->user()->roles->pluck('name'));
-        return view('guest.configuraciondeprecios',['sessions' => $repuestos, 'total' => $total]);
+        return view('guest.configuraciondeprecios',['sessions' => $repuestos, 'total' => $total, 'cliente' => $cliente]);
     }
 
     public function preciocliente(Request $request){

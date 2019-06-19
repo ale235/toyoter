@@ -14,7 +14,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Porcentaje al Precio de Venta') }}</label>
 
                             <div class="col-md-6">
-                                <input id="porcentaje" type="number" class="form-control{{ $errors->has('porcentaje') ? ' is-invalid' : '' }}" name="porcentaje" value="{{ old('porcentaje') }}" required autofocus>
+                                <input id="porcentaje" type="number" class="form-control{{ $errors->has('porcentaje') ? ' is-invalid' : '' }}" name="porcentaje" value="{{ old('porcentaje') ? old('porcentaje'):@$cliente->porcentaje  }}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
@@ -37,7 +37,7 @@
                                 <div class="col-md-6">
                                     <label class="switch">
                                         {{--<input class="estado" type="checkbox" @if($galeria->estado) checked @endif>--}}
-                                        <input name="vercosto" class="estado" type="checkbox" checked>
+                                        <input name="vercosto" class="estado" type="checkbox" @if($cliente->vercosto) checked @endif>
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
@@ -49,7 +49,7 @@
                                 <div class="col-md-6">
                                     <label class="switch">
                                         {{--<input class="estado" type="checkbox" @if($galeria->estado) checked @endif>--}}
-                                        <input name="verdatostoyoter" class="estado" type="checkbox" checked>
+                                        <input name="verdatostoyoter" class="estado" type="checkbox" @if($cliente->verdatostoyoter) checked @endif>
                                         <span class="slider round"></span>
                                     </label>
                                 </div>

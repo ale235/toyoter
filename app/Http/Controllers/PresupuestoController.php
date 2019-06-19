@@ -383,8 +383,7 @@ class PresupuestoController extends Controller
         $actualizarPresupuesto = Presupuesto::find($presupuesto->id);
         $actualizarPresupuesto->montototal = $total;
         $actualizarPresupuesto->update();
-
-        $pdf = PDF::loadView('exports.presupuesto', ['repuestos' => $arrayRepuestos, 'cliente' => $cliente, 'presupuesto' => $actualizarPresupuesto, 'admin' => $admin]);
+        $pdf = PDF::loadView('exports.presupuesto', ['repuestos' => $arrayRepuestos, 'cliente' => $cliente, 'presupuesto' => $actualizarPresupuesto, 'admin' => $admin, 'role' => $roleLoggueado[0]]);
         return $pdf->download('Presupuesto-'.trim($cliente->razon_social).'-'.date('d/m/Y', strtotime($presupuesto->created_at)).'.pdf');
     }
 }
