@@ -10,7 +10,11 @@
     <meta property="og:title" content="{{$repuesto->descripcion}}" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="{{url('/guest')}}/{{$repuesto->id}}" />
-    <meta property="og:image" content="{{asset('/images/noimg.jpg')}}" />
+    @if(empty($imagen))
+        <meta property="og:image" content="{{asset('/photos/shares/noimg.jpg')}}" />
+    @else
+        <meta property="og:image" itemprop="image" content="{{asset($imagen->ruta)}}" />
+    @endif
     <meta property="og:description" content="{{$repuesto->descripcion}}" />
 
 @section('content')
@@ -25,7 +29,7 @@
                                 <div class="preview-pic tab-content">
                                     <div class="tab-pane active" id="pic-1">
                                         @if(empty($imagen))
-                                            <img src="/images/noimg.jpg" />
+                                            <img src="{{url('/photos/shares/noimg.jpg')}}" />
                                         @else
                                             <img src="{{asset($imagen->ruta)}}" />
                                         @endif

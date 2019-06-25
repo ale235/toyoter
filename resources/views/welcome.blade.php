@@ -1,5 +1,17 @@
 @extends('layouts.guest')
 
+@section('card')
+
+
+    <meta name="twitter:card" value="summary">
+
+
+    <meta property="og:title" content="Repuestos Toyoter" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://www.toyoter.com.ar" />
+    <meta property="og:image" itemprop="image" content="{{asset('/photos/shares/noimg.jpg')}}" />
+    <meta property="og:description" content="Repuestos Toyoter" />
+
 @section('content')
     <div class="content">
         <div class="title m-b-md">
