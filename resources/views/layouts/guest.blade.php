@@ -152,7 +152,7 @@
                     @role('cliente_mayorista')
                     <li class="nav-item"><a class="nav-link" href="{{ url('/configuraciondeprecio') }}"><strong><p>Configuración de Precio</p></strong></a></li>
                     @endrole
-                    @role('cliente_minorista|cliente_mayorista')
+                    @role('cliente_minorista|cliente_mayorista|admin|taller')
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <strong>Exportar Presupuesto</strong>
