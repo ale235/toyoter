@@ -380,4 +380,8 @@ class GuestController extends Controller
         return Redirect::to('/');
     }
 
+
+
+//return view('guest.index',['sessions' => $repuestos, 'total' => $total]);
+
 }

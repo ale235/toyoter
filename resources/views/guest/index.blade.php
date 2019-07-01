@@ -200,6 +200,9 @@
                 }
             });
         });
+//        $('.asa').on('change', function (e) {
+//            e.stopPropagation();
+//        })
 </script>
     <style>
         input[type=number]::-webkit-inner-spin-button,

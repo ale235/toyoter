@@ -106,6 +106,8 @@ Route::get('/check',function(){
 });
 
 Route::post('guest/cambiarimagen', 'GuestController@cambiarimagen')->middleware('role:admin');
+Route::get('cambiarpreciopresupuesto', 'PresupuestoController@cambiarpreciopresupuesto')->middleware('role:admin');
+
 
 Route::get('/send/send_feedback', 'HomeController@sendFeedback');
 

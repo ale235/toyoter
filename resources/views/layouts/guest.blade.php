@@ -197,8 +197,15 @@
                                     <tfoot>
                                     <tr>
                                         <td colspan="2" class="hidden-xs"></td>
+                                        <form  id="table-form2" action="{{ url('cambiarpreciopresupuesto') }}" method="GET">
+                                            <label class="radio-inline"><input type="radio" name="optradio" value="Minorista" {{ (old('optradio') == 'Minorista') ? 'checked' : '' }}>Minorista</label>
+                                            <label class="radio-inline"><input type="radio" name="optradio" value="Mayorista" {{ (old('optradio') == 'Mayorista') ? 'checked' : '' }}>Mayorista</label>
+                                            <label class="radio-inline"><input type="radio" name="optradio" value="Taller" {{ (old('optradio') == 'Taller') ? 'checked' : '' }}>Taller</label>
+                                            <button type="submit" class="btn btn-sm">
+                                                <a class="btn btn-success btn-block">Cambian precios</a>
+                                            </button>
+                                        </form>
                                         <form  id="table-form" action="{{ url('exportpresupuesto') }}" method="GET">
-
                                                 <td class="imprimir" {{ (count($sessions) == 0) ? 'style=display:none' : "" }}>
                                                     <button type="submit" class="btn btn-sm">
                                                         <a  class="btn btn-success btn-block">Imprimir Presupuesto</a>
@@ -273,6 +280,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.js" type="text/javascript"></script>
     <script>
         $('#lfm').filemanager('image');
+        $(".dropdown-menu").click(function(e){
+            e.stopPropagation();
+        });
     </script>
         @stack('scripts')
 

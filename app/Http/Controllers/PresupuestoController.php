@@ -300,7 +300,6 @@ class PresupuestoController extends Controller
      */
     public function exportPresupuesto(Request $request)
     {
-
         $admin = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
             ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.provincia','c.cuit', 'c.localidad', 'c.codigopostal', 'c.calleynumero', 'c.logoempresa')
@@ -385,5 +384,64 @@ class PresupuestoController extends Controller
         $actualizarPresupuesto->update();
         $pdf = PDF::loadView('exports.presupuesto', ['repuestos' => $arrayRepuestos, 'cliente' => $cliente, 'presupuesto' => $actualizarPresupuesto, 'admin' => $admin, 'role' => $roleLoggueado[0]]);
         return $pdf->download('Presupuesto-'.trim($cliente->razon_social).'-'.date('d/m/Y', strtotime($presupuesto->created_at)).'.pdf');
+    }
+
+    public function cambiarpreciopresupuesto(Request $request){
+//        dd($request);
+        $items = Session::get('items');
+        $repuestos  = [];
+//        dd($items);
+        if(!is_null($items) && count($items) == 1){
+            $items  = $items[0];
+        }
+        $total = 0;
+        if($items != null){
+            $roleLogged = Auth::user()->roles->pluck('name');
+            $aux = collect();
+            foreach ($items as $item){
+                if(!is_object($item)){
+                    $aux->push($item);
+                } else {
+                    $aux->push($item->codigo);
+                }
+            }
+            $aux = array_count_values($aux->toArray());
+
+            foreach ($aux as $clave => $valor) {
+                if($roleLogged[0] == 'cliente_minorista'){
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_minorista as precio','r.descripcion')
+                        ->get();
+                } else if ($roleLogged[0] == 'cliente_mayorista'){
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
+                        ->get();
+                } else if ($roleLogged[0] == 'admin') {
+                    if($request->get('optradio') == 'Minorista'){
+                        $repuesto = DB::table('repuestos as r')
+                            ->join('precios as p','p.id','=','r.precio_id')
+                            ->where('r.codigo','=', $clave)
+                            ->select('r.codigo','p.precio_minorista as precio','r.descripcion')
+                            ->get();
+                    } else if ($request->get('optradio') == 'Mayorista'){
+
+                        $repuesto = DB::table('repuestos as r')
+                            ->join('precios as p','p.id','=','r.precio_id')
+                            ->where('r.codigo','=', $clave)
+                            ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
+                            ->get();
+                    }
+                }
+                $repuesto['cantidad'] = $valor;
+                $total = $total + ($repuesto['cantidad'] * $repuesto[0]->precio);
+                array_push($repuestos, $repuesto);
+            }
+        }
+
+        return view('guest.index',['sessions' => $repuestos, 'total' => $total]);
     }
 }
