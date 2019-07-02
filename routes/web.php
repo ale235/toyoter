@@ -18,7 +18,7 @@ Route::get('/', function (Request $request) {
 
     $items = Session::get('items');
     $repuestos  = [];
-    $precio_presupuesto_admin = $request->session()->pull('precio_admin');
+    $precio_presupuesto_admin = Session::get('precio_admin');
 
     if(!is_null($items) && count($items) == 1 ){
         $items  = $items[0];
@@ -50,12 +50,40 @@ Route::get('/', function (Request $request) {
                     ->where('r.codigo','=', $clave)
                     ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
                     ->get();
-            } else {
+            }
+            else if ($roleLogged[0] == 'cliente_taller'){
                 $repuesto = DB::table('repuestos as r')
                     ->join('precios as p','p.id','=','r.precio_id')
                     ->where('r.codigo','=', $clave)
-                    ->select('r.codigo','p.precio_sugerido as precio','r.descripcion')
+                    ->select('r.codigo','p.precio_taller as precio','r.descripcion')
                     ->get();
+            }
+            else if ($roleLogged[0] == 'admin'){
+//                    dd($precio_presupuesto_admin);
+                if(is_null($precio_presupuesto_admin) || end($precio_presupuesto_admin) == 'Minorista'){
+
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_minorista as precio','r.descripcion')
+                        ->get();
+                } else if (end($precio_presupuesto_admin) == 'Mayorista'){
+
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
+                        ->get();
+
+                } else if (end($precio_presupuesto_admin) == 'Taller'){
+
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_taller as precio','r.descripcion')
+                        ->get();
+                }
+
             }
             if(count($repuesto) == 0){
                 $repuesto[0] = (object) array('precio' => 0);
@@ -67,7 +95,8 @@ Route::get('/', function (Request $request) {
         }
     }
 
-    return view('welcome', ['sessions' => $repuestos, 'total' => $total, 'precio_admin' => $precio_presupuesto_admin]);
+//    dd(!is_null($precio_presupuesto_admin) ? end($precio_presupuesto_admin) : null);
+    return view('welcome', ['sessions' => $repuestos, 'total' => $total, 'precio_admin' => !is_null($precio_presupuesto_admin) ? end($precio_presupuesto_admin) : null]);
 });
 
 Auth::routes();

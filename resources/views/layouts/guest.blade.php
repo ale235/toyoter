@@ -199,9 +199,9 @@
                                         <td colspan="2" class="hidden-xs"></td>
                                         <form  id="table-form2" action="{{ url('cambiarpreciopresupuesto') }}" method="POST">
                                             @csrf
-                                            <label class="radio-inline"><input type="radio" name="optradio" value="Minorista" {{ (app('request')->input('optradio') == 'Minorista') ? 'checked='.'"checked"' : '' }}>Minorista</label>
-                                            <label class="radio-inline"><input type="radio" name="optradio" value="Mayorista" {{ (app('request')->input('optradio') == 'Mayorista') ? 'checked='.'"checked"' : '' }}>Mayorista</label>
-                                            <label class="radio-inline"><input type="radio" name="optradio" value="Taller" {{ (app('request')->input('optradio') == 'Taller') ? 'checked='.'"checked"' : '' }}>Taller</label>
+                                            <label class="radio-inline"><input type="radio" name="optradio" value="Minorista" {{( (is_null($precio_admin )) || ($precio_admin == 'Minorista')) ? 'checked='.'"checked"' : '' }}>Minorista</label>
+                                            <label class="radio-inline"><input type="radio" name="optradio" value="Mayorista" {{ ($precio_admin == 'Mayorista') ? 'checked='.'"checked"' : '' }}>Mayorista</label>
+                                            <label class="radio-inline"><input type="radio" name="optradio" value="Taller" {{ ($precio_admin == 'Taller') ? 'checked='.'"checked"' : '' }}>Taller</label>
                                             <button type="submit" class="btn btn-sm">
                                                 <a class="btn btn-success btn-block">Cambian precios</a>
                                             </button>

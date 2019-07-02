@@ -169,6 +169,7 @@ class PresupuestoController extends Controller
      */
     public function show(Presupuesto $presupuesto)
     {
+        dd($presupuesto);
         //--Repo de Info para usar--
         //Tomamos el rol del Usuario que está logueado, para poder tomar el precio de los repuestos
         $cliente = DB::table('clientes')
@@ -366,14 +367,14 @@ class PresupuestoController extends Controller
                     ->first();
             }
             else if ($roleLoggueado[0] == 'admin'){
-                if($precio_presupuesto_admin == 'Minorista'){
+                if(end($precio_presupuesto_admin) == 'Minorista'){
 
                     $precio = DB::table('repuestos as r')
                         ->join('precios as p','p.id','=','r.precio_id')
                         ->where('r.codigo','=', $repuesto->codigo)
                         ->select('r.codigo','p.precio_minorista as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
                         ->first();
-                } else if ($precio_presupuesto_admin == 'Mayorista'){
+                } else if (end($precio_presupuesto_admin) == 'Mayorista'){
 
                     $precio = DB::table('repuestos as r')
                         ->join('precios as p','p.id','=','r.precio_id')
@@ -381,7 +382,7 @@ class PresupuestoController extends Controller
                         ->select('r.codigo','p.precio_mayorista as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
                         ->first();
 
-                } else if ($precio_presupuesto_admin == 'Taller'){
+                } else if (end($precio_presupuesto_admin) == 'Taller'){
 
                     $precio = DB::table('repuestos as r')
                         ->join('precios as p','p.id','=','r.precio_id')
@@ -482,6 +483,6 @@ class PresupuestoController extends Controller
             }
         }
 
-        return view('guest.index',['sessions' => $repuestos, 'total' => $total]);
+        return view('guest.index',['sessions' => $repuestos, 'total' => $total, 'precio_admin' => $request->get('optradio')]);
     }
 }
