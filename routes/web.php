@@ -11,12 +11,14 @@
 |
 */
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
 
     $items = Session::get('items');
     $repuestos  = [];
+    $precio_presupuesto_admin = $request->session()->pull('precio_admin');
 
     if(!is_null($items) && count($items) == 1 ){
         $items  = $items[0];
@@ -65,7 +67,7 @@ Route::get('/', function () {
         }
     }
 
-    return view('welcome', ['sessions' => $repuestos, 'total' => $total]);
+    return view('welcome', ['sessions' => $repuestos, 'total' => $total, 'precio_admin' => $precio_presupuesto_admin]);
 });
 
 Auth::routes();
@@ -101,12 +103,12 @@ Route::get('repuestos', 'GuestController@repuestos')->middleware('role:admin');
 Route::get('/clientesSinActivar','HomeController@clientesSinActivar');
 
 Route::get('/check',function(){
-    $user = Auth::user()->roles->pluck('name');
-    return (Auth::guest() || ($user[0] == 'cliente_sin_categorizar')) ? 'true' : 'false';
+
+    return (Auth::guest() ? 'true' : 'false');
 });
 
 Route::post('guest/cambiarimagen', 'GuestController@cambiarimagen')->middleware('role:admin');
-Route::get('cambiarpreciopresupuesto', 'PresupuestoController@cambiarpreciopresupuesto')->middleware('role:admin');
+Route::post('cambiarpreciopresupuesto', 'PresupuestoController@cambiarpreciopresupuesto')->middleware('role:admin');
 
 
 Route::get('/send/send_feedback', 'HomeController@sendFeedback');

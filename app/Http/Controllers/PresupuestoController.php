@@ -317,6 +317,9 @@ class PresupuestoController extends Controller
         $sessions = Session::get('items');
         //--Fin del Repo--
 
+        $precio_presupuesto_admin = Session::get('precio_admin');
+        //dd($value);
+
         //--Armamos el Presupuesto--
         $presupuesto = new Presupuesto();
         $presupuesto->cliente_id = $cliente->id;
@@ -341,24 +344,52 @@ class PresupuestoController extends Controller
                             ->where('codigo','=', $key)
                             ->first();
 
-            if($roleLoggueado == 'cliente_minorista'){
+            if($roleLoggueado[0] == 'cliente_minorista'){
                 $precio = DB::table('repuestos as r')
                     ->join('precios as p','p.id','=','r.precio_id')
                     ->where('r.codigo','=', $repuesto->codigo)
                     ->select('r.codigo','p.precio_minorista as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
                     ->first();
-            } else if ($roleLoggueado == 'cliente_mayorista'){
+            }
+            else if ($roleLoggueado[0] == 'cliente_mayorista'){
                 $precio = DB::table('repuestos as r')
                     ->join('precios as p','p.id','=','r.precio_id')
                     ->where('r.codigo','=', $repuesto->codigo)
                     ->select('r.codigo','p.precio_mayorista as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
                     ->first();
-            } else {
+            }
+            else if ($roleLoggueado[0] == 'cliente_taller'){
                 $precio = DB::table('repuestos as r')
                     ->join('precios as p','p.id','=','r.precio_id')
                     ->where('r.codigo','=', $repuesto->codigo)
-                    ->select('r.codigo','p.precio_sugerido as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
+                    ->select('r.codigo','p.cliente_taller as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
                     ->first();
+            }
+            else if ($roleLoggueado[0] == 'admin'){
+                if($precio_presupuesto_admin == 'Minorista'){
+
+                    $precio = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $repuesto->codigo)
+                        ->select('r.codigo','p.precio_minorista as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
+                        ->first();
+                } else if ($precio_presupuesto_admin == 'Mayorista'){
+
+                    $precio = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $repuesto->codigo)
+                        ->select('r.codigo','p.precio_mayorista as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
+                        ->first();
+
+                } else if ($precio_presupuesto_admin == 'Taller'){
+
+                    $precio = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $repuesto->codigo)
+                        ->select('r.codigo','p.precio_taller as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
+                        ->first();
+                }
+
             }
             $repuesto->precio = $precio->precio;
             $repuesto->precio_costo = $precio->precio_costo;
@@ -389,6 +420,8 @@ class PresupuestoController extends Controller
     public function cambiarpreciopresupuesto(Request $request){
 //        dd($request);
         $items = Session::get('items');
+//        $request->session()->put('precio_admin', $request->get('optradio'));
+        Session::push('precio_admin',$request->get('optradio'));
         $repuestos  = [];
 //        dd($items);
         if(!is_null($items) && count($items) == 1){
@@ -433,6 +466,13 @@ class PresupuestoController extends Controller
                             ->join('precios as p','p.id','=','r.precio_id')
                             ->where('r.codigo','=', $clave)
                             ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
+                            ->get();
+                    } else if ($request->get('optradio') == 'Taller'){
+
+                        $repuesto = DB::table('repuestos as r')
+                            ->join('precios as p','p.id','=','r.precio_id')
+                            ->where('r.codigo','=', $clave)
+                            ->select('r.codigo','p.precio_taller as precio','r.descripcion')
                             ->get();
                     }
                 }

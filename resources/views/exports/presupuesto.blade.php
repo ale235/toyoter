@@ -272,6 +272,78 @@
         </tr>
     </table>
 @endif
+@endif
 
+@if(($role == "admin"))
+    <table class="tg" align="center" width="100%" style="border:2px solid #000">
+        <tr style="background-color: #9f191f;">
+            <th class="tg-baqh" colspan="5">
+                <div>
+                    <span><strong style="color: white">PRESUPESTO - N°: {{$presupuesto->id}}</strong></span>
+                    <span style="color: white; float: right">Fecha: {{now()->format('d/m/y')}}</span>
+                </div>
+            </th>
+        </tr>
 
+        <tr>
+            <td class="tg-wp8o" colspan="5"><img src="{{public_path().$admin->logoempresa}}"></td>
+        </tr>
+        <tr>
+            <td class="tg-73oq"><strong>Razón social:</strong></td>
+            <td class="tg-73oq">{{$admin->razon_social}}</td>
+            {{--<td class="tg-73oq"></td>--}}
+            <td class="tg-73oq"><strong>CUIT:</strong></td>
+            <td class="tg-73oq" colspan="2">{{$admin->cuit}}</td>
+        </tr>
+        <tr>
+            <td class="tg-73oq"><strong>Provincia:</strong></td>
+            <td class="tg-73oq">{{$admin->provincia}}</td>
+            {{--<td class="tg-73oq"></td>--}}
+            <td class="tg-73oq"><strong>IIBB:</strong></td>
+            <td class="tg-73oq" colspan="2">921-3907013-0</td>
+        </tr>
+        <tr>
+            <td class="tg-73oq"><strong>Cond IVA:</strong></td>
+            <td class="tg-73oq">{{$admin->iva}}</td>
+            {{--<td class="tg-73oq"></td>--}}
+            <td class="tg-73oq"><strong>Fecha Inicio de Actividades:</strong></td>
+            <td class="tg-73oq" colspan="2">01/02/2007</td>
+        </tr>
+        <tr>
+            <td class="tg-73oq"><strong>Localidad:</strong></td>
+            <td class="tg-73oq">{{$admin->localidad}}</td>
+            {{--<td class="tg-73oq"></td>--}}
+            <td class="tg-73oq"><strong>Dirección:</strong></td>
+            <td class="tg-73oq" colspan="2">{{$admin->calleynumero}}</td>
+        </tr>
+        <tr>
+            <td class="tg-73oq"><strong>CP:</strong></td>
+            <td class="tg-73oq" colspan="4">{{$admin->codigopostal}}</td>
+            {{--<td class="tg-73oq"></td>--}}
+        </tr>
+        <tr>
+            <td class="tg-0lax" colspan="5"></td>
+        </tr>
+        <tr>
+            <td class="tg-0lax"><strong>Código</strong></td>
+            <td class="tg-0lax"><strong>Producto</strong></td>
+            <td class="tg-0lax"><strong>Cantidad</strong></td>
+            <td class="tg-0lax"><strong>Precio Unitario</strong></td>
+            <td class="tg-0lax"><strong>Total</strong></td>
+        </tr>
+        @foreach($repuestos as $repuesto)
+            <tr>
+                <td class="tg-0lax">{{$repuesto->codigo}}</td>
+                <td class="tg-0lax">{{$repuesto->descripcion}}</td>
+                <td class="tg-0lax">{{$repuesto->cantidad}}</td>
+                <td class="tg-0lax">{{$repuesto->precio}}</td>
+                <td class="tg-0lax">{{$repuesto->subtotal}}</td>
+            </tr>
+        @endforeach
+        <tr>
+            <td class="tg-0lax" colspan="2"><small>Este presupuesto es válido por los siguientes 5 días después de su creación.</small> </td>
+            <td class="tg-0lax" colspan="2"><strong>Importe total c/ IVA:</strong> </td>
+            <td class="tg-0lax">$ {{$presupuesto->montototal}}</td>
+        </tr>
+    </table>
 @endif
