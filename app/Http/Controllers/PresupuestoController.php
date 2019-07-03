@@ -238,32 +238,14 @@ class PresupuestoController extends Controller
             ->where('u.id','=',1)
             ->first();
 
-        $roleLoggueado = User::findOrFail($cliente->user_id)->roles->pluck('name')[0];
+        $repuestos = DB::table('detalle_presupuestos as d')
+            ->join('repuestos as r','r.codigo','=','d.codigo')
+            ->join('precios as p','p.id','=','r.precio_id')
+            ->where('d.presupuesto_id','=',$presupuesto->id)
+            ->select('r.codigo','p.precio_sugerido as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
+            ->get();
 
-        if($roleLoggueado == 'cliente_minorista'){
-            $repuestos = DB::table('detalle_presupuestos as d')
-                ->join('repuestos as r','r.codigo','=','d.codigo')
-                ->join('precios as p','p.id','=','r.precio_id')
-                ->where('d.presupuesto_id','=',$presupuesto->id)
-                ->select('r.codigo','d.precio_venta as precio', 'd.precio_sugerido as precio_costo','r.descripcion','d.cantidad')
-                ->get();
-        } else if ($roleLoggueado == 'cliente_mayorista'){
-
-            $repuestos = DB::table('detalle_presupuestos as d')
-                ->join('repuestos as r','r.codigo','=','d.codigo')
-                ->join('precios as p','p.id','=','r.precio_id')
-                ->where('d.presupuesto_id','=',$presupuesto->id)
-                ->select('r.codigo','d.precio_venta as precio', 'd.precio_sugerido as precio_costo','r.descripcion','d.cantidad')
-                ->get();
-        } else {
-            $repuestos = DB::table('detalle_presupuestos as d')
-                ->join('repuestos as r','r.codigo','=','d.codigo')
-                ->join('precios as p','p.id','=','r.precio_id')
-                ->where('d.presupuesto_id','=',$presupuesto->id)
-                ->select('r.codigo','p.precio_sugerido as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
-                ->get();
-        }
-
+        dd($repuestos);
         foreach ($repuestos as $repuesto){
             $repuesto->subtotal = $repuesto->precio * $repuesto->cantidad;
         }
