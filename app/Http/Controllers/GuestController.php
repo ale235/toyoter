@@ -172,7 +172,15 @@ class GuestController extends Controller
                         ->where('r.codigo','=', $clave)
                         ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
                         ->get();
-                } else if ($roleLogged[0] == 'admin'){
+                }
+                else if ($roleLogged[0] == 'cliente_taller'){
+                    $repuesto = DB::table('repuestos as r')
+                        ->join('precios as p','p.id','=','r.precio_id')
+                        ->where('r.codigo','=', $clave)
+                        ->select('r.codigo','p.precio_taller as precio','r.descripcion')
+                        ->get();
+                }
+                else if ($roleLogged[0] == 'admin'){
 //                    dd($precio_presupuesto_admin);
                     if(is_null($precio_presupuesto_admin) || end($precio_presupuesto_admin) == 'Minorista'){
 
@@ -230,7 +238,7 @@ class GuestController extends Controller
                     ->where('u.id','=',$id)
                     ->first();
 //        dd($cliente);
-
+        $precio_presupuesto_admin = Session::get('precio_admin');
         $items = Session::get('items');
         $repuestos  = [];
         if(!is_null($items) && count($items) == 1 ){
@@ -263,12 +271,40 @@ class GuestController extends Controller
                         ->where('r.codigo','=', $clave)
                         ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
                         ->get();
-                } else {
+                }
+                else if ($roleLogged[0] == 'cliente_taller'){
                     $repuesto = DB::table('repuestos as r')
                         ->join('precios as p','p.id','=','r.precio_id')
                         ->where('r.codigo','=', $clave)
-                        ->select('r.codigo','p.precio_sugerido as precio','r.descripcion')
+                        ->select('r.codigo','p.precio_taller as precio','r.descripcion')
                         ->get();
+                }
+                else if ($roleLogged[0] == 'admin'){
+//                    dd($precio_presupuesto_admin);
+                    if(is_null($precio_presupuesto_admin) || end($precio_presupuesto_admin) == 'Minorista'){
+
+                        $repuesto = DB::table('repuestos as r')
+                            ->join('precios as p','p.id','=','r.precio_id')
+                            ->where('r.codigo','=', $clave)
+                            ->select('r.codigo','p.precio_minorista as precio','r.descripcion')
+                            ->get();
+                    } else if (end($precio_presupuesto_admin) == 'Mayorista'){
+
+                        $repuesto = DB::table('repuestos as r')
+                            ->join('precios as p','p.id','=','r.precio_id')
+                            ->where('r.codigo','=', $clave)
+                            ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
+                            ->get();
+
+                    } else if (end($precio_presupuesto_admin) == 'Taller'){
+
+                        $repuesto = DB::table('repuestos as r')
+                            ->join('precios as p','p.id','=','r.precio_id')
+                            ->where('r.codigo','=', $clave)
+                            ->select('r.codigo','p.precio_taller as precio','r.descripcion')
+                            ->get();
+                    }
+
                 }
                 $repuesto['cantidad'] = $valor;
 //            dd($repuesto);
@@ -277,7 +313,7 @@ class GuestController extends Controller
             }
         }
 
-        return view('guest.edit',['cliente' => $cliente, 'sessions' => $repuestos, 'total' => $total]);
+        return view('guest.edit',['cliente' => $cliente, 'sessions' => $repuestos, 'total' => $total, 'precio_admin' => end($precio_presupuesto_admin)]);
     }
 
     /**
@@ -365,6 +401,7 @@ class GuestController extends Controller
 
     public function configuraciondeprecio(Request $request){
 
+        $precio_presupuesto_admin = Session::get('precio_admin');
         $items = Session::get('items');
         $repuestos  = [];
 //        dd($items);
@@ -397,12 +434,39 @@ class GuestController extends Controller
                         ->where('r.codigo','=', $clave)
                         ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
                         ->get();
-                } else {
+                } else if ($roleLogged[0] == 'cliente_taller'){
                     $repuesto = DB::table('repuestos as r')
                         ->join('precios as p','p.id','=','r.precio_id')
                         ->where('r.codigo','=', $clave)
-                        ->select('r.codigo','p.precio_sugerido as precio','r.descripcion')
+                        ->select('r.codigo','p.precio_taller as precio','r.descripcion')
                         ->get();
+                }
+                else if ($roleLogged[0] == 'admin'){
+//                    dd($precio_presupuesto_admin);
+                    if(is_null($precio_presupuesto_admin) || end($precio_presupuesto_admin) == 'Minorista'){
+
+                        $repuesto = DB::table('repuestos as r')
+                            ->join('precios as p','p.id','=','r.precio_id')
+                            ->where('r.codigo','=', $clave)
+                            ->select('r.codigo','p.precio_minorista as precio','r.descripcion')
+                            ->get();
+                    } else if (end($precio_presupuesto_admin) == 'Mayorista'){
+
+                        $repuesto = DB::table('repuestos as r')
+                            ->join('precios as p','p.id','=','r.precio_id')
+                            ->where('r.codigo','=', $clave)
+                            ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
+                            ->get();
+
+                    } else if (end($precio_presupuesto_admin) == 'Taller'){
+
+                        $repuesto = DB::table('repuestos as r')
+                            ->join('precios as p','p.id','=','r.precio_id')
+                            ->where('r.codigo','=', $clave)
+                            ->select('r.codigo','p.precio_taller as precio','r.descripcion')
+                            ->get();
+                    }
+
                 }
                 $repuesto['cantidad'] = $valor;
                 $total = $total + ($repuesto['cantidad'] * $repuesto[0]->precio);
@@ -413,7 +477,7 @@ class GuestController extends Controller
         $cliente = Cliente::where('user_id','=',Auth::user()->id)->first();
 
 //        dd(auth()->user()->roles->pluck('name'));
-        return view('guest.configuraciondeprecios',['sessions' => $repuestos, 'total' => $total, 'cliente' => $cliente]);
+        return view('guest.configuraciondeprecios',['sessions' => $repuestos, 'total' => $total, 'cliente' => $cliente, 'precio_admin' => end($precio_presupuesto_admin)]);
     }
 
     public function preciocliente(Request $request){

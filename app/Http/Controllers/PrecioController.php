@@ -140,4 +140,19 @@ class PrecioController extends Controller
         return view('precio.create');
 
     }
+
+    public function actualizarpreciotaller(Request $request)
+    {
+        set_time_limit(0);
+
+        DB::table('repuestos as r')
+            ->join('precios as p','p.id','=','r.precio_id')
+            ->update([
+                'p.precio_taller' => DB::raw('p.precio_sugerido * '.((float)($request->get('coeficientetaller')/100) + 1).''),
+                'p.precio_taller_co' => $request->get('coeficientemayorista'),
+                'p.updated_at' => Carbon::now()->toDateTimeString()]);
+
+        return view('precio.create');
+
+    }
 }

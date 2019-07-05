@@ -169,9 +169,6 @@ class PresupuestoController extends Controller
      */
     public function show(Presupuesto $presupuesto)
     {
-        dd($presupuesto);
-        //--Repo de Info para usar--
-        //Tomamos el rol del Usuario que está logueado, para poder tomar el precio de los repuestos
         $cliente = DB::table('clientes')
             ->where('id','=',$presupuesto->cliente_id)
             ->first();
@@ -179,41 +176,24 @@ class PresupuestoController extends Controller
 
         $admin = DB::table('clientes as c')
             ->join('users as u','c.user_id','=','u.id')
-            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.provincia','c.cuit', 'c.localidad', 'c.codigopostal', 'c.calleynumero', 'c.logoempresa')
+            ->select('u.id','c.razon_social','u.name as username','u.email as mail','c.telefono','u.id as id_user', 'c.iva', 'c.chasis','c.provincia','c.cuit', 'c.localidad', 'c.calleynumero', 'c.codigopostal', 'c.logoempresa')
             ->where('u.id','=',1)
             ->first();
 
-        $roleLoggueado = User::findOrFail($cliente->user_id)->roles->pluck('name')[0];
+//        $roleLoggueado = User::findOrFail($cliente->user_id)->roles->pluck('name')[0];
 
-        if($roleLoggueado == 'cliente_minorista'){
-            $repuestos = DB::table('detalle_presupuestos as d')
-                ->join('repuestos as r','r.codigo','=','d.codigo')
-                ->join('precios as p','p.id','=','r.precio_id')
-                ->where('d.presupuesto_id','=',$presupuesto->id)
-                ->select('r.codigo','d.precio_venta as precio', 'd.precio_sugerido as precio_costo','r.descripcion','d.cantidad')
-                ->get();
-        } else if ($roleLoggueado == 'cliente_mayorista'){
+        $repuestos = DB::table('detalle_presupuestos as d')
+            ->join('repuestos as r','r.codigo','=','d.codigo')
+            ->join('precios as p','p.id','=','r.precio_id')
+            ->where('d.presupuesto_id','=',$presupuesto->id)
+            ->select('r.codigo','d.precio_venta as precio', 'p.precio_sugerido as precio_costo','r.descripcion','d.cantidad as cantidad', DB::raw('(d.cantidad * d.precio_venta) as subtotal'))
+            ->get();
 
-            $repuestos = DB::table('detalle_presupuestos as d')
-                ->join('repuestos as r','r.codigo','=','d.codigo')
-                ->join('precios as p','p.id','=','r.precio_id')
-                ->where('d.presupuesto_id','=',$presupuesto->id)
-                ->select('r.codigo','d.precio_venta as precio', 'd.precio_sugerido as precio_costo','r.descripcion','d.cantidad')
-                ->get();
-        } else {
-            $repuestos = DB::table('detalle_presupuestos as d')
-                ->join('repuestos as r','r.codigo','=','d.codigo')
-                ->join('precios as p','p.id','=','r.precio_id')
-                ->where('d.presupuesto_id','=',$presupuesto->id)
-                ->select('r.codigo','p.precio_sugerido as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
-                ->get();
-        }
-
+//        dd($repuestos);
         foreach ($repuestos as $repuesto){
             $repuesto->subtotal = $repuesto->precio * $repuesto->cantidad;
         }
-
-        return view('presupuesto.show',['repuestos' => $repuestos, 'cliente' => $cliente, 'presupuesto' => $presupuesto, 'admin' => $admin]);
+        return view('presupuesto.show',['repuestos' => $repuestos, 'cliente' => $cliente, 'presupuesto' => $presupuesto, 'admin' => $admin, 'role' => 'admin']);
     }
 
     /**
@@ -238,19 +218,21 @@ class PresupuestoController extends Controller
             ->where('u.id','=',1)
             ->first();
 
+//        $roleLoggueado = User::findOrFail($cliente->user_id)->roles->pluck('name')[0];
+
         $repuestos = DB::table('detalle_presupuestos as d')
             ->join('repuestos as r','r.codigo','=','d.codigo')
             ->join('precios as p','p.id','=','r.precio_id')
             ->where('d.presupuesto_id','=',$presupuesto->id)
-            ->select('r.codigo','p.precio_sugerido as precio', 'p.precio_sugerido as precio_costo','r.descripcion')
+            ->select('r.codigo','d.precio_venta as precio', 'p.precio_sugerido as precio_costo','r.descripcion','d.cantidad as cantidad', DB::raw('(d.cantidad * d.precio_venta) as subtotal'))
             ->get();
 
-        dd($repuestos);
+//        dd($repuestos);
         foreach ($repuestos as $repuesto){
             $repuesto->subtotal = $repuesto->precio * $repuesto->cantidad;
         }
 
-        $pdf = PDF::loadView('exports.presupuesto', ['repuestos' => $repuestos, 'cliente' => $cliente, 'presupuesto' => $presupuesto, 'admin' => $admin]);
+        $pdf = PDF::loadView('exports.presupuesto', ['repuestos' => $repuestos, 'cliente' => $cliente, 'presupuesto' => $presupuesto, 'admin' => $admin, 'role' => 'admin']);
         return $pdf->download('Presupuesto-'.trim($cliente->razon_social).'-'.date('d/m/Y', strtotime($presupuesto->created_at)).'.pdf');
     }
 

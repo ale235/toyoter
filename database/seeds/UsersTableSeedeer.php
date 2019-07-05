@@ -84,9 +84,9 @@ class UsersTableSeedeer extends Seeder
                     break;
 
                 case 4:
-                    $u->assignRole('cliente_personalizado');
+                    $u->assignRole('cliente_taller');
                     $u->name = 'Maxi';
-                    $u->email = 'cliente@personalizado.com';
+                    $u->email = 'cliente@taller.com';
                     $cliente = new Cliente();
                     $cliente->user_id = $u->id;
                     $cliente->telefono = "444444";

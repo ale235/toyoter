@@ -118,6 +118,7 @@ Route::get('removeitemtosessions','PresupuestoController@removeItemToSessions');
 //Route::post('guardarpresupuesto','PresupuestoController@guardarPresupuesto');
 Route::post('actualizarpreciominorista', 'PrecioController@actualizarpreciominorista')->middleware('role:admin');
 Route::post('actualizarpreciomayorista', 'PrecioController@actualizarpreciomayorista')->middleware('role:admin');
+Route::post('actualizarpreciotaller', 'PrecioController@actualizarpreciotaller')->middleware('role:admin');
 //Route::post('user/create', 'HomeController@store');
 
 Route::get('export', 'RepuestoController@export')->name('export')->middleware('role:admin');
