@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Exports\ClientesExport;
 use App\Mail\AcceptMail;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Role;
 
 class ClienteController extends Controller
@@ -229,5 +231,10 @@ class ClienteController extends Controller
 //        dd($clienteedit);
 
         return view('admin.edit',['cliente' => $clienteedit]);
+    }
+
+    public function exportClientes()
+    {
+        return Excel::download(new ClientesExport, 'users.xls');
     }
 }

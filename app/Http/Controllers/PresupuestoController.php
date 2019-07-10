@@ -16,6 +16,10 @@ use PDF;
 
 class PresupuestoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -331,7 +335,7 @@ class PresupuestoController extends Controller
                     ->first();
             }
             else if ($roleLoggueado[0] == 'admin'){
-                if(end($precio_presupuesto_admin) == 'Minorista'){
+                if(is_null($precio_presupuesto_admin) || end($precio_presupuesto_admin) == 'Minorista'){
 
                     $precio = DB::table('repuestos as r')
                         ->join('precios as p','p.id','=','r.precio_id')

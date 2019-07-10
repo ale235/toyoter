@@ -1,0 +1,1 @@
+UPDATE roles SET name='cliente_taller' WHERE id=4;

@@ -69,7 +69,7 @@
 
                                 <div class="action">
                                     {{--https://wa.me/número?text=mensaje--}}
-                                    <a href="https://wa.me/5493424232136?text={{Request::url()}}" class="botao-wpp">
+                                    <a href="https://wa.me/{{\App\Cliente::find(1)->telefono}}?text={{Request::url()}}" class="botao-wpp" target="_blank">
                                         {{--<a href="whatsapp://send?text={{Request::url()}}" class="botao-wpp">--}}
                                             <!-- ícone -->
                                             <i class="fa fa-whatsapp"></i>

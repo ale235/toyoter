@@ -137,7 +137,7 @@
     @foreach($repuestos as $repuesto)
         <tr>
             <td class="tg-0lax">{{$repuesto->codigo}}</td>
-            <td class="tg-0lax">{{$repuesto->descripcion}}</td>
+            <td class="tg-0lax" style="font-size: 10px; white-space: nowrap;">{{$repuesto->descripcion}}</td>
             <td class="tg-0lax">{{$repuesto->cantidad}}</td>
             <td class="tg-0lax">{{$repuesto->precio * (1 + ($cliente->porcentaje/100))}}</td>
             <td class="tg-0lax">{{$repuesto->subtotal * (1 + ($cliente->porcentaje/100))}}</td>
@@ -251,7 +251,7 @@
         </tr>
         <tr>
             <td class="tg-0lax"><strong>Código</strong></td>
-            <td class="tg-0lax"><strong>Producto</strong></td>
+            <td class="tg-0lax" colspan="2"><strong>Productooo</strong></td>
             <td class="tg-0lax"><strong>Cantidad</strong></td>
             <td class="tg-0lax"><strong>Precio Unitario</strong></td>
             <td class="tg-0lax"><strong>Total</strong></td>
@@ -259,7 +259,7 @@
         @foreach($repuestos as $repuesto)
             <tr>
                 <td class="tg-0lax">{{$repuesto->codigo}}</td>
-                <td class="tg-0lax">{{$repuesto->descripcion}}</td>
+                <td class="tg-0lax" style="font-size: 10px; white-space: nowrap;">{{$repuesto->descripcion}}</td>
                 <td class="tg-0lax">{{$repuesto->cantidad}}</td>
                 <td class="tg-0lax">{{$repuesto->precio}}</td>
                 <td class="tg-0lax">{{$repuesto->subtotal}}</td>
@@ -327,15 +327,15 @@
         <tr>
             <td class="tg-0lax"><strong>Código</strong></td>
             <td class="tg-0lax"><strong>Producto</strong></td>
-            <td class="tg-0lax"><strong>Cantidad</strong></td>
+            <td class="tg-0lax" style="white-space: nowrap;"><strong>Cantidad</strong></td>
             <td class="tg-0lax"><strong>Precio Unitario</strong></td>
             <td class="tg-0lax"><strong>Total</strong></td>
         </tr>
         @foreach($repuestos as $repuesto)
             <tr>
                 <td class="tg-0lax">{{$repuesto->codigo}}</td>
-                <td class="tg-0lax">{{$repuesto->descripcion}}</td>
-                <td class="tg-0lax">{{$repuesto->cantidad}}</td>
+                <td class="tg-0lax"  style="font-size: 10px; white-space: nowrap;">{{$repuesto->descripcion}}</td>
+                <td class="tg-0lax" style="white-space: normal;">{{$repuesto->cantidad}}</td>
                 <td class="tg-0lax">{{$repuesto->precio}}</td>
                 <td class="tg-0lax">{{$repuesto->subtotal}}</td>
             </tr>

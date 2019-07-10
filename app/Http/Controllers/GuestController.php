@@ -219,7 +219,7 @@ class GuestController extends Controller
                     ->where('i.repuesto_id','=',$id)
                     ->orderBy('created_at','desc')
                     ->first();
-        return view('guest.show',['repuesto'=>$repuestoshow, 'sessions' => $repuestos, 'total' => $total, 'imagen' => $imagen, 'precio_admin' => end($precio_presupuesto_admin)]);
+        return view('guest.show',['repuesto'=>$repuestoshow, 'sessions' => $repuestos, 'total' => $total, 'imagen' => $imagen, 'precio_admin' => !is_null($precio_presupuesto_admin) ? end($precio_presupuesto_admin) : null]);
 
     }
 

@@ -123,6 +123,7 @@ Route::post('actualizarpreciotaller', 'PrecioController@actualizarpreciotaller')
 
 Route::get('export', 'RepuestoController@export')->name('export')->middleware('role:admin');
 Route::get('exportpresupuesto', 'PresupuestoController@exportPresupuesto');
+Route::get('exportcliente', 'ClienteController@exportClientes')->middleware('role:admin');
 //Route::get('exportadmin', 'PresupuestoController@exportAdmin');
 Route::get('importExportView', 'RepuestoController@importExportView')->middleware('role:admin');
 Route::post('import', 'RepuestoController@import')->name('import')->middleware('role:admin');

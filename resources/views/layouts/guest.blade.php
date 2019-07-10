@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <title>TOYOTER | REPUESTOS TOYOTA, MARCAS JAPONESAS y COREANAS</title>
+        <link rel="shortcut icon" href={{asset('favicon/favicon.ico')}}>
         <!-- Tell the browser to be responsive to screen width -->
         @yield('card')
 
@@ -129,6 +130,19 @@
             }
             .fa-youtube:hover {
                 background-color: #e64a41;
+            }
+
+            .fa-instagram {
+                padding:10px 14px;
+                -o-transition:.5s;
+                -ms-transition:.5s;
+                -moz-transition:.5s;
+                -webkit-transition:.5s;
+                transition: .5s;
+                /*background-color: #322f30;*/
+            }
+            .fa-instagram:hover {
+                background-color: #e4606d;
             }
 
         </style>
