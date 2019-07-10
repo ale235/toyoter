@@ -8,6 +8,9 @@
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#mayoristaModal">Actualizar Porcentaje - Precio Mayorista</button>
             </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#tallerModal">Actualizar Porcentaje - Precio Taller</button>
+            </div>
         </div>
     </div>
     <br>
@@ -22,7 +25,7 @@
                         <th>Precio Sugerido</th>
                         <th>Precio Mayorista</th>
                         <th>Precio Minorista</th>
-                        {{--<th>Precio</th>--}}
+                        <th>Precio Taller</th>
                         <th>Acción</th>
                         <th>Sección</th>
                         <th>Marca Repuesto</th>
@@ -92,6 +95,36 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="tallerModal" tabindex="-1" role="dialog" aria-labelledby="tallerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tallerModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{--<form action="{{ url('precio/create') }}" method="POST" enctype="multipart/form-data">--}}
+                <form action="{{ url('actualizarpreciotaller') }}" method="POST" enctype="multipart/form-data">
+                    {{--<form method="POST" enctype="multipart/form-data">--}}
+                    @csrf
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <span class="input-group-addon">%</span>
+                            <input type="number" name="coeficientetaller" class="form-control" aria-label="Amount (to the nearest dollar)">
+                        </div>
+                        <label>
+                            Ingresá el porcentaje que querés aumentar al Precio Sugerido para tus Clientes Taller.
+                        </label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" id="submittaller" class="btn btn-primary">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @push('scripts')
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
@@ -112,7 +145,7 @@
                     {data: 'precio_id_sugerido'},
                     {data: 'precio_id_mayorista'},
                     {data: 'precio_id_minorista'},
-//                    {data: 'precio_id_personalizado'},
+                    {data: 'precio_id_taller'},
                     {data: 'btn'},
                     {data: 'seccion_id'},
                     {data: 'marca_repuesto_id'},

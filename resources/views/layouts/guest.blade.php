@@ -166,7 +166,8 @@
                     @role('cliente_mayorista')
                     <li class="nav-item"><a class="nav-link" href="{{ url('/configuraciondeprecio') }}"><strong><p>Configuración de Precio</p></strong></a></li>
                     @endrole
-                    @role('cliente_minorista|cliente_mayorista|admin|taller')
+                    @role('cliente_minorista|cliente_mayorista|admin|cliente_taller')
+                    @if(!(Request::url() === url('/')) || (Request::url() === url('/') && !(count($sessions) == 0)))
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <strong>Exportar Presupuesto</strong>
@@ -211,6 +212,7 @@
                                     <tfoot>
                                     <tr>
                                         <td colspan="2" class="hidden-xs"></td>
+                                        @role('admin')
                                         <form  id="table-form2" action="{{ url('cambiarpreciopresupuesto') }}" method="POST">
                                             @csrf
                                             <label class="radio-inline"><input type="radio" name="optradio" value="Minorista" {{( (is_null($precio_admin )) || ($precio_admin == 'Minorista')) ? 'checked='.'"checked"' : '' }}>Minorista</label>
@@ -220,6 +222,7 @@
                                                 <a class="btn btn-success btn-block">Cambian precios</a>
                                             </button>
                                         </form>
+                                        @endrole
                                         <form  id="table-form" action="{{ url('exportpresupuesto') }}" method="GET">
                                                 <td class="imprimir" {{ (count($sessions) == 0) ? 'style=display:none' : "" }}>
                                                     <button type="submit" class="btn btn-sm">
@@ -234,6 +237,7 @@
                                 </table>
                         </div>
                     </li>
+                    @endif
                     @endrole
                     <li class="nav-item"><a class="nav-link" href="{{ url('/buscar') }}"><strong><p>Buscar</p></strong></a>
                     </li>
@@ -256,7 +260,7 @@
                                 @csrf
                             </form>
                         </li>
-                        @hasanyrole('cliente_minorista|cliente_mayorista|cliente_sin_categorizar')
+                        @hasanyrole('cliente_minorista|cliente_mayorista|cliente_taller|cliente_sin_categorizar')
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ url('/guest') }}/{{Auth::user()->id}}/edit">
                                 <strong>{{ Auth::user()->name }}</strong>

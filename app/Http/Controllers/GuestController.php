@@ -313,7 +313,7 @@ class GuestController extends Controller
             }
         }
 
-        return view('guest.edit',['cliente' => $cliente, 'sessions' => $repuestos, 'total' => $total, 'precio_admin' => end($precio_presupuesto_admin)]);
+        return view('guest.edit',['cliente' => $cliente, 'sessions' => $repuestos, 'total' => $total, 'precio_admin' => !is_null($precio_presupuesto_admin) ? end($precio_presupuesto_admin) : null]);
     }
 
     /**

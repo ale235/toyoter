@@ -134,8 +134,7 @@ Route::get('repuestos', 'GuestController@repuestos')->middleware('role:admin');
 Route::get('/clientesSinActivar','HomeController@clientesSinActivar');
 
 Route::get('/check',function(){
-
-    return (Auth::guest() ? 'true' : 'false');
+    return ((Auth::guest() || (Auth::user()->roles->pluck('name')[0] == 'cliente_sin_categorizar'))  ? 'true' : 'false');
 });
 
 Route::post('guest/cambiarimagen', 'GuestController@cambiarimagen')->middleware('role:admin');

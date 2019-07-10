@@ -149,7 +149,7 @@ class PrecioController extends Controller
             ->join('precios as p','p.id','=','r.precio_id')
             ->update([
                 'p.precio_taller' => DB::raw('p.precio_sugerido * '.((float)($request->get('coeficientetaller')/100) + 1).''),
-                'p.precio_taller_co' => $request->get('coeficientemayorista'),
+                'p.precio_taller_co' => $request->get('coeficientetaller'),
                 'p.updated_at' => Carbon::now()->toDateTimeString()]);
 
         return view('precio.create');
