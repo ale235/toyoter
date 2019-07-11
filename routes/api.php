@@ -52,18 +52,6 @@ Route::middleware('auth')->get('buscarRepuestos', function (Request $request){
             ->join('precios', 'precios.id', '=', 'repuestos.precio_id')
             ->select('repuestos.id', 'repuestos.codigo', 'repuestos.descripcion','marca_repuestos.nombre as marca_repuesto_id', 'marca_vehiculos.nombre as marca_vehiculo_id', 'secciones.nombre as seccion_id', 'precios.precio_taller as precio_id');
     }
-    else {
-
-        $repuestos = DB::table('repuestos')
-            ->join('marca_repuestos', 'marca_repuestos.id', '=', 'repuestos.marca_repuesto_id')
-            ->join('marca_vehiculos', 'marca_vehiculos.id', '=', 'repuestos.marca_vehiculo_id')
-            ->join('secciones', 'secciones.id', '=', 'repuestos.seccion_id')
-            ->join('precios', 'precios.id', '=', 'repuestos.precio_id')
-            ->select('repuestos.id', 'repuestos.codigo', 'repuestos.descripcion','marca_repuestos.nombre as marca_repuesto_id', 'marca_vehiculos.nombre as marca_vehiculo_id', 'secciones.nombre as seccion_id', 'precios.precio_sugerido as precio_id');
-    }
-
-
-
 
 return datatables($repuestos)
     ->addColumn('btn', 'datatables.actions')
@@ -80,6 +68,26 @@ Route::get('buscarRepuestosGuest', function (Request $request){
         ->join('secciones', 'secciones.id', '=', 'repuestos.seccion_id')
         ->join('precios', 'precios.id', '=', 'repuestos.precio_id')
         ->select('repuestos.id', 'repuestos.codigo', 'repuestos.descripcion','marca_repuestos.nombre as marca_repuesto_id', 'marca_vehiculos.nombre as marca_vehiculo_id', 'secciones.nombre as seccion_id', 'precios.precio_sugerido as precio_id');
+
+
+    return datatables($repuestos)
+        ->addColumn('btn', 'datatables.actions')
+        ->rawColumns(['btn'])
+        ->toJson();
+
+});
+
+Route::get('buscarRepuestosAdmin', function (Request $request){
+
+    $repuestos = DB::table('repuestos')
+        ->join('marca_repuestos', 'marca_repuestos.id', '=', 'repuestos.marca_repuesto_id')
+        ->join('marca_vehiculos', 'marca_vehiculos.id', '=', 'repuestos.marca_vehiculo_id')
+        ->join('secciones', 'secciones.id', '=', 'repuestos.seccion_id')
+        ->join('precios', 'precios.id', '=', 'repuestos.precio_id')
+        ->select('repuestos.id', 'repuestos.codigo', 'repuestos.descripcion','marca_repuestos.nombre as marca_repuesto_id', 'marca_vehiculos.nombre as marca_vehiculo_id', 'secciones.nombre as seccion_id',
+            'precios.precio_sugerido as precio_id_sugerido', 'precios.precio_taller as precio_id_taller',
+            'precios.precio_minorista as precio_id_minorista', 'precios.precio_mayorista as precio_id_mayorista'
+        );
 
 
     return datatables($repuestos)

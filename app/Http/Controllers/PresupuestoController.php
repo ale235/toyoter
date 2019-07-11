@@ -79,6 +79,8 @@ class PresupuestoController extends Controller
 
         $roleLogged = Auth::user()->roles->pluck('name');
 
+        $precio_presupuesto_admin = Session::get('precio_admin');
+
         if($roleLogged[0] == 'cliente_minorista'){
             $items = DB::table('repuestos as r')
                 ->join('precios as p','p.id','=','r.precio_id')
@@ -91,15 +93,40 @@ class PresupuestoController extends Controller
                 ->where('r.codigo','=', $request->codigo)
                 ->select('r.codigo','p.precio_mayorista as precio','r.descripcion')
                 ->get();
-        } else {
+        }
+        else if ($roleLogged[0] == 'cliente_taller'){
             $items = DB::table('repuestos as r')
                 ->join('precios as p','p.id','=','r.precio_id')
                 ->where('r.codigo','=', $request->codigo)
-                ->select('r.codigo','p.precio_sugerido as precio','r.descripcion')
+                ->select('r.codigo','p.precio_taller as precio','r.descripcion')
                 ->get();
         }
+        else if ($roleLogged[0] == 'admin'){
+            if(is_null($precio_presupuesto_admin) || end($precio_presupuesto_admin) == 'Minorista'){
 
+                $items = DB::table('repuestos as r')
+                    ->join('precios as p','p.id','=','r.precio_id')
+                    ->where('r.codigo','=', $request->codigo)
+                    ->select('r.codigo','p.precio_minorista as precio','r.descripcion')
+                    ->get();
+            } else if (end($precio_presupuesto_admin) == 'Mayorista'){
 
+                $items = DB::table('repuestos as r')
+                    ->join('precios as p','p.id','=','r.precio_id')
+                    ->where('r.codigo','=', $request->codigo)
+                    ->select('r.codigo','p.precio_mayorista as precio', 'r.descripcion')
+                    ->get();
+
+            } else if (end($precio_presupuesto_admin) == 'Taller'){
+
+                $items = DB::table('repuestos as r')
+                    ->join('precios as p','p.id','=','r.precio_id')
+                    ->where('r.codigo','=', $request->codigo)
+                    ->select('r.codigo','p.precio_taller as precio','r.descripcion')
+                    ->get();
+            }
+
+        }
 
 //        Session::push('items',$items);
 

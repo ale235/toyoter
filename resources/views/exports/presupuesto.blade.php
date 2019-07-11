@@ -23,11 +23,11 @@
             <td class="tg-wp8o" colspan="5"><img src="{{public_path().$admin->logoempresa}}"></td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>Razón social:</strong></td>
-            <td class="tg-73oq">{{$admin->razon_social}}</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Razón social:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;">{{$admin->razon_social}}</td>
             {{--<td class="tg-73oq"></td>--}}
-            <td class="tg-73oq"><strong>CUIT:</strong></td>
-            <td class="tg-73oq" colspan="2">{{$admin->cuit}}</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>CUIT:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="2">{{$admin->cuit}}</td>
         </tr>
         <tr>
             <td class="tg-73oq"><strong>Provincia:</strong></td>
@@ -166,36 +166,36 @@
             <td class="tg-wp8o" colspan="5"><img src="{{public_path().$admin->logoempresa}}"></td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>Razón social:</strong></td>
-            <td class="tg-73oq">{{$admin->razon_social}}</td>
-            {{--<td class="tg-73oq"></td>--}}
-            <td class="tg-73oq"><strong>CUIT:</strong></td>
-            <td class="tg-73oq" colspan="2">{{$admin->cuit}}</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Razón social:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;">{{$admin->razon_social}}</td>
+            {{--<td class="tg-7style="font-size: 10px; white-space: nowrap;"3oq"></td>--}}
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>CUIT:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="2">{{$admin->cuit}}</td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>Provincia:</strong></td>
-            <td class="tg-73oq">{{$admin->provincia}}</td>
-            {{--<td class="tg-73oq"></td>--}}
-            <td class="tg-73oq"><strong>IIBB:</strong></td>
-            <td class="tg-73oq" colspan="2">921-3907013-0</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Provincia:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;">{{$admin->provincia}}</td>
+            {{--<td class="tg-7style="font-size: 10px; white-space: nowrap;"3oq"></td>--}}
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>IIBB:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="2">921-3907013-0</td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>Cond IVA:</strong></td>
-            <td class="tg-73oq">{{$admin->iva}}</td>
-            {{--<td class="tg-73oq"></td>--}}
-            <td class="tg-73oq"><strong>Fecha Inicio de Actividades:</strong></td>
-            <td class="tg-73oq" colspan="2">01/02/2007</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Cond IVA:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;">{{$admin->iva}}</td>
+            {{--<td class="tg-7style="font-size: 10px; white-space: nowrap;"3oq"></td>--}}
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Fecha Inicio de Actividades:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="2">01/02/2007</td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>Localidad:</strong></td>
-            <td class="tg-73oq">{{$admin->localidad}}</td>
-            {{--<td class="tg-73oq"></td>--}}
-            <td class="tg-73oq"><strong>Dirección:</strong></td>
-            <td class="tg-73oq" colspan="2">{{$admin->calleynumero}}</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Localidad:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;">{{$admin->localidad}}</td>
+            {{--<td class="tg-7style="font-size: 10px; white-space: nowrap;"3oq"></td>--}}
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Dirección:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="2">{{$admin->calleynumero}}</td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>CP:</strong></td>
-            <td class="tg-73oq" colspan="4">{{$admin->codigopostal}}</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>CP:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="4">{{$admin->codigopostal}}</td>
             {{--<td class="tg-73oq"></td>--}}
         </tr>
         <tr>
@@ -220,31 +220,31 @@
             <td class="tg-wp8o" colspan="5"><img style="max-width:600px;" src="{{public_path().$cliente->logoempresa}}"></td>
         </tr>
         <tr>
-            <td class="tg-0lax"><strong>CUIT: </strong></td>
-            <td class="tg-0lax">{{$cliente->cuit}}</td>
-            {{--<td class="tg-0lax"></td>--}}
-            <td class="tg-0lax"><strong>Apellido y Nombre / Razón Social:</strong></td>
-            <td class="tg-0lax" colspan="2">{{$cliente->razon_social}}</td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;"><strong>CUIT: </strong></td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;">{{$cliente->cuit}}</td>
+            {{--<td class="tg-0style="font-size: 10px; white-space: nowrap;"lax"></td>--}}
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;"><strong>Apellido y Nombre / Razón Social:</strong></td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;" colspan="2">{{$cliente->razon_social}}</td>
         </tr>
         <tr>
-            <td class="tg-0lax"><strong>Cond. IVA:</strong></td>
-            <td class="tg-0lax">{{$cliente->iva}}</td>
-            {{--<td class="tg-0lax"></td>--}}
-            <td class="tg-0lax"><strong>Domicilio:</strong></td>
-            <td class="tg-0lax" colspan="2">{{$cliente->provincia}}</td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;"><strong>Cond. IVA:</strong></td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;">{{$cliente->iva}}</td>
+            {{--<td class="tg-0style="font-size: 10px; white-space: nowrap;"lax"></td>--}}
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;"><strong>Domicilio:</strong></td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;" colspan="2">{{$cliente->provincia}}</td>
         </tr>
         <tr>
-            <td class="tg-0lax"><strong>Localidad:</strong></td>
-            <td class="tg-0lax">{{$cliente->localidad}}</td>
-            {{--<td class="tg-0lax"></td>--}}
-            <td class="tg-0lax"><strong>Dirección:</strong></td>
-            <td class="tg-0lax" colspan="2">{{$cliente->calleynumero}}</td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;"><strong>Localidad:</strong></td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;">{{$cliente->localidad}}</td>
+            {{--<td class="tg-0style="font-size: 10px; white-space: nowrap;"lax"></td>--}}
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;"><strong>Dirección:</strong></td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;" colspan="2">{{$cliente->calleynumero}}</td>
         </tr>
         <tr>
-            <td class="tg-0lax"><strong>CP:</strong></td>
-            <td class="tg-0lax">{{$cliente->codigopostal}}</td>
-            <td class="tg-0lax"><strong>Chasis:</strong></td>
-            <td class="tg-0lax"  colspan="2">{{$cliente->chasis}}</td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;"><strong>CP:</strong></td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;">{{$cliente->codigopostal}}</td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;"><strong>Chasis:</strong></td>
+            <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;"  colspan="2">{{$cliente->chasis}}</td>
         </tr>
         <tr>
             <td class="tg-0lax" colspan="5"></td>
@@ -289,36 +289,36 @@
             <td class="tg-wp8o" colspan="5"><img src="{{public_path().$admin->logoempresa}}"></td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>Razón social:</strong></td>
-            <td class="tg-73oq">{{$admin->razon_social}}</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Razón social:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;">{{$admin->razon_social}}</td>
             {{--<td class="tg-73oq"></td>--}}
-            <td class="tg-73oq"><strong>CUIT:</strong></td>
-            <td class="tg-73oq" colspan="2">{{$admin->cuit}}</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>CUIT:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="2">{{$admin->cuit}}</td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>Provincia:</strong></td>
-            <td class="tg-73oq">{{$admin->provincia}}</td>
-            {{--<td class="tg-73oq"></td>--}}
-            <td class="tg-73oq"><strong>IIBB:</strong></td>
-            <td class="tg-73oq" colspan="2">921-3907013-0</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Provincia:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;">{{$admin->provincia}}</td>
+            {{--<td class="tg-7style="font-size: 10px; white-space: nowrap;"3oq"></td>--}}
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>IIBB:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="2">921-3907013-0</td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>Cond IVA:</strong></td>
-            <td class="tg-73oq">{{$admin->iva}}</td>
-            {{--<td class="tg-73oq"></td>--}}
-            <td class="tg-73oq"><strong>Fecha Inicio de Actividades:</strong></td>
-            <td class="tg-73oq" colspan="2">01/02/2007</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Cond IVA:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;">{{$admin->iva}}</td>
+            {{--<td class="tg-7style="font-size: 10px; white-space: nowrap;"3oq"></td>--}}
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Fecha Inicio de Actividades:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="2">01/02/2007</td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>Localidad:</strong></td>
-            <td class="tg-73oq">{{$admin->localidad}}</td>
-            {{--<td class="tg-73oq"></td>--}}
-            <td class="tg-73oq"><strong>Dirección:</strong></td>
-            <td class="tg-73oq" colspan="2">{{$admin->calleynumero}}</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Localidad:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;">{{$admin->localidad}}</td>
+            {{--<td class="tg-7style="font-size: 10px; white-space: nowrap;"3oq"></td>--}}
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Dirección:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="2">{{$admin->calleynumero}}</td>
         </tr>
         <tr>
-            <td class="tg-73oq"><strong>CP:</strong></td>
-            <td class="tg-73oq" colspan="4">{{$admin->codigopostal}}</td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>CP:</strong></td>
+            <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;" colspan="4">{{$admin->codigopostal}}</td>
             {{--<td class="tg-73oq"></td>--}}
         </tr>
         <tr>
