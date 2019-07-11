@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 table-responsive" style="overflow-x:auto;">
-                @role('cliente_mayorista|cliente_minorista|cliente_taller')
+                @role('cliente_mayorista|cliente_minorista|cliente_taller|admin')
                 <table id="example" class="table table-striped table-bordered dt-responsive nowrap table-dark" style="width:100%">
                     <thead>
                     <tr>
@@ -147,7 +147,7 @@
             $('#exampleguest').DataTable({
                 "serverSide": true,
                 "processing": true,
-                "ajax": "{{url('api/buscarRepuestos')}}",
+                "ajax": "{{url('api/buscarRepuestosGuest')}}",
                 "columns": [
                     {data: 'descripcion'},
                     {data: 'codigo'},

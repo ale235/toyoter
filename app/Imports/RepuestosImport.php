@@ -51,7 +51,8 @@ class RepuestosImport implements ToModel
                 'precio_mayorista' => $repuesto->precio_mayorista_co * $row[6],
                 'precio_minorista_co' => $repuesto->precio_minorista_co,
                 'precio_mayorista_co' => $repuesto->precio_mayorista_co,
-                'precio_personalizado' => $repuesto->precio_personalizado,
+                'precio_taller_co' => $repuesto->precio_taller_co,
+                'precio_taller' => $repuesto->precio_taller * $row[6],
             ]);
             $precio->save();
             //$repuesto->id_precio = $precio->id;
@@ -62,6 +63,7 @@ class RepuestosImport implements ToModel
                 [
                     'precio_minorista' => $repuesto->precio_minorista_co * $repuesto->precio_sugerido,
                     'precio_mayorista' => $repuesto->precio_mayorista_co * $repuesto->precio_sugerido,
+                    'precio_taller' => $repuesto->precio_taller_co * $repuesto->precio_sugerido,
                     'updated_at' => Carbon::now()->toDateTimeString(),
                     ]);
 
@@ -90,7 +92,8 @@ class RepuestosImport implements ToModel
                 'precio_mayorista' => $row[6],
                 'precio_minorista_co' => 1.0,
                 'precio_mayorista_co' => 1.0,
-                'precio_personalizado' => $row[6],
+                'precio_taller_co' => 1.0,
+                'precio_taller' => $row[6],
             ]);
 
             $precio->save();
