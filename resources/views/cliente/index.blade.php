@@ -2,7 +2,7 @@
 @section ('contenido')
     <div class="col-md-12">
         <h4>Clientes</h4>
-        <a class="btn btn-app" href="{{route('clientes.edit', '2')}}">
+        <a class="btn btn-app" href="{{url('exportcliente')}}">
             <i class="fa fa-save"></i> Exportar Clientes
         </a>
     </div>

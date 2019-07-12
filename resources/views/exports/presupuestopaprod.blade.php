@@ -20,7 +20,7 @@
         </tr>
 
         <tr>
-            <td class="tg-wp8o" colspan="5"><img src="{{public_path().$admin->logoempresa}}"></td>
+            <td class="tg-wp8o" colspan="5"><img src="{{url('/').$admin->logoempresa}}"></td>
         </tr>
         <tr>
             <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Razón social:</strong></td>
@@ -95,7 +95,7 @@
     </tr>
 
     <tr>
-        <td class="tg-wp8o" colspan="5"><img style="max-width:600px;" src="{{public_path().$cliente->logoempresa}}"></td>
+        <td class="tg-wp8o" colspan="5"><img style="max-width:600px;" src="{{url('/').$cliente->logoempresa}}"></td>
     </tr>
     <tr>
         <td class="tg-0lax"><strong>CUIT: </strong></td>
@@ -163,7 +163,7 @@
         </tr>
 
         <tr>
-            <td class="tg-wp8o" colspan="5"><img src="{{public_path().$admin->logoempresa}}"></td>
+            <td class="tg-wp8o" colspan="5"><img src="{{url('/').$admin->logoempresa}}"></td>
         </tr>
         <tr>
             <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Razón social:</strong></td>
@@ -217,7 +217,7 @@
         </tr>
 
         <tr>
-            <td class="tg-wp8o" colspan="5"><img style="max-width:600px;" src="{{public_path().$cliente->logoempresa}}"></td>
+            <td class="tg-wp8o" colspan="5"><img style="max-width:600px;" src="{{url('/').$cliente->logoempresa}}"></td>
         </tr>
         <tr>
             <td class="tg-0lax"style="font-size: 10px; white-space: nowrap;"><strong>CUIT: </strong></td>
@@ -286,7 +286,7 @@
         </tr>
 
         <tr>
-            <td class="tg-wp8o" colspan="5"><img src="{{public_path().$admin->logoempresa}}"></td>
+            <td class="tg-wp8o" colspan="5"><img src="{{url('/').$admin->logoempresa}}"></td>
         </tr>
         <tr>
             <td class="tg-73oq"style="font-size: 10px; white-space: nowrap;"><strong>Razón social:</strong></td>
