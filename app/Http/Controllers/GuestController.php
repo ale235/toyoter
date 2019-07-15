@@ -477,7 +477,7 @@ class GuestController extends Controller
         $cliente = Cliente::where('user_id','=',Auth::user()->id)->first();
 
 //        dd(auth()->user()->roles->pluck('name'));
-        return view('guest.configuraciondeprecios',['sessions' => $repuestos, 'total' => $total, 'cliente' => $cliente, 'precio_admin' => end($precio_presupuesto_admin)]);
+        return view('guest.configuraciondeprecios',['sessions' => $repuestos, 'total' => $total, 'cliente' => $cliente, 'precio_admin' => !is_null($precio_presupuesto_admin) ? end($precio_presupuesto_admin) : null]);
     }
 
     public function preciocliente(Request $request){

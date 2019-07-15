@@ -15,6 +15,6 @@ class PermissionsTableSeedeer extends Seeder
         Permission::create(['name' => 'ver_precio_sugerido']);
         Permission::create(['name' => 'ver_precio_minorista']);
         Permission::create(['name' => 'ver_precio_mayorista']);
-        Permission::create(['name' => 'ver_precio_personalizado']);
+        Permission::create(['name' => 'ver_precio_taller']);
     }
 }

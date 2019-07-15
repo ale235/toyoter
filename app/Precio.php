@@ -11,5 +11,5 @@ class Precio extends Model
 
     public $timestamps = true;
 
-    protected $fillable = ['precio_sugerido', 'precio_minorista', 'precio_mayorista', 'precio_minorista_co', 'precio_mayorista_co', 'precio_personalizado'];
+    protected $fillable = ['precio_sugerido', 'precio_minorista', 'precio_mayorista', 'precio_minorista_co', 'precio_mayorista_co', 'precio_taller', 'precio_taller_co'];
 }
