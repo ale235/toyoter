@@ -156,6 +156,7 @@
                         }
 
                         $('.imprimir').show();
+                        $('.limpiar').show();
 
                     },
                     error:function(){
@@ -265,6 +266,7 @@
                         }
 
                         $('.imprimir').show();
+                        $('.limpiar').show();
 
                     },
                     error:function(){
@@ -370,6 +372,7 @@
                         }
 
                         $('.imprimir').show();
+                        $('.limpiar').show();
 
                     },
                     error:function(){

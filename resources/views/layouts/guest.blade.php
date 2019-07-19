@@ -223,6 +223,13 @@
                                             </button>
                                         </form>
                                         @endrole
+                                        <form  id="table-form" action="{{ url('limpiarpresupuesto') }}" method="GET">
+                                            <td class="limpiar" {{ (count($sessions) == 0) ? 'style=display:none' : "" }}>
+                                                <button type="submit" class="btn btn-sm">
+                                                    <a  class="btn btn-success btn-block">Limpiar Presupuesto</a>
+                                                </button>
+                                            </td>
+                                        </form>
                                         <form  id="table-form" action="{{ url('exportpresupuesto') }}" method="GET">
                                                 <td class="imprimir" {{ (count($sessions) == 0) ? 'style=display:none' : "" }}>
                                                     <button type="submit" class="btn btn-sm">
@@ -230,7 +237,7 @@
                                                     </button>
                                                 </td>
                                         </form>
-                                        <td class="hidden-xs text-center"><strong>Total: <span class="totalazo">{{$total}}</span></strong></td>
+                                        <td class="hidden-xs text-center"><strong>Total: <span class="totalazo">${{$total}}</span></strong></td>
 
                                     </tr>
                                     </tfoot>

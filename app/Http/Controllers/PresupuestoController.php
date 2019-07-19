@@ -413,6 +413,19 @@ class PresupuestoController extends Controller
         return $pdf->download('Presupuesto-'.trim($cliente->razon_social).'-'.date('d/m/Y', strtotime($presupuesto->created_at)).'.pdf');
     }
 
+    public function limpiarPresupuesto(Request $request)
+    {
+        Session::forget('items');
+
+        $repuestos  = [];
+        $precio_presupuesto_admin = Session::get('precio_admin');
+
+
+//    dd(!is_null($precio_presupuesto_admin) ? end($precio_presupuesto_admin) : null);
+        return view('guest.index', ['sessions' => $repuestos, 'total' => 0, 'precio_admin' => !is_null($precio_presupuesto_admin) ? end($precio_presupuesto_admin) : null]);
+
+    }
+
     public function cambiarpreciopresupuesto(Request $request){
 //        dd($request);
         $items = Session::get('items');
