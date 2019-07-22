@@ -130,6 +130,9 @@
                 </div>
             </form>
         </div>
+        <div class="box box-footer with-border">
+            <h3 class="box-title">Servicio de Mail</h3>
+        </div>
     </div>
 @endsection
 @push('scripts')
