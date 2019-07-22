@@ -153,19 +153,6 @@ class ClienteController extends Controller
                 ->where('u.id', '=', 1)
                 ->first();
 
-            // some code
-            $env_update = $this->changeEnv([
-                'MAIL_USERNAME'   => 'new_db_name',
-                'MAIL_PASSWORD'   => ''
-            ]);
-            if($env_update){
-                dd("llegó");
-            } else {
-                dd("no llegó");
-                // Do something else
-            }
-            // more code
-
 
             return view('admin.edit', ['cliente' => $clienteedit]);
         }
@@ -226,6 +213,24 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+    }
+
+    public function servicioMail(Request $request){
+        // some code
+
+        $env_update = $this->changeEnv([
+            'MAIL_USERNAME'  => User::find(1)->email,
+            'MAIL_PASSWORD'   => $request->get('contrasenaserviciodemail'),
+        ]);
+        if($env_update){
+//                dd("llegó");
+        } else {
+//                dd("no llegó");
+            // Do something else
+        }
+        // more code
+
+        return view('home');
     }
 
     public function listSinCategorizar(Request $request)
