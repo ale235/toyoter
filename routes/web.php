@@ -106,6 +106,7 @@ Route::get('/buscar', 'GuestController@index')->name('buscar');
 Route::resource('repuesto','RepuestoController')->middleware('role:admin');
 Route::resource('guest','GuestController');
 Route::get('/cliente/listsincategorizar','ClienteController@listSinCategorizar');
+Route::get('/cliente/serviciomail','ClienteController@servicioMail');
 
 Route::resource('cliente','ClienteController')->middleware('role:admin');
 Route::get('admin/edit','ClienteController@modificarAdmin');

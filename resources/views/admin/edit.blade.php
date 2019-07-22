@@ -130,6 +130,28 @@
                 </div>
             </form>
         </div>
+        <div class="box box-footer with-border">
+            <h3 class="box-title">Servicio de Mail</h3>
+            <form role="form" action="{{ url('cliente/serviciomail') }}" method="get" id="form-post" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <div class="col-md-12">
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label>Contraseña encryptada tomada de google</label><em>*</em>
+                            <input type="text" name="contrasenaserviciodemail" id="contrasenaserviciodemail" class="form-control">
+                        </div>
+                    </div>
+
+
+                    <div class="row form-group">
+                        <div class="col-md-9">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection
 @push('scripts')
