@@ -8,6 +8,7 @@ use App\Precio;
 use App\PrecioHistorico;
 use App\Repuesto;
 use App\Seccion;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 
@@ -45,14 +46,16 @@ class RepuestosImport implements ToModel
 //                'precio_id' => $repuesto->precio_id
 //                ]
 //            );
+//            if($row[6] == 11499.13)
+//                dd($row[6]);
             $precio = new Precio([
                 'precio_sugerido' => $row[6],
-                'precio_minorista' => $repuesto->precio_minorista_co * $row[6],
-                'precio_mayorista' => $repuesto->precio_mayorista_co * $row[6],
+                'precio_minorista' => (1+($repuesto->precio_minorista_co/100)) * $row[6],
+                'precio_mayorista' => (1+($repuesto->precio_mayorista_co/100)) * $row[6],
                 'precio_minorista_co' => $repuesto->precio_minorista_co,
                 'precio_mayorista_co' => $repuesto->precio_mayorista_co,
                 'precio_taller_co' => $repuesto->precio_taller_co,
-                'precio_taller' => $repuesto->precio_taller * $row[6],
+                'precio_taller' => (1+($repuesto->precio_taller_co/100)) * $row[6],
             ]);
             $precio->save();
             //$repuesto->id_precio = $precio->id;
@@ -61,9 +64,9 @@ class RepuestosImport implements ToModel
 
             Precio::find($repuesto->precio_id)->update(
                 [
-                    'precio_minorista' => $repuesto->precio_minorista_co * $repuesto->precio_sugerido,
-                    'precio_mayorista' => $repuesto->precio_mayorista_co * $repuesto->precio_sugerido,
-                    'precio_taller' => $repuesto->precio_taller_co * $repuesto->precio_sugerido,
+                    'precio_minorista' => (1+($repuesto->precio_minorista_co/100)) * $repuesto->precio_sugerido,
+                    'precio_mayorista' => (1+($repuesto->precio_mayorista_co/100)) * $repuesto->precio_sugerido,
+                    'precio_taller' => (1+($repuesto->precio_taller_co/100))  * $repuesto->precio_sugerido,
                     'updated_at' => Carbon::now()->toDateTimeString(),
                     ]);
 
@@ -72,17 +75,17 @@ class RepuestosImport implements ToModel
         else{
             //dd([$repuesto,$row,'else']);
             $marca_repuesto = new MarcaRepuesto([
-                'nombre' => $row[3],
+                'nombre' => is_null($row[3]) ? "" : $row[3],
             ]);
             $marca_repuesto->save();
 
             $marca_vehiculo = new MarcaVehiculo([
-                'nombre' => $row[4],
+                'nombre' => is_null($row[4]) ? "" : $row[4],
             ]);
             $marca_vehiculo->save();
 
             $seccion = new Seccion([
-                'nombre' => $row[5],
+                'nombre' => is_null($row[5]) ? "" : $row[5],
             ]);
             $seccion->save();
 
