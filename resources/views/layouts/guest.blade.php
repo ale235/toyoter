@@ -194,11 +194,11 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td data-th="Precio" class="preciotabla">${{$repuesto[0]->precio}}</td>
+                                            <td data-th="Precio" class="preciotabla">${{round((double)$repuesto[0]->precio,2)}}</td>
                                             <td data-th="Cantidad">
                                                 <input type="number" readonly class="form-control text-center cantidadtabla" value="{{$repuesto['cantidad']}}">
                                             </td>
-                                            <td data-th="Subtotal" class="text-center subtotaltabla">${{$repuesto[0]->precio * $repuesto['cantidad']}}</td>
+                                            <td data-th="Subtotal" class="text-center subtotaltabla">${{round((double)$repuesto[0]->precio,2) * $repuesto['cantidad']}}</td>
                                             <td class="actions" data-th="">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     <button class="btn btn-info btn-sm minus"><a><i class="fa fa-minus"></i></a></button>
@@ -237,7 +237,7 @@
                                                     </button>
                                                 </td>
                                         </form>
-                                        <td class="hidden-xs text-center"><strong>Total: <span class="totalazo">${{$total}}</span></strong></td>
+                                        <td class="hidden-xs text-center"><strong>Total: $<span class="totalazo">{{$total}}</span></strong></td>
 
                                     </tr>
                                     </tfoot>

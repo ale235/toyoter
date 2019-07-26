@@ -435,10 +435,10 @@
             var cantidad = parseInt($(e.currentTarget).closest('tr').find('.cantidadtabla').val()) - 1;
             $(e.currentTarget).closest('tr').find('.cantidadtabla').val(cantidad);
 
-            $('.totalazo').text(Math.trunc(parseFloat($('.totalazo').text()) - parseFloat(precio.substring(1))));
+            $('.totalazo').text((parseFloat($('.totalazo').text()) - parseFloat(precio.substring(1))).toFixed(2));
 
 
-            $(e.currentTarget).closest('tr').find('.subtotaltabla')[0].textContent ="$" + Math.trunc(parseFloat(precio.substring(1)) * parseFloat(cantidad));
+            $(e.currentTarget).closest('tr').find('.subtotaltabla')[0].textContent ="$" + (parseFloat(precio.substring(1)) * parseFloat(cantidad)).toFixed(2);
 
             $.ajax({
                 type:'get',
