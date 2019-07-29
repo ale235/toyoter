@@ -53,6 +53,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'provincia' => ['required', 'string', 'max:255'],
+            'telefono' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
@@ -98,8 +100,8 @@ class RegisterController extends Controller
 //        $table->string('chasis');
 
         $comment = 'El cliente '.Cliente::where('user_id','=',$user->id)->first()->razon_social.' fue Activado. Ya puede ver los precios de los repuestos y completar los datos faltantes del formulario.';
-        $toEmail = 'alejandrocolautti@gmail.com';
-        Mail::to($toEmail)->send(new AcceptMail($comment));
+//        $toEmail = 'alejandrocolautti@gmail.com';
+        Mail::to($user->email)->send(new AcceptMail($comment));
 
         return $user;
     }

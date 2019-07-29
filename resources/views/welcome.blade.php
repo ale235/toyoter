@@ -28,10 +28,10 @@
         {{--</div>--}}
         <div class="footer-social-icons">
             <ul class="social-icons">
-                <li><a href="https://www.facebook.com/repuestostoyoter" class="social-icon"> <i class="fab fa-facebook fa-3x"></i></a></li>
-                <li><a href="https://www.youtube.com/channel/UC627Gt0WNY3CBEg5Fmcf_3w" class="social-icon"> <i class="fab fa-youtube fa-3x"></i></a></li>
-                <li><a href="" class="social-icon"> <i class="fab fa-twitter fa-3x"></i></a></li>
-                <li><a href="https://www.instagram.com/repuestos_toyoter/" class="social-icon"> <i class="fab fa-instagram fa-3x"></i></a></li>
+                <li><a href="https://www.facebook.com/repuestostoyoter" class="social-icon"  target="_blank"> <i class="fab fa-facebook fa-3x"></i></a></li>
+                <li><a href="https://www.youtube.com/channel/UC627Gt0WNY3CBEg5Fmcf_3w" class="social-icon" target="_blank"> <i class="fab fa-youtube fa-3x"></i></a></li>
+                <li><a href="" class="social-icon"  target="_blank"> <i class="fab fa-twitter fa-3x"></i></a></li>
+                <li><a href="https://www.instagram.com/repuestos_toyoter/" class="social-icon" target="_blank"> <i class="fab fa-instagram fa-3x"></i></a></li>
             </ul>
         </div>
     </div>

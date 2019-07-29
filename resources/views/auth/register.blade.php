@@ -53,6 +53,34 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="provincia" class="col-md-4 col-form-label text-md-right">{{ __('Provincia') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="provincia" type="text" class="form-control{{ $errors->has('provincia') ? ' is-invalid' : '' }}" name="provincia" value="{{ old('provincia') }}">
+
+                                @if ($errors->has('provincia'))
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('provincia') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}">
+
+                                @if ($errors->has('telefono'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('telefono') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
@@ -110,19 +138,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="provincia" class="col-md-4 col-form-label text-md-right">{{ __('Provincia') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="provincia" type="text" class="form-control{{ $errors->has('provincia') ? ' is-invalid' : '' }}" name="provincia" value="{{ old('provincia') }}">
-
-                                    @if ($errors->has('provincia'))
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('provincia') }}</strong>
-                                </span>
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="form-group row">
                                 <label for="localidad" class="col-md-4 col-form-label text-md-right">{{ __('Localidad') }}</label>
@@ -166,19 +181,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('Teléfono') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono" value="{{ old('telefono') }}">
-
-                                    @if ($errors->has('telefono'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('telefono') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
 
 
                         </details>
