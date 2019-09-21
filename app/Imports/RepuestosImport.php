@@ -61,12 +61,9 @@ class RepuestosImport implements ToModel
             //$repuesto->id_precio = $precio->id;
 //            dd(Repuesto::find($repuesto->id));
             //dd([$repuesto,$row]);
-
-            Precio::find($repuesto->precio_id)->update(
+            Repuesto::where('precio_id','=',$repuesto->precio_id)->update(
                 [
-                    'precio_minorista' => (1+($repuesto->precio_minorista_co/100)) * $repuesto->precio_sugerido,
-                    'precio_mayorista' => (1+($repuesto->precio_mayorista_co/100)) * $repuesto->precio_sugerido,
-                    'precio_taller' => (1+($repuesto->precio_taller_co/100))  * $repuesto->precio_sugerido,
+                    'precio_id' => $precio->id,
                     'updated_at' => Carbon::now()->toDateTimeString(),
                     ]);
 
